@@ -1,0 +1,6 @@
+name: urn:sib:product-base-1
+version: 1
+state: Experimental
+fields:
+  itemNumber:
+    type: String
