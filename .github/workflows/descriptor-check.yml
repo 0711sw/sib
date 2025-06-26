@@ -40,23 +40,24 @@ jobs:
     env:
       T01_CLIENT_ID: ${{ secrets.T01_CLIENT_ID }}
       T01_CLIENT_SECRET: ${{ secrets.T01_CLIENT_SECRET }}
+      D01_CLIENT_ID: ${{ secrets.D01_CLIENT_ID }}
+      D01_CLIENT_SECRET: ${{ secrets.D01_CLIENT_SECRET }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Get Auth0 Token
-        id: get_token
+      - name: Get Auth0 Token for https://t01.durablox.net
+        id: get_t01_token
         run: |
           token_response=$(curl -s --request POST https://durablox.eu.auth0.com/oauth/token \
             --header "content-type: application/json" \
             --data '{"client_id":"'"$T01_CLIENT_ID"'","client_secret":"'"$T01_CLIENT_SECRET"'","audience":"https://t01.durablox.net","grant_type":"client_credentials"}')
-          echo $token_response  
-          echo "$(echo "$token_response" | jq -r .access_token)"
+          echo "::add-mask::$(echo "$token_response" | jq -r .access_token)"
           echo "token=$(echo "$token_response" | jq -r .access_token)" >> $GITHUB_OUTPUT
 
-      - name: Deploy Descriptors via PUT
+      - name: Deploy Descriptors to https://t01.durablox.net
         run: |
-          token=${{ steps.get_token.outputs.token }}
+          token=${{ steps.get_t01_token.outputs.token }}
           for file in *.yml; do
             echo "Uploading $file..."
             resp=$(curl -s -o /dev/null -w "%{http_code}" \
@@ -70,3 +71,29 @@ jobs:
             fi
             echo "$file uploaded successfully (status $resp)"
           done
+
+      - name: Get Auth0 Token for https://d01.durablox.net
+        id: get_d01_token
+        run: |
+          token_response=$(curl -s --request POST https://durablox.eu.auth0.com/oauth/token \
+            --header "content-type: application/json" \
+            --data '{"client_id":"'"$D01_CLIENT_ID"'","client_secret":"'"$D01_CLIENT_SECRET"'","audience":"https://d01.durablox.net","grant_type":"client_credentials"}')
+          echo "::add-mask::$(echo "$token_response" | jq -r .access_token)"
+          echo "token=$(echo "$token_response" | jq -r .access_token)" >> $GITHUB_OUTPUT
+
+      - name: Deploy Descriptors to https://d01.durablox.net
+        run: |
+          token=${{ steps.get_d01_token.outputs.token }}
+          for file in *.yml; do
+            echo "Uploading $file..."
+            resp=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X PUT https://d01.durablox.net/descriptor/v1 \
+              -H "Authorization: Bearer $token" \
+              -H "Content-Type: application/x-yaml" \
+              --data-binary "@$file")
+            if [ "$resp" -ge 300 ]; then
+              echo "::error file=$file::Upload failed with status $resp"
+              exit 1
+            fi
+            echo "$file uploaded successfully (status $resp)"
+          done          
