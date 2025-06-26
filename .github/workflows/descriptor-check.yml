@@ -2,13 +2,9 @@ name: Descriptor Check & Deploy
 
 on:
   pull_request:
-    paths:
-      - "*.yml"
   push:
     branches:
       - main
-    paths:
-      - "*.yml"
 
 jobs:
   pr-check:
