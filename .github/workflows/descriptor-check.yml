@@ -49,8 +49,9 @@ jobs:
         run: |
           token_response=$(curl -s --request POST https://durablox.eu.auth0.com/oauth/token \
             --header "content-type: application/json" \
-            --data '{"client_id":"$T01_CLIENT_ID","client_secret":"$T01_CLIENT_SECRET","audience":"https://t01.durablox.net","grant_type":"client_credentials"}')
-          echo "$(echo "$token_response" | jq -r .access_token)"
+            --data '{"client_id":"'"$T01_CLIENT_ID"'","client_secret":"'"$T01_CLIENT_SECRET"'","audience":"https://t01.durablox.net","grant_type":"client_credentials"}')
+          echo $token_response
+          echo "::add-mask::$(echo "$token_response" | jq -r .access_token)"
           echo "token=$(echo "$token_response" | jq -r .access_token)" >> $GITHUB_OUTPUT
 
       - name: Deploy Descriptors via PUT
