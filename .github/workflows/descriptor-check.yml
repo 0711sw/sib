@@ -1,0 +1,75 @@
+name: Descriptor Check & Deploy
+
+on:
+  pull_request:
+    paths:
+      - "*.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "*.yml"
+
+jobs:
+  pr-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run PR descriptor check
+        run: |
+          failed=0
+          for file in *.yml; do
+            echo "Checking $file..."
+            resp=$(curl -s -w "%{http_code}" -o output.json \
+              -X POST https://t01.durablox.net/descriptor/check/v1 \
+              -H "Content-Type: application/x-yaml" \
+              --data-binary "@$file")
+
+            if [ "$resp" -ne 200 ]; then
+              echo "::error file=$file::Validation failed with status $resp"
+              failed=1
+            else
+              echo "Messages for $file:"
+              jq '.messages[] | "\(.severity): \(.message)"' output.json
+            fi
+          done
+          exit $failed
+
+  main-deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      T01_CLIENT_ID: ${{ secrets.T01_CLIENT_ID }}
+      T01_CLIENT_SECRET: ${{ secrets.T01_CLIENT_SECRET }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get Auth0 Token
+        id: get_token
+        run: |
+          token_response=$(curl -s --request POST https://durablox.eu.auth0.com/oauth/token \
+            --header "content-type: application/json" \
+            --data '{"client_id":"'"$T01_CLIENT_ID"'","client_secret":"'"$T01_CLIENT_SECRET"'","audience":"https://t01.durablox.net/","grant_type":"client_credentials"}')
+          echo "::add-mask::$(echo "$token_response" | jq -r .access_token)"
+          echo "token=$(echo "$token_response" | jq -r .access_token)" >> $GITHUB_OUTPUT
+
+      - name: Deploy Descriptors via PUT
+        run: |
+          token=${{ steps.get_token.outputs.token }}
+          for file in *.yml; do
+            echo "Uploading $file..."
+            resp=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X PUT https://t01.durablox.net/descriptor/v1 \
+              -H "Authorization: Bearer $token" \
+              -H "Content-Type: application/x-yaml" \
+              --data-binary "@$file")
+            if [ "$resp" -ge 300 ]; then
+              echo "::error file=$file::Upload failed with status $resp"
+              exit 1
+            fi
+            echo "$file uploaded successfully (status $resp)"
+          done
