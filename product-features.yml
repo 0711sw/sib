@@ -1,0 +1,25 @@
+name: urn:sib:product-features-1
+version: 1
+state: Experimental
+fields:
+  systems:
+    type: List
+    listType: 
+      type: Object
+      fields:
+        system:
+          type: String
+        features:
+          type: List
+          listType: 
+            type: Object
+            fields:
+              name:
+                type: String
+              value:
+                type: String
+              unit:
+                type: String
+                optional: true
+
+  

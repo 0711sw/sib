@@ -4,3 +4,23 @@ state: Experimental
 fields:
   itemNumber:
     type: String
+  model:
+    type: String
+    optional: true
+  gtin:
+    type: String
+    optional: true
+  shortDescription:
+    type: String
+  mainImage:
+    type: Asset
+    optional: true
+    acceptedFileExtensions:
+      - jpg
+      - jpeg
+      - png
+      - tif
+      - tiff
+      - webp
+      - heic
+      - avif
