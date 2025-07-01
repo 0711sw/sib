@@ -4,14 +4,20 @@ state: Experimental
 fields:
   systems:
     type: List
-    listType: 
+    contents: 
       type: Object
       fields:
-        system:
+        systemName:
+          type: String
+          pattern: "[A-Z]{1,20}"
+        systemVersion:
+          type: String
+          pattern: "[1-9][0-9]{0,2}(\\.[0-9]{1,2})"
+        classification:
           type: String
         features:
           type: List
-          listType: 
+          contents: 
             type: Object
             fields:
               name:

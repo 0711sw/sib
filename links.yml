@@ -4,7 +4,7 @@ state: Experimental
 fields:
   uplinks:
     type: List
-    listType: 
+    contents: 
       type: Object
       fields:
         entityType:
