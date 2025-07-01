@@ -1,0 +1,16 @@
+name: urn:sib:links-1
+version: 1
+state: Experimental
+fields:
+  uplinks:
+    type: List
+    contents: 
+      type: Object
+      fields:
+        entityType:
+          type: String
+        entityId:
+          type: String
+  effectiveDate:
+    type: Date
+    optional: true

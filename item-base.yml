@@ -1,0 +1,11 @@
+name: urn:sib:item-base-1
+version: 1
+state: Experimental
+fields:
+  serialNumber:
+    type: String
+    optional: true
+  manufacturedAt:
+    type: Date
+    optional: true
+  
