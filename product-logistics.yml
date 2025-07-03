@@ -1,0 +1,60 @@
+name: urn:sib:product-logistics-1
+version: 1
+description: Provides information about transportation an storage of a product.
+state: Experimental
+fields:
+  shelfLife:
+    type: Number
+    optional: true
+    description: Contains the expected shelf life in months.
+  basePackage:
+    type: Object
+    description: Contains information about the product within its basic packaging.
+    fields:
+      length:
+        type: Number
+        optional: true
+        description: Contains the length of the product within its base packaging in millimeters.
+      width:
+        type: Number
+        optional: true
+        description: Contains the width of the product within its base packaging in millimeters.
+      height:
+        type: Number
+        optional: true
+        description: Contains the height of the product within its base packaging in millimeters.
+      weight:
+        type: Number
+        optional: true
+        description: Contains the weight of the product with packaging in kilograms.
+  dangerousGoods:
+    type: Object
+    description: |
+      Determines if this product is or contains dangerous goods to ensure a safe transportation
+      and storage.
+    optional: true
+    fields:
+      containsDangerousGoods:
+        type: Boolean
+        description: Determines if this product is or contains dangerous goods.
+        optional: true
+      unNumbers:
+        type: List
+        description: Contains the UN numbers of the harazdous materials within the product.
+        optional: true
+        contents: 
+          type: String
+      dangerClass:
+        type: String
+        description: Contains the danger class of this product or its materials.
+        optional: true
+      transportCategory:
+        type: String
+        description: Contains the transportation category of this product or its materials.
+        optional: true
+      hazardIdentificationNumber:
+        type: String
+        description: Contains the identification number of the hazardous material in this product.
+        optional: true
+
+  

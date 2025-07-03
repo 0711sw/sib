@@ -1,0 +1,26 @@
+name: urn:sib:product-brand-1
+version: 1
+state: Experimental
+description: |
+  Contains some information for the brand or manufacturer of a product.
+  This is most probably stored in an own block and then 'linked' to all
+  products (sold via one brand - there might by several). This way, the
+  information provided below, can be easily changed for all products.
+fields:
+  brandName:
+    type: String
+    description: Contains the (short) brand name under which a product is sold.
+    optional: true
+  brandLogo:
+    type: Asset
+    description: Contains the logo used for the brand.
+    optional: true
+    acceptedFileExtensions:
+      - jpg
+      - jpeg
+      - png
+      - tif
+      - tiff
+      - webp
+      - heic
+      - avif

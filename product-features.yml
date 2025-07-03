@@ -1,31 +1,46 @@
 name: urn:sib:product-features-1
 version: 1
 state: Experimental
+description: |
+  Contains (technical) features for a product a specified by one or more
+  classification systems like eCl@ss or ETIM. Note: For custom attributes
+  the block 'urn:sib:product-attributes-1' should be used.
 fields:
   systems:
     type: List
+    description: Contains a list of all systems for which features are provided.
     contents: 
       type: Object
       fields:
         systemName:
           type: String
+          description: Contains the system name in all uppercase like 'ETIM' or 'ECLASS'.
           pattern: "[A-Z]{1,20}"
         systemVersion:
           type: String
+          description: |
+            Contains the version of the system like '10'. Note that this should be as specific
+            as possible (use '10' and not '10.0' unless specified otherwise by the classification
+            system.)
           pattern: "[1-9][0-9]{0,2}(\\.[0-9]{1,2})"
         classification:
           type: String
+          description: Contains the identifier of the class in which the product belongs. (e.g. EC010203)
         features:
           type: List
+          description: Contains the features of the product within this class (and system).
           contents: 
             type: Object
             fields:
               name:
                 type: String
+                description: Contains the name (or code) of the feature (e.g. EF010203).
               value:
                 type: String
+                description: Contains the value (e.g. EV010203 or 10.24).
               unit:
                 type: String
+                description: Contains the unit to use.
                 optional: true
 
   

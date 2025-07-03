@@ -1,16 +1,30 @@
 name: urn:sib:links-1
 version: 1
 state: Experimental
+description: |
+  Describes links between entities. Systems like Durablox will automatically follow these links
+  and join the resulting blocks together. This way, e.g. a 'urn:sib:product-brand-1' block can
+  be defined only once for a virtual entity like BRAND-1 and the referenced via such a link
+  block.
 fields:
   uplinks:
     type: List
+    description: Contains all links to follow.
     contents: 
       type: Object
       fields:
         entityType:
           type: String
+          description: Contains the type of the entity for which the parent block was stored.
         entityId:
           type: String
+          description: Contains the ID of the entity for which the parent block was stored.
   effectiveDate:
     type: Date
+    description: |
+      May define a date "at which" this link was defined. Imagine having a singe item
+      being producted at 01.07.2025. This may reference a PRODUCT entity which stores
+      general information which is true for all produced items. Now, when the ITEM is
+      accessed (without a specific date being specified) the data loaded for the product
+      is still pinned to '2025-07-01'.
     optional: true

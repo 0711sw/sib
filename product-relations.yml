@@ -1,0 +1,79 @@
+name: urn:sib:product-relations-1
+version: 1
+state: Experimental
+description: |
+  Contains information about relations to other products like spareparts or
+  alternatives.
+fields:
+  successors:
+    type: List
+    description: Lists all successors of this product.
+    contents:
+      type: Object
+      fields:
+        itemNumber:
+          type: String
+          description: Contains the item number of the successor.
+        type:
+          type: String
+          description: |
+            Describes whether this successor is a sort of drop-in replacement
+            or more or less a similar product which might be used but may come
+            with some complexity during installation.
+          choices:
+            - DIRECT_REPLACEMENT
+            - SIMILAR_PROUDCT
+  spareparts:
+    type: List
+    description: |
+      Lists modules which may define explosion drwaings or other schematics along
+      with lists of associated spareparts.
+    contents:
+      type: Object
+      fields:
+        module:
+          type: String
+          description: Contains a short and concise name or description of the module.
+          translatable: true
+        drawings:
+          type: List
+          description: Contains one or more drwaings.
+          contents:
+            type: Object
+            fields:
+              name:
+                type: String
+                description: Contains the name or description of this drawing.
+                translatable: true
+                optional: true
+              image:
+                type: Asset
+                description: Contains the name or path of the asset to use as drawing.
+                acceptedFileExtensions:
+                  - pdf
+                  - jpg
+                  - jpeg
+                  - png
+                  - tif
+                  - tiff
+                  - webp
+                  - heic
+                  - avif                
+        parts:
+          type: List
+          description: Lists the spareparts of the module.
+          contents:
+            type: Object
+            fields:
+              number:
+                type: String
+                description: Contains the number or marking of the sparepart in the drawing.
+                optional: true
+              itemNumber:
+                type: String
+                description: Contains the item number of the sparepart.
+              description:
+                type: String
+                description: Contains a short and concise description or remark for the part.
+                optional: true
+                translatable: true

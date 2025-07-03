@@ -1,11 +1,19 @@
 name: urn:sib:item-base-1
 version: 1
 state: Experimental
+description: |
+  Provides information for an actual physical item. For mass produced entities which
+  behave all the same, use 'product-' blocks like 'urn:sib:product-base-1'. Note that
+  entities having an 'item-base' block will most likely link to one or more blocks
+  (via 'links') of type 'product-*' to output all the general data. Therefore, this
+  block only contains data specific to a single instance or physical product.
 fields:
   serialNumber:
     type: String
+    description: Contains the serial number of the item.
     optional: true
   manufacturedAt:
     type: Date
+    description: Contains the date on which this item has been manufactured.
     optional: true
   

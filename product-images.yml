@@ -1,0 +1,34 @@
+name: urn:sib:product-images-1
+version: 1
+state: Experimental
+description: Provides various images for a product.
+fields:
+  images:
+    type: List
+    description: Lists all images available for a product.
+    contents: 
+      type: Object
+      fields:
+        label:
+          type: String
+          description: |
+            Might contain a label or short and concise description of the image.
+            Cryptic filenames like acme_coloured_v99_453486.img should be avoided.          
+          translatable: true
+          optional: true
+        type:
+          type: String
+          description: Contains the type of image being supplied.
+        image:
+          type: Asset
+          description: Contains the name or path of the asset to use as image.          
+          acceptedFileExtensions:
+            - jpg
+            - jpeg
+            - png
+            - tif
+            - tiff
+            - webp
+            - heic
+            - avif
+            - pdf

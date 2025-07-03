@@ -1,19 +1,30 @@
 name: urn:sib:product-base-1
 version: 1
 state: Experimental
+description: |
+  Contains elemental base data for a product.
 fields:
   itemNumber:
     type: String
+    description: Contains the item number which uniquely identifies the product.
   model:
     type: String
+    description: Contains the model number (often called 'Type' in german) of the product.
     optional: true
   gtin:
     type: String
+    description: |
+      Contains the GTIN of the product. Nnote that this might be the same as the 'itemNumber'
+      of the product.
     optional: true
   shortDescription:
     type: String
+    description: |
+      Contains a short and concise description of the product. A longer description can
+      be provided in 'urn:sib:product-texts-1'.
   mainImage:
     type: Asset
+    description: Contains the main image to use for the product.
     optional: true
     acceptedFileExtensions:
       - jpg
@@ -24,3 +35,15 @@ fields:
       - webp
       - heic
       - avif
+  discontinued:
+    type: Boolean
+    description: Determines if production of this product has (or soon will be) ended.
+    optional: true
+  expectedAvailabilityEnd:
+    type: Date
+    description: |
+      If this product is discontinued, this may contain the date when last stock of the
+      product is expected to be sold. In other words, after the given date, the product
+      cannot be sourced from the manufacturer anymore.
+    optional: true
+  

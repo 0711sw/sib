@@ -1,0 +1,24 @@
+name: urn:sib:product-documents-1
+version: 1
+state: Experimental
+description: Provides various documents for a product.
+fields:
+  documents:
+    type: List
+    description: Lists all documents available for a product.
+    contents: 
+      type: Object
+      fields:
+        label:
+          type: String
+          description: |
+            Might contain a label or short and concise description of the document.
+            Cryptic filenames like acme_manual_v99_453486.pdf should be avoided.
+          translatable: true
+          optional: true
+        type:
+          type: String
+          description: Contains the type of document being supplied.
+        document:      
+          type: Asset
+          description: Contains the name or path of the asset to use as document.

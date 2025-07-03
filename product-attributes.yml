@@ -1,0 +1,33 @@
+name: urn:sib:product-attributes-1
+version: 1
+state: Experimental
+description: |
+  Contains a list of attributes (most probably technical ones) of the product.
+  Note that these attributes are only used for rendering and provide little to
+  no used in technical exchange or environments as neither the attribute names
+  nor their units are standardized. Therefore, when possible, use 
+  product-features-1 to provide such information in a standardized manner.
+fields:
+  attributes:
+    type: List
+    description: Lists all custom attributes of this product.
+    contents: 
+      type: Object
+      fields:
+        label:
+          type: String
+          description: Contains the label of the attribute (to be shown to the user).
+          translatable: true
+        value:
+          type: String
+          description: |
+            Contains the value of the attribute. This should be a formatted string to
+            meet the users expectation. Therefore, a number might be stored as 1,24
+            in a 'de' translation.
+          translatable: true
+        unit:
+          type: String
+          description: |
+            Contains the ISO / SI code of the unit to render. If a custom or unknown
+            code is used, it is directly shown to the user.
+          optional: true

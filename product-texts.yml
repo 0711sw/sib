@@ -1,0 +1,18 @@
+name: urn:sib:product-texts-1
+version: 1
+state: Experimental
+description: |
+  Contains several (potentially longer) texts describing the product or its
+  characteristics.
+fields:
+  description:
+    type: String
+    description: Contains a detailed description of the product and all of its relevant properties.
+    optional: true
+    translatable: true
+  usageNote:
+    type: String
+    description: Contains a short and concise hint or recommendation on how to install or use the product.
+    optional: true
+    translatable: true
+  
