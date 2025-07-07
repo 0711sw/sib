@@ -22,7 +22,7 @@ fields:
             Contains the version of the system like '10'. Note that this should be as specific
             as possible (use '10' and not '10.0' unless specified otherwise by the classification
             system.)
-          pattern: "[1-9][0-9]{0,2}(\\.[0-9]{1,2})"
+          pattern: "[1-9][0-9]{0,2}(\\.[0-9]{1,2})?"
         classification:
           type: String
           description: Contains the identifier of the class in which the product belongs. (e.g. EC010203)
