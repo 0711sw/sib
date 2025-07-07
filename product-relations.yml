@@ -8,6 +8,7 @@ fields:
   successors:
     type: List
     description: Lists all successors of this product.
+    optional: true
     contents:
       type: Object
       fields:
@@ -28,6 +29,7 @@ fields:
     description: |
       Lists modules which may define explosion drwaings or other schematics along
       with lists of associated spareparts.
+    optional: true
     contents:
       type: Object
       fields:
