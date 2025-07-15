@@ -7,6 +7,12 @@ fields:
     type: Number
     optional: true
     description: Contains the expected shelf life in months.
+  numberOfPackages:
+    type: Number
+    optional: true
+    description: |
+      Contains the number of packages used for this product. If the product is delivered in
+      a single package, it is recommended to leave this field empty.
   basePackage:
     type: Object
     description: Contains information about the product within its basic packaging.
@@ -40,21 +46,38 @@ fields:
         optional: true
       unNumbers:
         type: List
-        description: Contains the UN numbers of the harazdous materials within the product.
+        description: Contains the UN numbers of the hazardous materials within the product.
         optional: true
         contents: 
           type: String
-      dangerClass:
+      hazardClass:
         type: String
-        description: Contains the danger class of this product or its materials.
+        description: Contains the hazard class of this product or its materials, e.g. "3" for flammable liquids.
         optional: true
+      hazardDivision:
+        type: String
+        optional: true
+        description: Division within the hazard class, e.g. "1.4" for explosives.
       transportCategory:
         type: String
         description: Contains the transportation category of this product or its materials.
         optional: true
       hazardIdentificationNumber:
         type: String
-        description: Contains the identification number of the hazardous material in this product.
+        description: |
+          Contains the ADR hazard identification number (HIN), also known as the Kemler code, shown on orange panels during transport.
         optional: true
-
-  
+      packingGroup:
+        type: String
+        optional: true
+        description: Contains the ADR packing group of the hazardous substance, e.g. "II".
+      properShippingName:
+        type: String
+        optional: true
+        description: Official UN shipping name of the hazardous material.
+      adrLabels:
+        type: List
+        optional: true
+        description: List of ADR label codes or pictogram identifiers (e.g. "3", "8").
+        contents:
+          type: String

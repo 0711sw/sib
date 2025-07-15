@@ -1,0 +1,72 @@
+name: urn:sib:product-regulations-1
+version: 1
+state: Experimental
+fields:
+  germany:
+    type: Object
+    optional: true
+    fields:
+      ubaPositive:
+        type: Boolean
+        optional: true
+  weee:
+    type: Object
+    optional: true
+    fields:
+      weeeNumber:
+        type: String
+        optional: true
+  reach:
+    type: Object
+    optional: true
+    fields:
+      isSubjectToReach:
+        type: Boolean
+        optional: true
+      lastCheck:
+        type: Date
+        optional: true
+      scipNumber:
+        type: String
+        optional: true
+      svhcContents:
+        type: List
+        optional: true
+        contents:
+          type: Object
+          fields:
+            substanceName:
+              type: String
+            casNumber:
+              type: String
+            concentration:
+              type: String
+              optional: true
+  clp:
+    type: Object
+    optional: true
+    fields:
+      isHazardous:
+        type: Boolean
+        optional: true
+      signalWordWarning:
+        type: Boolean
+        optional: true
+      signalWordDanger:
+        type: Boolean
+        optional: true
+      hazardStatements:
+        type: List
+        optional: true
+        contents: 
+          type: String
+      precautionaryStatements:
+        type: List
+        optional: true
+        contents: 
+          type: String
+      pictograms:
+        type: List
+        optional: true
+        contents: 
+          type: String
