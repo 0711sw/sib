@@ -1,0 +1,86 @@
+name: urn:sib:product-maintenance-1
+version: 1
+description: Contains maintenance and replacement information for a product.
+state: Experimental
+fields:
+  replacementCycle:
+    type: Object
+    description: Defines the overall replacement cycle of the product.
+    optional: true
+    fields:
+      intervalValue:
+        type: Number
+        description: Numeric interval for replacement (e.g., 24).
+        optional: false
+      intervalUnit:
+        type: String
+        description: Unit of the interval.
+        choices:
+          - DAYS
+          - MONTHS
+          - YEARS
+      note:
+        type: String
+        description: Optional note to clarify replacement requirements.
+        optional: true
+        translated: true
+
+  maintenanceTasks:
+    type: List
+    description: Defines recurring maintenance tasks for the product.
+    optional: true
+    contents:
+      type: Object
+      fields:
+        name:
+          type: String
+          description: Short name of the maintenance task (e.g., "Replace filter").
+          translated: true
+        description:
+          type: String
+          description: Longer explanation of the task.
+          translated: true
+          optional: true
+        intervalValue:
+          type: Number
+          description: Numeric interval for the task (e.g., 12).
+          optional: false
+        intervalUnit:
+          type: String
+          description: Unit of the interval.
+          choices:
+            - DAYS
+            - MONTHS
+            - YEARS
+        requiredParts:
+          type: List
+          description: List of products, spare parts, or consumables required for this task.
+          optional: true
+          contents:
+            type: Object
+            fields:
+              itemNumber:
+                type: String
+                description: Item number of the required part.
+              description:
+                type: String
+                description: Optional short description of the required part.
+                translated: true
+                optional: true
+        relatedDocuments:
+          type: List
+          description: Optional documents (manuals, guides) relevant for this task.
+          optional: true
+          contents:
+            type: Object
+            fields:
+              label:
+                type: String
+                description: Short label for the document.
+                translated: true
+                optional: true
+              document:
+                type: Asset
+                description: The document asset.
+                acceptedFileExtensions:
+                  - pdf
