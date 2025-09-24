@@ -27,7 +27,7 @@ fields:
   spareparts:
     type: List
     description: |
-      Lists modules which may define explosion drwaings or other schematics along
+      Lists modules which may define explosion drawings or other schematics along
       with lists of associated spareparts.
     optional: true
     contents:
@@ -39,7 +39,7 @@ fields:
           translatable: true
         drawings:
           type: List
-          description: Contains one or more drwaings.
+          description: Contains one or more drawings.
           contents:
             type: Object
             fields:
