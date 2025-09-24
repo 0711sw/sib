@@ -1,0 +1,36 @@
+name: urn:sib:product-faq-1
+version: 1
+description: Provides frequently asked questions (FAQ) and answers for a product.
+state: Experimental
+fields:
+  faqs:
+    type: List
+    description: A list of frequently asked questions and their answers.
+    contents:
+      type: Object
+      fields:
+        question:
+          type: String
+          description: The question as shown to users.
+          translated: true
+        answer:
+          type: String
+          description: The answer or resolution steps.
+          translated: true
+        relatedDocuments:
+          type: List
+          description: Optional documents that relate to this FAQ (e.g. manuals, datasheets).
+          optional: true
+          contents:
+            type: Object
+            fields:
+              label:
+                type: String
+                description: Short, human-friendly label for the document.
+                optional: true
+                translated: true
+              document:
+                type: Asset
+                description: The asset to use as the document.
+                acceptedFileExtensions:
+                  - pdf
