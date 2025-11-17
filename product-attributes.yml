@@ -23,11 +23,6 @@ fields:
           description: |
             Contains the value of the attribute. This should be a formatted string to
             meet the users expectation. Therefore, a number might be stored as 1,24
-            in a 'de' translation.
+            in a 'de' translation. Note that number should also include their units,
+            if needed.
           translatable: true
-        unit:
-          type: String
-          description: |
-            Contains the ISO / SI code of the unit to render. If a custom or unknown
-            code is used, it is directly shown to the user.
-          optional: true
