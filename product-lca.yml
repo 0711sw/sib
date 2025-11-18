@@ -1,0 +1,82 @@
+name: urn:sib:product-lca-1
+version: 1
+state: Experimental
+fields:
+  declaredUnitQuantity:
+    type: Number
+    description: Quantity to which all environmental impacts refer (e.g., 1.0).
+  declaredUnitUnit:
+    type: String
+    description: Unit of the declared quantity (e.g., m2, kg, piece).
+  functionalUnitDescription:
+    type: String
+    optional: true
+    description: Description of the product’s function as basis for the LCA.
+  referenceServiceLife:
+    type: Number
+    optional: true
+    description: Expected service life of the product in years.
+  thirdPartyVerification:
+    type: String
+    optional: true
+    description: Indicates whether the LCA has been verified by a third party. Expected values: "none", "internal", "external".
+  impacts:
+    type: List
+    optional: true
+    contents:
+      type: Object
+      fields:
+        stage:
+          type: String
+          description: Life cycle stage according to EN 15804 (e.g., A1-A3, B1, C1).
+        declared:
+          type: Boolean
+          description: Indicates whether the values for this stage are declared or not.
+        gwp:
+          type: Number
+          optional: true
+          description: Global Warming Potential [kg CO2-eq.]
+        odp:
+          type: Number
+          optional: true
+          description: Ozone Depletion Potential [kg CFC-11-eq.]
+        ap:
+          type: Number
+          optional: true
+          description: Acidification Potential [kg SO2-eq.]
+        ep_freshwater:
+          type: Number
+          optional: true
+          description: Eutrophication Potential (freshwater) [kg P-eq.]
+        ep_marine:
+          type: Number
+          optional: true
+          description: Eutrophication Potential (marine) [kg N-eq.]
+        ep_terrestrial:
+          type: Number
+          optional: true
+          description: Eutrophication Potential (terrestrial) [mol N-eq.]
+        pocp:
+          type: Number
+          optional: true
+          description: Photochemical Ozone Creation Potential [kg NMVOC-eq.]
+        adpe:
+          type: Number
+          optional: true
+          description: Abiotic Depletion Potential – Elements [kg Sb-eq.]
+        adpf:
+          type: Number
+          optional: true
+          description: Abiotic Depletion Potential – Fossil Fuels [MJ]
+        pert:
+          type: Number
+          optional: true
+          description: Use of renewable primary energy excluding raw materials [MJ]
+        penrt:
+          type: Number
+          optional: true
+          description: Use of non-renewable primary energy excluding raw materials [MJ]
+        wdp:
+          type: Number
+          optional: true
+          description: Water deprivation potential [m³ world eq. deprived]
