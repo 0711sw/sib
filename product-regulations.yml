@@ -1,72 +1,284 @@
 name: urn:sib:product-regulations-1
 version: 1
+description: Provides regulative information (CLP, WEEE, REACH, ERP) about a product.
 state: Experimental
 fields:
   germany:
     type: Object
+    description: National regulations for the german market.
     optional: true
     fields:
-      ubaPositive:
+      ubaRelevant:
         type: Boolean
         optional: true
-  weee:
-    type: Object
-    optional: true
-    fields:
-      weeeNumber:
-        type: String
+        description: Indicates whether the product contains materials listed in the UBA positive list for hygienic assessment of drinking water contact materials.
+      ubaCompliant:
+        type: Boolean
         optional: true
+        description: Indicates whether the product complies with the UBA hygienic assessment criteria, regardless of explicit listing.
+weee:
+  type: Object
+  optional: true
+  description: |
+    Contains information required for compliance with the WEEE Directive (2012/19/EU),
+    such as registration numbers and product classification. This ensures correct reporting,
+    recycling and return handling for electrical and electronic equipment in the EU.
+  fields:
+    weeeNumber:
+      type: String
+      optional: true
+      description: Official WEEE registration number for the product, as required under EU Directive 2012/19/EU.
+    weeeCategory:
+      type: String
+      optional: true
+      description: Assigned WEEE category of the product, according to national registers or EU classification.
+      choices:
+        - largeHouseholdAppliances
+        - smallHouseholdAppliances
+        - itAndTelecommunicationsEquipment
+        - consumerEquipment
+        - lightingEquipment
+        - electricalAndElectronicTools
+        - toysLeisureAndSportsEquipment
+        - medicalDevices
+        - monitoringAndControlInstruments
+        - automaticDispensers
+        - displayEquipment
+        - coolingAppliancesContainingRefrigerants
   reach:
-    type: Object
-    optional: true
-    fields:
-      isSubjectToReach:
-        type: Boolean
-        optional: true
-      lastCheck:
-        type: Date
-        optional: true
-      scipNumber:
-        type: String
-        optional: true
-      svhcContents:
-        type: List
-        optional: true
-        contents:
-          type: Object
-          fields:
-            substanceName:
-              type: String
-            casNumber:
-              type: String
-            concentration:
-              type: String
-              optional: true
+  type: Object
+  optional: true
+  description: |
+    Contains compliance information with the REACH Regulation (EC) No 1907/2006,
+    including the presence of Substances of Very High Concern (SVHC) and SCIP reporting.
+    Ensures conformity with chemical safety and substance disclosure requirements.
+  fields:
+    isSubjectToReach:
+      type: Boolean
+      optional: true
+      description: Indicates whether the product falls under the scope of the REACH Regulation.
+    lastCheck:
+      type: Date
+      optional: true
+      description: Date of the last verification of REACH conformity or SVHC relevance.
+    scipNumber:
+      type: String
+      optional: true
+      description: SCIP number assigned by the ECHA SCIP database if SVHC substances are present above thresholds.
+    svhcContents:
+      type: List
+      optional: true
+      description: List of SVHC substances present in the product above 0.1% w/w threshold.
+      contents:
+        type: Object
+        fields:
+          substanceName:
+            type: String
+            description: Name of the identified SVHC substance.
+          casNumber:
+            type: String
+            description: CAS (Chemical Abstracts Service) registry number of the substance.
+          concentration:
+            type: String
+            optional: true
+            description: Concentration of the SVHC substance in the product, typically in percent.
   clp:
-    type: Object
+  type: Object
+  optional: true
+  description: |
+    Contains classification and labeling information in accordance with the CLP Regulation (EC) No 1272/2008.
+    Includes hazard pictograms, signal words, hazard and precautionary statements, and usage restrictions
+    for hazardous substances or mixtures.
+  fields:
+    isHazardous:
+      type: Boolean
+      optional: true
+      description: Indicates whether the product is classified as hazardous according to CLP.
+    signalWordWarning:
+      type: Boolean
+      optional: true
+      description: Indicates if the signal word "Warning" applies to the product.
+    signalWordDanger:
+      type: Boolean
+      optional: true
+      description: Indicates if the signal word "Danger" applies to the product.
+    hazardStatements:
+      type: List
+      optional: true
+      contents: 
+        type: String
+      description: List of hazard statements (H-phrases) in accordance with CLP Regulation.
+    precautionaryStatements:
+      type: List
+      optional: true
+      contents: 
+        type: String
+      description: List of precautionary statements (P-phrases) in accordance with CLP Regulation.
+    pictograms:
+      type: List
+      optional: true
+      contents: 
+        type: String
+      description: List of hazard pictograms required under CLP.
+    tradeName:
+      type: String
+      optional: true
+      description: Commercial or trade name of the hazardous substance or mixture.
+    supplementalInformation:
+      type: String
+      optional: true
+      description: Additional hazard information as defined in Article 25 of the CLP Regulation.
+    storageClass:
+      type: String
+      optional: true
+      description: Storage class as defined by national or international standards (e.g., TRGS 510 in Germany).
+    b2bOnly:
+      type: Boolean
+      optional: true
+      description: Indicates whether the product is restricted to professional or industrial users (B2B only).
+  battery:
+  type: Object
+  optional: true
+  description: |
+    Contains information about batteries contained in or supplied with the product,
+    including technical data and regulatory labeling requirements. Supports compliance
+    with battery directives, transport regulations, and environmental disclosures.
+  fields:
+    containsBattery:
+      type: Boolean
+      optional: true
+      description: Indicates whether the product contains one or more batteries subject to labeling or transport regulations.
+    batteries:
+      type: List
+      optional: true
+      contents:
+        type: Object
+        fields:
+          id:
+            type: String
+            optional: true
+            description: Optional identifier to distinguish multiple battery types within the product, e.g., "battery-1" or "button-cell".
+          batteryType:
+            type: String
+            optional: true
+            description: Type of battery, according to BMDG 3.0 battery type code list.
+            choices:
+              - AL       # Alkaline non-rechargeable
+              - ALR      # Alkaline rechargeable
+              - BPAL     # Button cell alkaline
+              - BPARG    # Button cell silver oxide
+              - BPDIV    # Button cell other
+              - BPLI     # Button cell lithium
+              - BPZNA    # Button cell zinc air
+              - LIFEPO4  # Lithium iron phosphate
+              - LIIO     # Lithium-ion
+              - LIMN     # Lithium manganese
+              - LINVAL   # Lithium non-recyclable
+              - LI-NORE  # Lithium non-rechargeable
+              - LI-RE    # Lithium rechargeable
+              - LIPOLY   # Lithium polymer
+              - LISOCI2  # Lithium thionyl chloride
+              - MER      # Mercuric oxide
+              - NICAD    # Nickel cadmium
+              - NIMET    # Nickel metal hydride
+              - PB       # Lead acid
+              - SAL      # Saline
+              - ZNA      # Zinc air
+              - ZSP-NORE # Specific non-rechargeable
+              - ZSP-RE   # Specific rechargeable
+          batteryIecCode:
+            type: String
+            optional: true
+            description: IEC code of the battery type according to international standards.
+          batteryPictogram:
+            type: String
+            optional: true
+            description: Transport or hazard pictogram for the battery, e.g., UN 3480 for lithium-ion.
+          batteryLocation:
+            type: String
+            optional: true
+            translatable: true
+            description: Describes where the battery is located (e.g., internal, separately enclosed, or as the product itself).
+          quantity:
+            type: Number
+            optional: true
+            description: Number of batteries of this type contained in the product.
+          weight:
+            type: Number
+            optional: true
+            description: Weight per battery, in kilograms.
+          capacity:
+            type: Number
+            optional: true
+            description: Battery capacity in ampere-hours (Ah).
+          voltage:
+            type: Number
+            optional: true
+            description: Nominal voltage of the battery in volts.
+  erp:
+    type: List
     optional: true
+    contents:
+      type: Object
+      fields:
+        category:
+          type: String
+          enum:
+            - seasonal_space_heating
+            - seasonal_space_heating_medium_temp_55C
+            - seasonal_space_heating_low_temp_35C
+            - water_heating
+            - seasonal_space_heating_package
+            - seasonal_combined_heating_package
+            - hot_water_storage_tank
+            - cooling
+            - heating_colder_climate
+            - heating_average_climate
+            - heating_warmer_climate
+            - solid_fuel_boiler
+            - solid_fuel_package
+            - lamp
+            - luminaire_approved_range
+            - led_approved_range
+            - light_source_2019_2015
+            - local_space_heater
+            - two_direction_ventilation_unit
+          description: ERP category the efficiency class refers to, according to applicable EU or national labelling schemes.
+        energyEfficiencyClass:
+          type: String
+          description: ERP energy efficiency class for the given category (e.g., A+++, A, G).
+  erp:
+  type: List
+  optional: true
+  description: |
+    Contains ERP efficiency classification data for one or more product categories.
+    Supports compliance with EU energy labelling and ecodesign requirements.
+  contents:
+    type: Object
     fields:
-      isHazardous:
-        type: Boolean
-        optional: true
-      signalWordWarning:
-        type: Boolean
-        optional: true
-      signalWordDanger:
-        type: Boolean
-        optional: true
-      hazardStatements:
-        type: List
-        optional: true
-        contents: 
-          type: String
-      precautionaryStatements:
-        type: List
-        optional: true
-        contents: 
-          type: String
-      pictograms:
-        type: List
-        optional: true
-        contents: 
-          type: String
+      category:
+        type: String
+        choices:
+          - seasonal_space_heating
+          - seasonal_space_heating_medium_temp_55C
+          - seasonal_space_heating_low_temp_35C
+          - water_heating
+          - seasonal_space_heating_package
+          - seasonal_combined_heating_package
+          - hot_water_storage_tank
+          - cooling
+          - heating_colder_climate
+          - heating_average_climate
+          - heating_warmer_climate
+          - solid_fuel_boiler
+          - solid_fuel_package
+          - lamp
+          - luminaire_approved_range
+          - led_approved_range
+          - light_source_2019_2015
+          - local_space_heater
+          - two_direction_ventilation_unit
+        description: ERP category the efficiency class refers to, according to applicable EU or national labelling schemes.
+      energyEfficiencyClass:
+        type: String
+        description: ERP energy efficiency class for the given category (e.g., A+++, A, G).
