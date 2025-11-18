@@ -1,6 +1,6 @@
 name: urn:sib:product-logistics-1
 version: 1
-description: Provides information about transportation an storage of a product.
+description: Provides information about transportation and storage of a product.
 state: Experimental
 fields:
   shelfLife:
@@ -75,9 +75,41 @@ fields:
         type: String
         optional: true
         description: Official UN shipping name of the hazardous material.
-      adrLabels:
+      properShippingNameOfficial:
+        type: String
+        optional: true
+        description: Official UN shipping name of the dangerous good as defined in ADR section 3.2.
+      technicalName:
+        type: String
+        optional: true
+        description: Technical name for the dangerous substance, if required (e.g. for N.O.S. entries).
+      hazardLabels:
         type: List
         optional: true
-        description: List of ADR label codes or pictogram identifiers (e.g. "3", "8").
+        description: List of hazard labels (Gefahrenzettel) applicable for the product (e.g. "3", "8").
         contents:
           type: String
+      numberOfPackages:
+        type: Number
+        optional: true
+        description: Total number of dangerous goods packages for this product.
+      packageDescription:
+        type: String
+        optional: true
+        description: Description of the dangerous goods packaging used (e.g. box, drum, canister).
+      tunnelRestrictionCode:
+        type: String
+        optional: true
+        description: ADR tunnel restriction code (e.g. "E", "D/E") indicating transport limitations in tunnels.
+      waterHazardClass:
+        type: String
+        optional: true
+        description: Water hazard classification (WGK) according to German regulations.
+      limitedQuantity:
+        type: Boolean
+        optional: true
+        description: Indicates whether the product is subject to ADR limited quantity exemptions.
+      batteryWeight:
+        type: Number
+        optional: true
+        description: Weight of the battery if it contributes to the dangerous goods classification, in kilograms.
