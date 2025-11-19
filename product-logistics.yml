@@ -75,14 +75,12 @@ fields:
         type: String
         optional: true
         description: Official UN shipping name of the hazardous material.
-      properShippingNameOfficial:
-        type: String
-        optional: true
-        description: Official UN shipping name of the dangerous good as defined in ADR section 3.2.
+        translatable: true
       technicalName:
         type: String
         optional: true
         description: Technical name for the dangerous substance, if required (e.g. for N.O.S. entries).
+        translatable: true
       hazardLabels:
         type: List
         optional: true
@@ -96,7 +94,7 @@ fields:
       packageDescription:
         type: String
         optional: true
-        description: Description of the dangerous goods packaging used (e.g. box, drum, canister).
+        description: Description of the dangerous goods packaging used (it is recomended to use the codes of ADR 6.1.2 Code for designating types of packagings).
       tunnelRestrictionCode:
         type: String
         optional: true
