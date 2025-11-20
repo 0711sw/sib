@@ -76,7 +76,7 @@ fields:
               itemNumber:
                 type: String
                 description: Contains the item number of the sparepart.
-              description:
+              shortDescription:
                 type: String
                 description: Contains a short and concise description or remark for the part.
                 optional: true
@@ -93,7 +93,7 @@ fields:
         itemNumber:
           type: String
           description: Item number of the accessory.
-        description:
+        shortDescription:
           type: String
           optional: true
           translatable: true
@@ -125,7 +125,7 @@ fields:
         itemNumber:
           type: String
           description: Item number of the component within the set.
-        description:
+        shortDescription:
           type: String
           optional: true
           translatable: true
