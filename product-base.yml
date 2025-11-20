@@ -22,6 +22,8 @@ fields:
     description: |
       Contains a short and concise description of the product. A longer description can
       be provided in 'urn:sib:product-texts-1'.
+    optional: true
+    translatable: true
   mainImage:
     type: Asset
     description: Contains the main image to use for the product.
