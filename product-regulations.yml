@@ -45,7 +45,7 @@ weee:
         - automaticDispensers
         - displayEquipment
         - coolingAppliancesContainingRefrigerants
-  reach:
+reach:
   type: Object
   optional: true
   description: |
@@ -82,7 +82,7 @@ weee:
             type: String
             optional: true
             description: Concentration of the SVHC substance in the product, typically in percent.
-  clp:
+clp:
   type: Object
   optional: true
   description: |
@@ -136,7 +136,7 @@ weee:
       type: Boolean
       optional: true
       description: Indicates whether the product is restricted to professional or industrial users (B2B only).
-  battery:
+battery:
   type: Object
   optional: true
   description: |
@@ -161,31 +161,7 @@ weee:
           batteryType:
             type: String
             optional: true
-            description: Type of battery, according to BMDG 3.0 battery type code list.
-            choices:
-              - AL       # Alkaline non-rechargeable
-              - ALR      # Alkaline rechargeable
-              - BPAL     # Button cell alkaline
-              - BPARG    # Button cell silver oxide
-              - BPDIV    # Button cell other
-              - BPLI     # Button cell lithium
-              - BPZNA    # Button cell zinc air
-              - LIFEPO4  # Lithium iron phosphate
-              - LIIO     # Lithium-ion
-              - LIMN     # Lithium manganese
-              - LINVAL   # Lithium non-recyclable
-              - LI-NORE  # Lithium non-rechargeable
-              - LI-RE    # Lithium rechargeable
-              - LIPOLY   # Lithium polymer
-              - LISOCI2  # Lithium thionyl chloride
-              - MER      # Mercuric oxide
-              - NICAD    # Nickel cadmium
-              - NIMET    # Nickel metal hydride
-              - PB       # Lead acid
-              - SAL      # Saline
-              - ZNA      # Zinc air
-              - ZSP-NORE # Specific non-rechargeable
-              - ZSP-RE   # Specific rechargeable
+            description: Type of battery.
           batteryIecCode:
             type: String
             optional: true
@@ -214,71 +190,296 @@ weee:
           voltage:
             type: Number
             optional: true
-            description: Nominal voltage of the battery in volts.
-  erp:
-    type: List
-    optional: true
-    contents:
-      type: Object
-      fields:
-        category:
-          type: String
-          enum:
-            - seasonal_space_heating
-            - seasonal_space_heating_medium_temp_55C
-            - seasonal_space_heating_low_temp_35C
-            - water_heating
-            - seasonal_space_heating_package
-            - seasonal_combined_heating_package
-            - hot_water_storage_tank
-            - cooling
-            - heating_colder_climate
-            - heating_average_climate
-            - heating_warmer_climate
-            - solid_fuel_boiler
-            - solid_fuel_package
-            - lamp
-            - luminaire_approved_range
-            - led_approved_range
-            - light_source_2019_2015
-            - local_space_heater
-            - two_direction_ventilation_unit
-          description: ERP category the efficiency class refers to, according to applicable EU or national labelling schemes.
-        energyEfficiencyClass:
-          type: String
-          description: ERP energy efficiency class for the given category (e.g., A+++, A, G).
-  erp:
-  type: List
-  optional: true
+            description: Nominal voltage of the battery in volts. 
+erp:
+  type: Object
   description: |
-    Contains ERP efficiency classification data for one or more product categories.
-    Supports compliance with EU energy labelling and ecodesign requirements.
-  contents:
-    type: Object
-    fields:
-      category:
-        type: String
-        choices:
-          - seasonal_space_heating
-          - seasonal_space_heating_medium_temp_55C
-          - seasonal_space_heating_low_temp_35C
-          - water_heating
-          - seasonal_space_heating_package
-          - seasonal_combined_heating_package
-          - hot_water_storage_tank
-          - cooling
-          - heating_colder_climate
-          - heating_average_climate
-          - heating_warmer_climate
-          - solid_fuel_boiler
-          - solid_fuel_package
-          - lamp
-          - luminaire_approved_range
-          - led_approved_range
-          - light_source_2019_2015
-          - local_space_heater
-          - two_direction_ventilation_unit
-        description: ERP category the efficiency class refers to, according to applicable EU or national labelling schemes.
-      energyEfficiencyClass:
-        type: String
-        description: ERP energy efficiency class for the given category (e.g., A+++, A, G).
+    Contains ERP energy efficiency classes for defined product categories.
+    Only one value per category is allowed.
+  fields:
+    seasonalSpaceHeating:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for seasonal space heating
+    seasonalSpaceHeatingMediumTemp55C:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for seasonal space heating at 55 °C
+    seasonalSpaceHeatingLowTemp35C:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for seasonal space heating at 35 °C
+    waterHeating:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for water heating
+    seasonalSpaceHeatingPackage:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for combined space heating package
+    seasonalCombinedHeatingPackage:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for combined heating and hot water package
+    hotWaterStorageTank:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for hot water storage tanks
+    cooling:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for cooling
+    heatingColderClimate:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for heating in colder climate
+    heatingAverageClimate:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for heating in average climate
+    heatingWarmerClimate:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for heating in warmer climate
+    solidFuelBoiler:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for solid fuel boilers
+    solidFuelPackage:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for solid fuel packages
+    lamp:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for lamps
+    luminaireApprovedRange:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for luminaires (approved range)
+    ledApprovedRange:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for LED lighting (approved range)
+    lightSource20192015:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for light sources per 2019/2015 regulation
+    localSpaceHeater:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for local space heaters
+    twoDirectionVentilationUnit:
+      type: String
+      optional: true
+      choices:
+        - A+++
+        - A++
+        - A+
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+        - G
+      description: ERP class for two-direction ventilation units
+        
