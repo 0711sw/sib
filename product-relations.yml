@@ -3,7 +3,7 @@ version: 1
 state: Experimental
 description: |
   Contains information about relations to other products like spareparts,
-  accessories, set components or successors.
+  accessories, components or successors.
 fields:
   successors:
     type: List
