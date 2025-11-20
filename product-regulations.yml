@@ -16,470 +16,470 @@ fields:
         type: Boolean
         optional: true
         description: Indicates whether the product complies with the UBA hygienic assessment criteria, regardless of explicit listing.
-weee:
-  type: Object
-  optional: true
-  description: |
-    Contains information required for compliance with the WEEE Directive (2012/19/EU),
-    such as registration numbers and product classification. This ensures correct reporting,
-    recycling and return handling for electrical and electronic equipment in the EU.
-  fields:
-    weeeNumber:
-      type: String
-      optional: true
-      description: Official WEEE registration number for the product, as required under EU Directive 2012/19/EU.
-    weeeCategory:
-      type: String
-      optional: true
-      description: Assigned WEEE category of the product, according to national registers or EU classification.
-      choices:
-        - largeHouseholdAppliances
-        - smallHouseholdAppliances
-        - itAndTelecommunicationsEquipment
-        - consumerEquipment
-        - lightingEquipment
-        - electricalAndElectronicTools
-        - toysLeisureAndSportsEquipment
-        - medicalDevices
-        - monitoringAndControlInstruments
-        - automaticDispensers
-        - displayEquipment
-        - coolingAppliancesContainingRefrigerants
-reach:
-  type: Object
-  optional: true
-  description: |
-    Contains compliance information with the REACH Regulation (EC) No 1907/2006,
-    including the presence of Substances of Very High Concern (SVHC) and SCIP reporting.
-    Ensures conformity with chemical safety and substance disclosure requirements.
-  fields:
-    isSubjectToReach:
-      type: Boolean
-      optional: true
-      description: Indicates whether the product falls under the scope of the REACH Regulation.
-    lastCheck:
-      type: Date
-      optional: true
-      description: Date of the last verification of REACH conformity or SVHC relevance.
-    scipNumber:
-      type: String
-      optional: true
-      description: SCIP number assigned by the ECHA SCIP database if SVHC substances are present above thresholds.
-    svhcContents:
-      type: List
-      optional: true
-      description: List of SVHC substances present in the product above 0.1% w/w threshold.
-      contents:
-        type: Object
-        fields:
-          substanceName:
-            type: String
-            description: Name of the identified SVHC substance.
-          casNumber:
-            type: String
-            description: CAS (Chemical Abstracts Service) registry number of the substance.
-          concentration:
-            type: String
-            optional: true
-            description: Concentration of the SVHC substance in the product, typically in percent.
-clp:
-  type: Object
-  optional: true
-  description: |
-    Contains classification and labeling information in accordance with the CLP Regulation (EC) No 1272/2008.
-    Includes hazard pictograms, signal words, hazard and precautionary statements, and usage restrictions
-    for hazardous substances or mixtures.
-  fields:
-    isHazardous:
-      type: Boolean
-      optional: true
-      description: Indicates whether the product is classified as hazardous according to CLP.
-    signalWordWarning:
-      type: Boolean
-      optional: true
-      description: Indicates if the signal word "Warning" applies to the product.
-    signalWordDanger:
-      type: Boolean
-      optional: true
-      description: Indicates if the signal word "Danger" applies to the product.
-    hazardStatements:
-      type: List
-      optional: true
-      contents: 
+  weee:
+    type: Object
+    optional: true
+    description: |
+      Contains information required for compliance with the WEEE Directive (2012/19/EU),
+      such as registration numbers and product classification. This ensures correct reporting,
+      recycling and return handling for electrical and electronic equipment in the EU.
+    fields:
+      weeeNumber:
         type: String
-      description: List of hazard statements (H-phrases) in accordance with CLP Regulation.
-    precautionaryStatements:
-      type: List
-      optional: true
-      contents: 
+        optional: true
+        description: Official WEEE registration number for the product, as required under EU Directive 2012/19/EU.
+      weeeCategory:
         type: String
-      description: List of precautionary statements (P-phrases) in accordance with CLP Regulation.
-    pictograms:
-      type: List
-      optional: true
-      contents: 
+        optional: true
+        description: Assigned WEEE category of the product, according to national registers or EU classification.
+        choices:
+          - largeHouseholdAppliances
+          - smallHouseholdAppliances
+          - itAndTelecommunicationsEquipment
+          - consumerEquipment
+          - lightingEquipment
+          - electricalAndElectronicTools
+          - toysLeisureAndSportsEquipment
+          - medicalDevices
+          - monitoringAndControlInstruments
+          - automaticDispensers
+          - displayEquipment
+          - coolingAppliancesContainingRefrigerants
+  reach:
+    type: Object
+    optional: true
+    description: |
+      Contains compliance information with the REACH Regulation (EC) No 1907/2006,
+      including the presence of Substances of Very High Concern (SVHC) and SCIP reporting.
+      Ensures conformity with chemical safety and substance disclosure requirements.
+    fields:
+      isSubjectToReach:
+        type: Boolean
+        optional: true
+        description: Indicates whether the product falls under the scope of the REACH Regulation.
+      lastCheck:
+        type: Date
+        optional: true
+        description: Date of the last verification of REACH conformity or SVHC relevance.
+      scipNumber:
         type: String
-      description: List of hazard pictograms required under CLP.
-    tradeName:
-      type: String
-      optional: true
-      description: Commercial or trade name of the hazardous substance or mixture.
-    supplementalInformation:
-      type: String
-      optional: true
-      description: Additional hazard information as defined in Article 25 of the CLP Regulation.
-    storageClass:
-      type: String
-      optional: true
-      description: Storage class as defined by national or international standards (e.g., TRGS 510 in Germany).
-    b2bOnly:
-      type: Boolean
-      optional: true
-      description: Indicates whether the product is restricted to professional or industrial users (B2B only).
-battery:
-  type: Object
-  optional: true
-  description: |
-    Contains information about batteries contained in or supplied with the product,
-    including technical data and regulatory labeling requirements. Supports compliance
-    with battery directives, transport regulations, and environmental disclosures.
-  fields:
-    containsBattery:
-      type: Boolean
-      optional: true
-      description: Indicates whether the product contains one or more batteries subject to labeling or transport regulations.
-    batteries:
-      type: List
-      optional: true
-      contents:
-        type: Object
-        fields:
-          id:
-            type: String
-            optional: true
-            description: Optional identifier to distinguish multiple battery types within the product, e.g., "battery-1" or "button-cell".
-          batteryType:
-            type: String
-            optional: true
-            description: Type of battery.
-          batteryIecCode:
-            type: String
-            optional: true
-            description: IEC code of the battery type according to international standards.
-          batteryPictogram:
-            type: String
-            optional: true
-            description: Transport or hazard pictogram for the battery, e.g., UN 3480 for lithium-ion.
-          batteryLocation:
-            type: String
-            optional: true
-            translatable: true
-            description: Describes where the battery is located (e.g., internal, separately enclosed, or as the product itself).
-          quantity:
-            type: Number
-            optional: true
-            description: Number of batteries of this type contained in the product.
-          weight:
-            type: Number
-            optional: true
-            description: Weight per battery, in kilograms.
-          capacity:
-            type: Number
-            optional: true
-            description: Battery capacity in ampere-hours (Ah).
-          voltage:
-            type: Number
-            optional: true
-            description: Nominal voltage of the battery in volts. 
-erp:
-  type: Object
-  description: |
-    Contains ERP energy efficiency classes for defined product categories.
-    Only one value per category is allowed.
-  fields:
-    seasonalSpaceHeating:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for seasonal space heating
-    seasonalSpaceHeatingMediumTemp55C:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for seasonal space heating at 55 °C
-    seasonalSpaceHeatingLowTemp35C:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for seasonal space heating at 35 °C
-    waterHeating:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for water heating
-    seasonalSpaceHeatingPackage:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for combined space heating package
-    seasonalCombinedHeatingPackage:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for combined heating and hot water package
-    hotWaterStorageTank:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for hot water storage tanks
-    cooling:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for cooling
-    heatingColderClimate:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for heating in colder climate
-    heatingAverageClimate:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for heating in average climate
-    heatingWarmerClimate:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for heating in warmer climate
-    solidFuelBoiler:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for solid fuel boilers
-    solidFuelPackage:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for solid fuel packages
-    lamp:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for lamps
-    luminaireApprovedRange:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for luminaires (approved range)
-    ledApprovedRange:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for LED lighting (approved range)
-    lightSource20192015:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for light sources per 2019/2015 regulation
-    localSpaceHeater:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for local space heaters
-    twoDirectionVentilationUnit:
-      type: String
-      optional: true
-      choices:
-        - A+++
-        - A++
-        - A+
-        - A
-        - B
-        - C
-        - D
-        - E
-        - F
-        - G
-      description: ERP class for two-direction ventilation units
+        optional: true
+        description: SCIP number assigned by the ECHA SCIP database if SVHC substances are present above thresholds.
+      svhcContents:
+        type: List
+        optional: true
+        description: List of SVHC substances present in the product above 0.1% w/w threshold.
+        contents:
+          type: Object
+          fields:
+            substanceName:
+              type: String
+              description: Name of the identified SVHC substance.
+            casNumber:
+              type: String
+              description: CAS (Chemical Abstracts Service) registry number of the substance.
+            concentration:
+              type: String
+              optional: true
+              description: Concentration of the SVHC substance in the product, typically in percent.
+  clp:
+    type: Object
+    optional: true
+    description: |
+      Contains classification and labeling information in accordance with the CLP Regulation (EC) No 1272/2008.
+      Includes hazard pictograms, signal words, hazard and precautionary statements, and usage restrictions
+      for hazardous substances or mixtures.
+    fields:
+      isHazardous:
+        type: Boolean
+        optional: true
+        description: Indicates whether the product is classified as hazardous according to CLP.
+      signalWordWarning:
+        type: Boolean
+        optional: true
+        description: Indicates if the signal word "Warning" applies to the product.
+      signalWordDanger:
+        type: Boolean
+        optional: true
+        description: Indicates if the signal word "Danger" applies to the product.
+      hazardStatements:
+        type: List
+        optional: true
+        contents: 
+          type: String
+        description: List of hazard statements (H-phrases) in accordance with CLP Regulation.
+      precautionaryStatements:
+        type: List
+        optional: true
+        contents: 
+          type: String
+        description: List of precautionary statements (P-phrases) in accordance with CLP Regulation.
+      pictograms:
+        type: List
+        optional: true
+        contents: 
+          type: String
+        description: List of hazard pictograms required under CLP.
+      tradeName:
+        type: String
+        optional: true
+        description: Commercial or trade name of the hazardous substance or mixture.
+      supplementalInformation:
+        type: String
+        optional: true
+        description: Additional hazard information as defined in Article 25 of the CLP Regulation.
+      storageClass:
+        type: String
+        optional: true
+        description: Storage class as defined by national or international standards (e.g., TRGS 510 in Germany).
+      b2bOnly:
+        type: Boolean
+        optional: true
+        description: Indicates whether the product is restricted to professional or industrial users (B2B only).
+  battery:
+    type: Object
+    optional: true
+    description: |
+      Contains information about batteries contained in or supplied with the product,
+      including technical data and regulatory labeling requirements. Supports compliance
+      with battery directives, transport regulations, and environmental disclosures.
+    fields:
+      containsBattery:
+        type: Boolean
+        optional: true
+        description: Indicates whether the product contains one or more batteries subject to labeling or transport regulations.
+      batteries:
+        type: List
+        optional: true
+        contents:
+          type: Object
+          fields:
+            id:
+              type: String
+              optional: true
+              description: Optional identifier to distinguish multiple battery types within the product, e.g., "battery-1" or "button-cell".
+            batteryType:
+              type: String
+              optional: true
+              description: Type of battery.
+            batteryIecCode:
+              type: String
+              optional: true
+              description: IEC code of the battery type according to international standards.
+            batteryPictogram:
+              type: String
+              optional: true
+              description: Transport or hazard pictogram for the battery, e.g., UN 3480 for lithium-ion.
+            batteryLocation:
+              type: String
+              optional: true
+              translatable: true
+              description: Describes where the battery is located (e.g., internal, separately enclosed, or as the product itself).
+            quantity:
+              type: Number
+              optional: true
+              description: Number of batteries of this type contained in the product.
+            weight:
+              type: Number
+              optional: true
+              description: Weight per battery, in kilograms.
+            capacity:
+              type: Number
+              optional: true
+              description: Battery capacity in ampere-hours (Ah).
+            voltage:
+              type: Number
+              optional: true
+              description: Nominal voltage of the battery in volts. 
+  erp:
+    type: Object
+    description: |
+      Contains ERP energy efficiency classes for defined product categories.
+      Only one value per category is allowed.
+    fields:
+      seasonalSpaceHeating:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for seasonal space heating
+      seasonalSpaceHeatingMediumTemp55C:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for seasonal space heating at 55 °C
+      seasonalSpaceHeatingLowTemp35C:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for seasonal space heating at 35 °C
+      waterHeating:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for water heating
+      seasonalSpaceHeatingPackage:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for combined space heating package
+      seasonalCombinedHeatingPackage:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for combined heating and hot water package
+      hotWaterStorageTank:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for hot water storage tanks
+      cooling:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for cooling
+      heatingColderClimate:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for heating in colder climate
+      heatingAverageClimate:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for heating in average climate
+      heatingWarmerClimate:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for heating in warmer climate
+      solidFuelBoiler:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for solid fuel boilers
+      solidFuelPackage:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for solid fuel packages
+      lamp:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for lamps
+      luminaireApprovedRange:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for luminaires (approved range)
+      ledApprovedRange:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for LED lighting (approved range)
+      lightSource20192015:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for light sources per 2019/2015 regulation
+      localSpaceHeater:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for local space heaters
+      twoDirectionVentilationUnit:
+        type: String
+        optional: true
+        choices:
+          - A+++
+          - A++
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        description: ERP class for two-direction ventilation units
         
