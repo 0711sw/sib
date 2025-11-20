@@ -2,13 +2,14 @@ name: urn:sib:product-relations-1
 version: 1
 state: Experimental
 description: |
-  Contains information about relations to other products like spareparts or
-  alternatives.
+  Contains information about relations to other products like spareparts,
+  accessories, set components or successors.
 fields:
   successors:
     type: List
     description: Lists all successors of this product.
     optional: true
+    maxOccur: 10
     contents:
       type: Object
       fields:
@@ -23,7 +24,8 @@ fields:
             with some complexity during installation.
           choices:
             - DIRECT_REPLACEMENT
-            - SIMILAR_PROUDCT
+            - SIMILAR_PRODUCT
+
   spareparts:
     type: List
     description: |
@@ -60,7 +62,7 @@ fields:
                   - tiff
                   - webp
                   - heic
-                  - avif                
+                  - avif
         parts:
           type: List
           description: Lists the spareparts of the module.
@@ -79,3 +81,55 @@ fields:
                 description: Contains a short and concise description or remark for the part.
                 optional: true
                 translatable: true
+
+  accessories:
+    type: List
+    optional: true
+    maxOccur: 250
+    description: Lists all compatible accessories for this product.
+    contents:
+      type: Object
+      fields:
+        itemNumber:
+          type: String
+          description: Item number of the accessory.
+        shortDescription:
+          type: String
+          optional: true
+          translatable: true
+          description: Short, display-friendly name or description of the accessory.
+        recommendedQuantity:
+          type: Number
+          optional: true
+          description: Quantity of this accessory typically used or recommended for use with the product.
+        group:
+          type: String
+          optional: true
+          translatable: true
+          description: Logical accessory group this item belongs to (e.g., "Mounting", "Electrical components").
+        type:
+          type: String
+          optional: true
+          description: Describes the accessory type or intended use.
+          choices:
+            - optional
+            - mandatory
+
+  setComponents:
+    type: List
+    optional: true
+    description: Lists the components that are part of this product if it is a set or kit.
+    contents:
+      type: Object
+      fields:
+        itemNumber:
+          type: String
+          description: Item number of the component within the set.
+        shortDescription:
+          type: String
+          optional: true
+          translatable: true
+          description: Short, display-friendly name of the set component.
+        quantity:
+          type: Number
+          description: Quantity of this component in the set.
