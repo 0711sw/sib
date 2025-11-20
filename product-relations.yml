@@ -93,7 +93,7 @@ fields:
         itemNumber:
           type: String
           description: Item number of the accessory.
-        shortDescription:
+        description:
           type: String
           optional: true
           translatable: true
@@ -115,7 +115,7 @@ fields:
             - optional
             - mandatory
 
-  setComponents:
+  components:
     type: List
     optional: true
     description: Lists the components that are part of this product if it is a set or kit.
@@ -125,7 +125,7 @@ fields:
         itemNumber:
           type: String
           description: Item number of the component within the set.
-        shortDescription:
+        description:
           type: String
           optional: true
           translatable: true

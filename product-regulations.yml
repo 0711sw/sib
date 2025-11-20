@@ -150,6 +150,7 @@ fields:
         description: Indicates whether the product contains one or more batteries subject to labeling or transport regulations.
       batteries:
         type: List
+        description: Lists the batteries contained in or supplied with the product.
         optional: true
         contents:
           type: Object
@@ -199,6 +200,7 @@ fields:
     fields:
       seasonalSpaceHeating:
         type: String
+        description: ERP class for seasonal space heating
         optional: true
         choices:
           - A+++
@@ -211,9 +213,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for seasonal space heating
       seasonalSpaceHeatingMediumTemp55C:
         type: String
+        description: ERP class for seasonal space heating at 55 °C
         optional: true
         choices:
           - A+++
@@ -226,9 +228,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for seasonal space heating at 55 °C
       seasonalSpaceHeatingLowTemp35C:
         type: String
+        description: ERP class for seasonal space heating at 35 °C
         optional: true
         choices:
           - A+++
@@ -241,9 +243,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for seasonal space heating at 35 °C
       waterHeating:
         type: String
+        description: ERP class for water heating
         optional: true
         choices:
           - A+++
@@ -256,9 +258,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for water heating
       seasonalSpaceHeatingPackage:
         type: String
+        description: ERP class for combined space heating package
         optional: true
         choices:
           - A+++
@@ -271,9 +273,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for combined space heating package
       seasonalCombinedHeatingPackage:
         type: String
+        description: ERP class for combined heating and hot water package
         optional: true
         choices:
           - A+++
@@ -286,9 +288,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for combined heating and hot water package
       hotWaterStorageTank:
         type: String
+        description: ERP class for hot water storage tanks
         optional: true
         choices:
           - A+++
@@ -301,9 +303,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for hot water storage tanks
       cooling:
         type: String
+        description: ERP class for cooling
         optional: true
         choices:
           - A+++
@@ -316,9 +318,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for cooling
       heatingColderClimate:
         type: String
+        description: ERP class for heating in colder climate
         optional: true
         choices:
           - A+++
@@ -331,9 +333,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for heating in colder climate
       heatingAverageClimate:
         type: String
+        description: ERP class for heating in average climate
         optional: true
         choices:
           - A+++
@@ -346,9 +348,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for heating in average climate
       heatingWarmerClimate:
         type: String
+        description: ERP class for heating in warmer climate
         optional: true
         choices:
           - A+++
@@ -361,9 +363,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for heating in warmer climate
       solidFuelBoiler:
         type: String
+        description: ERP class for solid fuel boilers
         optional: true
         choices:
           - A+++
@@ -376,9 +378,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for solid fuel boilers
       solidFuelPackage:
         type: String
+        description: ERP class for solid fuel packages
         optional: true
         choices:
           - A+++
@@ -391,9 +393,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for solid fuel packages
       lamp:
         type: String
+        description: ERP class for lamps
         optional: true
         choices:
           - A+++
@@ -406,9 +408,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for lamps
       luminaireApprovedRange:
         type: String
+        description: ERP class for luminaires (approved range)
         optional: true
         choices:
           - A+++
@@ -421,9 +423,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for luminaires (approved range)
       ledApprovedRange:
         type: String
+        description: ERP class for LED lighting (approved range)
         optional: true
         choices:
           - A+++
@@ -436,9 +438,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for LED lighting (approved range)
       lightSource20192015:
         type: String
+        description: ERP class for light sources per 2019/2015 regulation
         optional: true
         choices:
           - A+++
@@ -451,9 +453,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for light sources per 2019/2015 regulation
       localSpaceHeater:
         type: String
+        description: ERP class for local space heaters
         optional: true
         choices:
           - A+++
@@ -466,9 +468,9 @@ fields:
           - E
           - F
           - G
-        description: ERP class for local space heaters
       twoDirectionVentilationUnit:
         type: String
+        description: ERP class for two-direction ventilation units
         optional: true
         choices:
           - A+++
@@ -481,5 +483,4 @@ fields:
           - E
           - F
           - G
-        description: ERP class for two-direction ventilation units
         
