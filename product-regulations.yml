@@ -194,6 +194,7 @@ fields:
               description: Nominal voltage of the battery in volts. 
   erp:
     type: Object
+    optional: true
     description: |
       Contains ERP energy efficiency classes for defined product categories.
       Only one value per category is allowed.
