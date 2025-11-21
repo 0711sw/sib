@@ -7,12 +7,22 @@ description: |
 fields:
   description:
     type: String
-    description: Contains a detailed description of the product and all of its relevant properties.
+    description: Contains a detailed description of the product and all of its relevant properties. Note that this should be plain text without any markup.
+    optional: true
+    translatable: true
+  descriptionHtml:
+    type: String
+    description: Contains an HTML version of the detailed description.
     optional: true
     translatable: true
   usageNote:
     type: String
-    description: Contains a short and concise hint or recommendation on how to install or use the product.
+    description: Contains a short and concise hint or recommendation on how to install or use the product. Note that this should be plain text without any markup.
+    optional: true
+    translatable: true
+  usageNoteHtml:
+    type: String
+    description: Contains an HTML version of the usage note.
     optional: true
     translatable: true
   
