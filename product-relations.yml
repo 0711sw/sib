@@ -47,7 +47,7 @@ fields:
           contents:
             type: Object
             fields:
-              name:
+              label:
                 type: String
                 description: Contains the name or description of this drawing.
                 translatable: true
