@@ -5,17 +5,18 @@ state: Experimental
 fields:
   shelfLife:
     type: Number
-    optional: true
     description: Contains the expected shelf life in months.
+    optional: true
   numberOfPackages:
     type: Number
-    optional: true
     description: |
       Contains the number of packages used for this product. If the product is delivered in
       a single package, it is recommended to leave this field empty.
+    optional: true
   basePackage:
     type: Object
     description: Contains information about the product within its basic packaging.
+    optional: true
     fields:
       length:
         type: Number
