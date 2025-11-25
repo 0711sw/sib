@@ -16,35 +16,30 @@ fields:
         type: Boolean
         optional: true
         description: Indicates whether the product complies with the UBA hygienic assessment criteria, regardless of explicit listing.
-  weee:
-    type: Object
-    optional: true
-    description: |
-      Contains information required for compliance with the WEEE Directive (2012/19/EU),
-      such as registration numbers and product classification. This ensures correct reporting,
-      recycling and return handling for electrical and electronic equipment in the EU.
-    fields:
-      weeeNumber:
-        type: String
-        optional: true
-        description: Official WEEE registration number for the product, as required under EU Directive 2012/19/EU.
-      weeeCategory:
-        type: String
-        optional: true
-        description: Assigned WEEE category of the product, according to national registers or EU classification.
-        choices:
-          - largeHouseholdAppliances
-          - smallHouseholdAppliances
-          - itAndTelecommunicationsEquipment
-          - consumerEquipment
-          - lightingEquipment
-          - electricalAndElectronicTools
-          - toysLeisureAndSportsEquipment
-          - medicalDevices
-          - monitoringAndControlInstruments
-          - automaticDispensers
-          - displayEquipment
-          - coolingAppliancesContainingRefrigerants
+weee:
+  type: Object
+  optional: true
+  description: |
+    Contains information required for compliance with the WEEE Directive (2012/19/EU),
+    such as registration numbers and product classification. This ensures correct reporting,
+    recycling and return handling for electrical and electronic equipment in the EU.
+  fields:
+    weeeNumber:
+      type: String
+      optional: true
+      description: Official WEEE registration number for the product, as required under EU Directive 2012/19/EU.
+
+    weeeCategory:
+      type: String
+      optional: true
+      description: Assigned WEEE category of the product according to Annex III of Directive 2012/19/EU (valid since 2018).
+      choices:
+        - temperatureExchangeEquipment
+        - screensAndMonitors
+        - lamps
+        - largeEquipment
+        - smallEquipment
+        - smallITAndTelecommunicationEquipment
   reach:
     type: Object
     optional: true
