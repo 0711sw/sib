@@ -1,81 +1,145 @@
 name: urn:sib:product-lca-1
 version: 1
 state: Experimental
+description: |
+  Contains life cycle assessment (LCA) information for quantifying the 
+  environmental impacts of a product in accordance with EN 15804 or similar
+  LCA methodologies. Provides declared units, functional descriptions, 
+  reference service life and impact indicators across life cycle stages.
+
 fields:
   declaredUnitQuantity:
     type: Number
     description: Quantity to which all environmental impacts refer (e.g., 1.0).
+
   declaredUnitUnit:
     type: String
-    description: Unit of the declared quantity (e.g., m2, kg, piece).
+    description: Unit of the declared quantity.
+    choices:
+      - piece   # Functional products, components
+      - kg      # Raw materials, granulates, substances
+      - m2      # Surface-related products
+      - m3      # Volumetric construction materials
+      - m       # Linear products (pipes, cables)
+      - kWh     # Energy-delivering products
+      - set     # Installation sets, kits
+
   functionalUnitDescription:
     type: String
     optional: true
     description: Description of the product’s function as basis for the LCA.
+
   referenceServiceLife:
     type: Number
     optional: true
     description: Expected service life of the product in years.
+
   thirdPartyVerification:
     type: String
     optional: true
-    description: Indicates whether the LCA has been verified by a third party. Expected values: "none", "internal", "external".
+    description: Indicates whether the LCA has been verified by a third party.
+    choices:
+      - none      # No verification performed
+      - internal  # Verified internally (e.g., by manufacturer)
+      - external  # Verified by accredited third-party auditor
+
   impacts:
     type: List
     optional: true
     contents:
       type: Object
       fields:
+
         stage:
           type: String
-          description: Life cycle stage according to EN 15804 (e.g., A1-A3, B1, C1).
+          description: Life cycle stage according to EN 15804 (single modules or aggregated modules).
+          choices:
+            # --- Single stages (EN 15804 standard modules) ---
+            - A1     # Raw material supply
+            - A2     # Transport
+            - A3     # Manufacturing
+            - A4     # Transport to construction site
+            - A5     # Installation
+            - B1     # Use
+            - B2     # Maintenance
+            - B3     # Repair
+            - B4     # Replacement
+            - B5     # Refurbishment
+            - B6     # Operational energy use
+            - B7     # Operational water use
+            - C1     # Deconstruction / demolition
+            - C2     # Transport
+            - C3     # Waste processing
+            - C4     # Disposal
+            - D      # Benefits and loads beyond system boundary
+
+            # --- Common aggregated stages (practical EPD groupings) ---
+            - A1-A3  # Product stage (A1 + A2 + A3)
+            - A4-A5  # Construction process stage
+            - B1-B7  # Entire use stage
+            - C1-C4  # End-of-life stage
+            - A1-A5  # Product + construction stage
+            - A1-D   # Cradle-to-grave including reuse/recovery benefits
+
         declared:
           type: Boolean
           description: Indicates whether the values for this stage are declared or not.
+
         gwp:
           type: Number
           optional: true
           description: Global Warming Potential [kg CO2-eq.]
+
         odp:
           type: Number
           optional: true
           description: Ozone Depletion Potential [kg CFC-11-eq.]
+
         ap:
           type: Number
           optional: true
           description: Acidification Potential [kg SO2-eq.]
+
         ep_freshwater:
           type: Number
           optional: true
           description: Eutrophication Potential (freshwater) [kg P-eq.]
+
         ep_marine:
           type: Number
           optional: true
           description: Eutrophication Potential (marine) [kg N-eq.]
+
         ep_terrestrial:
           type: Number
           optional: true
           description: Eutrophication Potential (terrestrial) [mol N-eq.]
+
         pocp:
           type: Number
           optional: true
           description: Photochemical Ozone Creation Potential [kg NMVOC-eq.]
+
         adpe:
           type: Number
           optional: true
           description: Abiotic Depletion Potential – Elements [kg Sb-eq.]
+
         adpf:
           type: Number
           optional: true
           description: Abiotic Depletion Potential – Fossil Fuels [MJ]
+
         pert:
           type: Number
           optional: true
           description: Use of renewable primary energy excluding raw materials [MJ]
+
         penrt:
           type: Number
           optional: true
           description: Use of non-renewable primary energy excluding raw materials [MJ]
+
         wdp:
           type: Number
           optional: true
