@@ -169,8 +169,11 @@ fields:
             batteryLocation:
               type: String
               optional: true
-              translatable: true
-              description: Describes where the battery is located (e.g., internal, separately enclosed, or as the product itself).
+              description: Describes where the battery is located.
+              choices:
+                - BATTERY # The product itself is a battery.
+                - INTERNAL # The battery is built into the product and not easily removable.
+                - SEPARATELY_ENCLOSED # The battery is supplied separately within the product packaging.
             quantity:
               type: Number
               optional: true
