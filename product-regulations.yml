@@ -73,10 +73,11 @@ fields:
             casNumber:
               type: String
               description: CAS (Chemical Abstracts Service) registry number of the substance.
+              optional: true
             concentration:
               type: String
-              optional: true
               description: Concentration of the SVHC substance in the product, typically in percent.
+              optional: true
   clp:
     type: Object
     optional: true
