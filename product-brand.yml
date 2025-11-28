@@ -27,17 +27,17 @@ fields:
   slogan:
     type: String
     description: Contains the slogan or tagline of the brand.
-    translatable: true
+    translated: true
     optional: true
   website:
     type: String
     description: Contains the website URL of the brand or manufacturer. This should be a full URL including "https://".
-    translatable: true
+    translated: true
     optional: true
   manufacturerName:
     type: String
     description: Should contain the name for contacting the brand manufacturer, according to GPSR regulation.
-    translatable: true
+    translated: true
     optional: true
   manufacturerPostalAddress:
     type: String
@@ -50,7 +50,7 @@ fields:
   distributorName:
     type: String
     description: Should contain the name for contacting the brand distributor, according to GPSR regulation.
-    translatable: true
+    translated: true
     optional: true
   distributorPostalAddress:
     type: String

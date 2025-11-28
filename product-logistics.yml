@@ -76,12 +76,12 @@ fields:
         type: String
         optional: true
         description: Official UN shipping name of the hazardous material.
-        translatable: true
+        translated: true
       technicalName:
         type: String
         optional: true
         description: Technical name for the dangerous substance, if required (e.g. for N.O.S. entries).
-        translatable: true
+        translated: true
       hazardLabels:
         type: List
         optional: true

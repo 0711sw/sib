@@ -17,7 +17,7 @@ fields:
         label:
           type: String
           description: Contains the label of the attribute (to be shown to the user).
-          translatable: true
+          translated: true
         value:
           type: String
           description: |
@@ -25,4 +25,4 @@ fields:
             meet the users expectation. Therefore, a number might be stored as 1,24
             in a 'de' translation. Note that number should also include their units,
             if needed.
-          translatable: true
+          translated: true

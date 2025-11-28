@@ -38,7 +38,7 @@ fields:
         module:
           type: String
           description: Contains a short and concise name or description of the module.
-          translatable: true
+          translated: true
           optional: true
         drawings:
           type: List
@@ -50,7 +50,7 @@ fields:
               label:
                 type: String
                 description: Contains the name or description of this drawing.
-                translatable: true
+                translated: true
                 optional: true
               image:
                 type: Asset
@@ -82,7 +82,7 @@ fields:
                 type: String
                 description: Contains a short and concise description or remark for the part.
                 optional: true
-                translatable: true
+                translated: true
 
   accessories:
     type: List
@@ -98,7 +98,7 @@ fields:
         shortDescription:
           type: String
           optional: true
-          translatable: true
+          translated: true
           description: Short, display-friendly name or description of the accessory.
         recommendedQuantity:
           type: Number
@@ -107,7 +107,7 @@ fields:
         group:
           type: String
           optional: true
-          translatable: true
+          translated: true
           description: Logical accessory group this item belongs to (e.g., "Mounting", "Electrical components").
         type:
           type: String
@@ -130,7 +130,7 @@ fields:
         shortDescription:
           type: String
           optional: true
-          translatable: true
+          translated: true
           description: Short, display-friendly name of the set component.
         quantity:
           type: Number

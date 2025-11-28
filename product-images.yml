@@ -14,7 +14,7 @@ fields:
           description: |
             Might contain a label or short and concise description of the image.
             Cryptic filenames like acme_coloured_v99_453486.img should be avoided.          
-          translatable: true
+          translated: true
           optional: true
         type:
           type: String
