@@ -24,3 +24,39 @@ fields:
       - webp
       - heic
       - avif
+  slogan:
+    type: String
+    description: Contains the slogan or tagline of the brand.
+    translatable: true
+    optional: true
+  website:
+    type: String
+    description: Contains the website URL of the brand or manufacturer. This should be a full URL including "https://".
+    translatable: true
+    optional: true
+  manufacturerName:
+    type: String
+    description: Should contain the name for contacting the brand manufacturer, according to GPSR regulation.
+    translatable: true
+    optional: true
+  manufacturerPostalAddress:
+    type: String
+    description: Should contain the postal address for contacting the brand manufacturer, according to GPSR regulation.
+    optional: true
+  manufacturerElectronicAddress:
+    type: String
+    description: Should contain the electronic address (e.g. website, email) for contacting the brand manufacturer, according to GPSR regulation.
+    optional: true
+  distributorName:
+    type: String
+    description: Should contain the name for contacting the brand distributor, according to GPSR regulation.
+    translatable: true
+    optional: true
+  distributorPostalAddress:
+    type: String
+    description: Should contain the postal address for contacting the brand distributor, according to GPSR regulation.
+    optional: true
+  distributorElectronicAddress:
+    type: String
+    description: Should contain the electronic address (e.g. website, email) for contacting the brand distributor, according to GPSR regulation.
+    optional: true
