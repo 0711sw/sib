@@ -32,3 +32,9 @@ fields:
             - heic
             - avif
             - pdf
+        contentLanguages:
+          type: List
+          description: Contains the languages this image is available in, using ISO 639-1 codes (e.g. "en" for English, "de" for German).
+          optional: true
+          contents:
+            type: String

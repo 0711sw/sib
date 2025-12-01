@@ -22,3 +22,9 @@ fields:
         document:      
           type: Asset
           description: Contains the name or path of the asset to use as document.
+        contentLanguages:
+          type: List
+          description: Contains the languages this document is available in, using ISO 639-1 codes (e.g. "en" for English, "de" for German).
+          optional: true
+          contents:
+            type: String
