@@ -24,13 +24,13 @@ fields:
       Unit of the declared quantity according to EN 15804. Defines the 
       reference basis of all environmental indicators.
     choices:
-      - piece   # Functional or discrete products
-      - kg      # Weight-based materials
-      - m2      # Surface-based building products
-      - m3      # Volumetric materials
-      - m       # Linear products
-      - kWh     # Energy-delivering products
-      - set     # Installation sets or kits
+      - PCE   # Functional or discrete products
+      - KGM      # Weight-based materials
+      - MTK      # Surface-based building products
+      - MTQ      # Volumetric materials
+      - MTR       # Linear products
+      - KWH     # Energy-delivering products
+      - SET     # Installation sets or kits
 
   # ---------------------------------------------------------------------------
   # FUNCTIONAL DESCRIPTION (EN 15804 §5.3)
