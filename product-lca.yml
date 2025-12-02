@@ -2,47 +2,86 @@ name: urn:sib:product-lca-1
 version: 1
 state: Experimental
 description: |
-  Contains life cycle assessment (LCA) information for quantifying the 
-  environmental impacts of a product in accordance with EN 15804 or similar
-  LCA methodologies. Provides declared units, functional descriptions, 
-  reference service life and impact indicators across life cycle stages.
+  Life Cycle Assessment (LCA) data block according to EN 15804:2012+A2:2019,
+  ISO 14025 and ISO 21930. Covers declared units, functional description, 
+  reference service life, optional scenarios and environmental impact 
+  indicators across all life cycle stages (A1–A3, A4–C4, D). Fully compatible 
+  with ECO Platform Digital EPDs and the INData 2.0 data model.
 
 fields:
+
+  # ---------------------------------------------------------------------------
+  # DECLARED UNIT (EN 15804 §5.3.2 + §6.3.4)
+  # All environmental impacts refer to this declared unit.
+  # ---------------------------------------------------------------------------
   declaredUnitQuantity:
     type: Number
-    description: Quantity to which all environmental impacts refer (e.g., 1.0).
+    description: Declared quantity to which all environmental impacts refer.
 
   declaredUnitUnit:
     type: String
-    description: Unit of the declared quantity.
+    description: |
+      Unit of the declared quantity according to EN 15804. Defines the 
+      reference basis of all environmental indicators.
     choices:
-      - piece   # Functional products, components
-      - kg      # Raw materials, granulates, substances
-      - m2      # Surface-related products
-      - m3      # Volumetric construction materials
-      - m       # Linear products (pipes, cables)
+      - piece   # Functional or discrete products
+      - kg      # Weight-based materials
+      - m2      # Surface-based building products
+      - m3      # Volumetric materials
+      - m       # Linear products
       - kWh     # Energy-delivering products
-      - set     # Installation sets, kits
+      - set     # Installation sets or kits
 
+  # ---------------------------------------------------------------------------
+  # FUNCTIONAL DESCRIPTION (EN 15804 §5.3)
+  # ---------------------------------------------------------------------------
   functionalUnitDescription:
     type: String
     optional: true
-    description: Description of the product’s function as basis for the LCA.
+    description: Functional description of the declared unit.
 
+  # ---------------------------------------------------------------------------
+  # REFERENCE SERVICE LIFE (EN 15804 §6.3.8)
+  # ---------------------------------------------------------------------------
   referenceServiceLife:
     type: Number
     optional: true
     description: Expected service life of the product in years.
 
+  # ---------------------------------------------------------------------------
+  # THIRD-PARTY VERIFICATION (ISO 14025 §8)
+  # ---------------------------------------------------------------------------
   thirdPartyVerification:
     type: String
     optional: true
-    description: Indicates whether the LCA has been verified by a third party.
     choices:
-      - none      # No verification performed
-      - internal  # Verified internally (e.g., by manufacturer)
-      - external  # Verified by accredited third-party auditor
+      - none
+      - internal
+      - external
 
+  # ---------------------------------------------------------------------------
+  # SCENARIOS (EN 15804 §6.3.7)
+  # ---------------------------------------------------------------------------
+  scenarios:
+    type: List
+    optional: true
+    description: List of alternative scenarios defined by the EPD.
+    contents:
+      type: Object
+      fields:
+        id:
+          type: String
+          description: Scenario identifier, e.g., "S1".
+
+        description:
+          type: String
+          translated: true
+          optional: true
+          description: Human-readable scenario description in multiple languages.
+
+  # ---------------------------------------------------------------------------
+  # IMPACT INDICATORS (FULL EN 15804+A2 SET)
+  # ---------------------------------------------------------------------------
   impacts:
     type: List
     optional: true
@@ -50,97 +89,241 @@ fields:
       type: Object
       fields:
 
+        # ---------------------------------------------------------------------
+        # LIFE CYCLE STAGE (EN 15804 Table 2)
+        # ---------------------------------------------------------------------
         stage:
           type: String
-          description: Life cycle stage according to EN 15804 (single modules or aggregated modules).
+          description: Life cycle stage according to EN 15804.
           choices:
-            # --- Single stages (EN 15804 standard modules) ---
-            - A1     # Raw material supply
-            - A2     # Transport
-            - A3     # Manufacturing
-            - A4     # Transport to construction site
-            - A5     # Installation
-            - B1     # Use
-            - B2     # Maintenance
-            - B3     # Repair
-            - B4     # Replacement
-            - B5     # Refurbishment
-            - B6     # Operational energy use
-            - B7     # Operational water use
-            - C1     # Deconstruction / demolition
-            - C2     # Transport
-            - C3     # Waste processing
-            - C4     # Disposal
-            - D      # Benefits and loads beyond system boundary
+            # PRODUCT STAGE
+            - A1   # Raw material supply
+            - A2   # Transport
+            - A3   # Manufacturing
 
-            # --- Common aggregated stages (practical EPD groupings) ---
-            - A1-A3  # Product stage (A1 + A2 + A3)
-            - A4-A5  # Construction process stage
-            - B1-B7  # Entire use stage
-            - C1-C4  # End-of-life stage
-            - A1-A5  # Product + construction stage
-            - A1-D   # Cradle-to-grave including reuse/recovery benefits
+            # CONSTRUCTION STAGE
+            - A4   # Transport to construction site
+            - A5   # Installation
 
+            # USE STAGE
+            - B1   # Use
+            - B2   # Maintenance
+            - B3   # Repair
+            - B4   # Replacement
+            - B5   # Refurbishment
+            - B6   # Operational energy use
+            - B7   # Operational water use
+
+            # END-OF-LIFE STAGE
+            - C1   # Deconstruction / demolition
+            - C2   # Transport
+            - C3   # Waste processing
+            - C4   # Disposal
+
+            # BEYOND SYSTEM BOUNDARY
+            - D    # Reuse/recovery/recycling benefits
+
+            # AGGREGATED STAGES
+            - A1-A3
+            - A4-A5
+            - B1-B7
+            - C1-C4
+            - A1-A5
+            - A1-D
+
+        # ---------------------------------------------------------------------
+        # DECLARED / NOT DECLARED (EN 15804: MND)
+        # ---------------------------------------------------------------------
         declared:
           type: Boolean
-          description: Indicates whether the values for this stage are declared or not.
+          description: |
+            Indicates whether this module is declared (true) or 
+            marked as “MND – Module not declared” (false).
 
-        gwp:
+        # ---------------------------------------------------------------------
+        # SCENARIO REFERENCE
+        # ---------------------------------------------------------------------
+        scenario:
+          type: String
+          optional: true
+          description: References a scenario ID from scenarios[].
+
+        # ---------------------------------------------------------------------
+        # === IMPACT INDICATORS (ALL WITH DESCRIPTIONS) ===
+        # ---------------------------------------------------------------------
+
+        # --- Climate Change ---
+        GWP_FOSSIL:
           type: Number
           optional: true
-          description: Global Warming Potential [kg CO2-eq.]
+          description: Climate change from fossil sources [kg CO2-eq].
 
-        odp:
+        GWP_BIOGENIC:
           type: Number
           optional: true
-          description: Ozone Depletion Potential [kg CFC-11-eq.]
+          description: Climate change from biogenic carbon [kg CO2-eq].
 
-        ap:
+        GWP_LULUC:
           type: Number
           optional: true
-          description: Acidification Potential [kg SO2-eq.]
+          description: Climate change from land use and land-use change [kg CO2-eq].
 
-        ep_freshwater:
+        GWP_TOTAL:
           type: Number
           optional: true
-          description: Eutrophication Potential (freshwater) [kg P-eq.]
+          description: Total climate change impact [kg CO2-eq].
 
-        ep_marine:
+        # --- Ozone Depletion ---
+        ODP:
           type: Number
           optional: true
-          description: Eutrophication Potential (marine) [kg N-eq.]
+          description: Ozone depletion potential [kg CFC-11-eq].
 
-        ep_terrestrial:
+        # --- Acidification ---
+        AP:
           type: Number
           optional: true
-          description: Eutrophication Potential (terrestrial) [mol N-eq.]
+          description: Acidification potential [kg SO2-eq].
 
-        pocp:
+        # --- Eutrophication ---
+        EP_FRESHWATER:
           type: Number
           optional: true
-          description: Photochemical Ozone Creation Potential [kg NMVOC-eq.]
+          description: Eutrophication freshwater [kg P-eq].
 
-        adpe:
+        EP_MARINE:
           type: Number
           optional: true
-          description: Abiotic Depletion Potential – Elements [kg Sb-eq.]
+          description: Eutrophication marine [kg N-eq].
 
-        adpf:
+        EP_TERRESTRIAL:
           type: Number
           optional: true
-          description: Abiotic Depletion Potential – Fossil Fuels [MJ]
+          description: Eutrophication terrestrial [mol N-eq].
 
-        pert:
+        # --- Photochemical Ozone Creation ---
+        POCP:
           type: Number
           optional: true
-          description: Use of renewable primary energy excluding raw materials [MJ]
+          description: Photochemical ozone creation potential [kg NMVOC-eq].
 
-        penrt:
+        # --- Primary Energy Use ---
+        PERE:
           type: Number
           optional: true
-          description: Use of non-renewable primary energy excluding raw materials [MJ]
+          description: Renewable primary energy as energy carrier [MJ].
 
-        wdp:
+        PERM:
           type: Number
           optional: true
-          description: Water deprivation potential [m³ world eq. deprived]
+          description: Renewable primary energy as material [MJ].
+
+        PERT:
+          type: Number
+          optional: true
+          description: Renewable primary energy, total [MJ].
+
+        PENRE:
+          type: Number
+          optional: true
+          description: Non-renewable primary energy as energy carrier [MJ].
+
+        PENRM:
+          type: Number
+          optional: true
+          description: Non-renewable primary energy as material [MJ].
+
+        PENRT:
+          type: Number
+          optional: true
+          description: Non-renewable primary energy, total [MJ].
+
+        # --- Secondary Resources ---
+        SM:
+          type: Number
+          optional: true
+          description: Secondary material input [kg].
+
+        RSF:
+          type: Number
+          optional: true
+          description: Renewable secondary fuels [MJ].
+
+        NRSF:
+          type: Number
+          optional: true
+          description: Non-renewable secondary fuels [MJ].
+
+        # --- Water Use ---
+        FW:
+          type: Number
+          optional: true
+          description: Use of net fresh water [m3].
+
+        WDP:
+          type: Number
+          optional: true
+          description: Water deprivation potential [m3 world-eq deprived].
+
+        # --- Waste Categories ---
+        HWD:
+          type: Number
+          optional: true
+          description: Hazardous waste disposed [kg].
+
+        NHWD:
+          type: Number
+          optional: true
+          description: Non-hazardous waste disposed [kg].
+
+        RWD:
+          type: Number
+          optional: true
+          description: Radioactive waste disposed [kg].
+
+        # --- Output Flows ---
+        CRU:
+          type: Number
+          optional: true
+          description: Components for reuse [kg].
+
+        MFR:
+          type: Number
+          optional: true
+          description: Materials for recycling [kg].
+
+        MER:
+          type: Number
+          optional: true
+          description: Materials for energy recovery [kg].
+
+        # --- Additional LCIA Indicators ---
+        PM:
+          type: Number
+          optional: true
+          description: Particulate matter formation [kg PM2.5-eq].
+
+        IR:
+          type: Number
+          optional: true
+          description: Ionising radiation [kBq U-235-eq].
+
+        ETP_FW:
+          type: Number
+          optional: true
+          description: Ecotoxicity freshwater [CTUe].
+
+        HTP_C:
+          type: Number
+          optional: true
+          description: Human toxicity, cancer effects [CTUh].
+
+        HTP_NC:
+          type: Number
+          optional: true
+          description: Human toxicity, non-cancer effects [CTUh].
+
+        SQP:
+          type: Number
+          optional: true
+          description: Soil quality potential [dimensionless].
