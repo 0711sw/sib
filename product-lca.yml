@@ -10,6 +10,44 @@ description: |
 
 fields:
 
+  epdID:
+    type: String
+    optional: true
+    description: |
+      ILCD UUID of the EPD process dataset. Ensures unique identification 
+      and stable referencing between product data and environmental data.
+
+  epdVersion:
+    type: String
+    optional: true
+    description: Version string of the EPD dataset (e.g., 00.01.000) in correspondece to the epdID.
+  
+  title:
+    type: String
+    optional: true
+    description: Human-readable title of the EPD as stated in the dataset.
+    translated: true
+  
+  publishedAt:
+    type: Date
+    optional: true
+    description: |
+      Publication date of the EPD according to EN 15804 and ECO Platform.
+      Needed for version tracking and regulatory conformity.
+
+  validFrom:
+    type: Date
+    optional: true
+    description: |
+      Start of the EPD validity period (EN 15804 mandatory validity information).
+
+  validTo:
+    type: Date
+    optional: true
+    description: |
+      End of the EPD validity period. EPDs can only be used within their 
+      declared validity window to ensure legal and methodological correctness.  
+
   declaredUnitQuantity:
     type: Number
     description: Declared quantity to which all environmental impacts refer. (EN 15804 §5.3.2 + §6.3.4)
