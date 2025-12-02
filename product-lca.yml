@@ -67,7 +67,7 @@ fields:
   impacts:
     type: List
     optional: true
-    description: impact indicators (EN 15804+A2)
+    description: Impact indicators (EN 15804+A2)
     contents:
       type: Object
       fields:
