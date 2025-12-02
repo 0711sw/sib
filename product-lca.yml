@@ -10,13 +10,9 @@ description: |
 
 fields:
 
-  # ---------------------------------------------------------------------------
-  # DECLARED UNIT (EN 15804 §5.3.2 + §6.3.4)
-  # All environmental impacts refer to this declared unit.
-  # ---------------------------------------------------------------------------
   declaredUnitQuantity:
     type: Number
-    description: Declared quantity to which all environmental impacts refer.
+    description: Declared quantity to which all environmental impacts refer. (EN 15804 §5.3.2 + §6.3.4)
 
   declaredUnitUnit:
     type: String
@@ -32,40 +28,29 @@ fields:
       - KWH     # Energy-delivering products
       - SET     # Installation sets or kits
 
-  # ---------------------------------------------------------------------------
-  # FUNCTIONAL DESCRIPTION (EN 15804 §5.3)
-  # ---------------------------------------------------------------------------
   functionalUnitDescription:
     type: String
     optional: true
-    description: Functional description of the declared unit.
+    description: Functional description of the declared unit. (EN 15804 §5.3)
 
-  # ---------------------------------------------------------------------------
-  # REFERENCE SERVICE LIFE (EN 15804 §6.3.8)
-  # ---------------------------------------------------------------------------
   referenceServiceLife:
     type: Number
     optional: true
-    description: Expected service life of the product in years.
+    description: Expected service life of the product in years. (EN 15804 §6.3.8)
 
-  # ---------------------------------------------------------------------------
-  # THIRD-PARTY VERIFICATION (ISO 14025 §8)
-  # ---------------------------------------------------------------------------
   thirdPartyVerification:
     type: String
     optional: true
+    description: how ist this epd verified?
     choices:
       - none
       - internal
       - external
 
-  # ---------------------------------------------------------------------------
-  # SCENARIOS (EN 15804 §6.3.7)
-  # ---------------------------------------------------------------------------
   scenarios:
     type: List
     optional: true
-    description: List of alternative scenarios defined by the EPD.
+    description: List of alternative scenarios defined by the EPD. (EN 15804 §6.3.7)
     contents:
       type: Object
       fields:
@@ -79,22 +64,17 @@ fields:
           optional: true
           description: Human-readable scenario description in multiple languages.
 
-  # ---------------------------------------------------------------------------
-  # IMPACT INDICATORS (FULL EN 15804+A2 SET)
-  # ---------------------------------------------------------------------------
   impacts:
     type: List
     optional: true
+    description: impact indicators (EN 15804+A2)
     contents:
       type: Object
       fields:
 
-        # ---------------------------------------------------------------------
-        # LIFE CYCLE STAGE (EN 15804 Table 2)
-        # ---------------------------------------------------------------------
         stage:
           type: String
-          description: Life cycle stage according to EN 15804.
+          description: Life cycle stage according to EN 15804 Table 2.
           choices:
             # PRODUCT STAGE
             - A1   # Raw material supply
@@ -131,25 +111,19 @@ fields:
             - A1-A5
             - A1-D
 
-        # ---------------------------------------------------------------------
-        # DECLARED / NOT DECLARED (EN 15804: MND)
-        # ---------------------------------------------------------------------
         declared:
           type: Boolean
           description: |
             Indicates whether this module is declared (true) or 
             marked as “MND – Module not declared” (false).
 
-        # ---------------------------------------------------------------------
-        # SCENARIO REFERENCE
-        # ---------------------------------------------------------------------
         scenario:
           type: String
           optional: true
-          description: References a scenario ID from scenarios[].
+          description: References a scenario ID from scenarios.
 
         # ---------------------------------------------------------------------
-        # === IMPACT INDICATORS (ALL WITH DESCRIPTIONS) ===
+        # === IMPACT INDICATORS ===
         # ---------------------------------------------------------------------
 
         # --- Climate Change ---
