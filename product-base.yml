@@ -48,4 +48,11 @@ fields:
       product is expected to be sold. In other words, after the given date, the product
       cannot be sourced from the manufacturer anymore.
     optional: true
+  countryOfOrigin:
+    type: String
+    description: |
+      Indicates the country of origin of the product. The value must be a valid ISO 3166-1 alpha-2 country code
+      (e.g. "DE" for Germany). Exception codes such as "EU" (European Union), "QU" (unspecified), or "XX" (unknown)
+      may also be used where applicable.
+    optional: true
   
