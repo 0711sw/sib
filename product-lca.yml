@@ -2,7 +2,7 @@ name: urn:sib:product-lca-1
 version: 1
 state: Experimental
 description: |
-  Life Cycle Assessment (LCA) data block according to EN 15804:2012+A2:2019,
+  Life Cycle Assessment (LCA) data block according to EN 15804:2012+A2:2019/AC:2021,
   ISO 14025 and ISO 21930. Covers declared units, functional description, 
   reference service life, optional scenarios and environmental impact 
   indicators across all life cycle stages (A1–A3, A4–C4, D). Fully compatible 
@@ -195,7 +195,7 @@ fields:
         AP:
           type: Number
           optional: true
-          description: Acidification potential [kg SO2-eq].
+          description: Acidification potential [mol H+ eq].
 
         # --- Eutrophication ---
         EP_FRESHWATER:
@@ -218,6 +218,17 @@ fields:
           type: Number
           optional: true
           description: Photochemical ozone creation potential [kg NMVOC-eq].
+
+        # --- Abiotic Resource Depletion (EN 15804 Table 3) ---
+        ADP_MINERALS_METALS:
+          type: Number
+          optional: true
+          description: Abiotic depletion potential for non-fossil resources (minerals & metals) [kg Sb-eq].
+
+        ADP_FOSSIL:
+          type: Number
+          optional: true
+          description: Abiotic depletion potential for fossil resources [MJ, net calorific value].          
 
         # --- Primary Energy Use ---
         PERE:
@@ -313,7 +324,7 @@ fields:
         PM:
           type: Number
           optional: true
-          description: Particulate matter formation [kg PM2.5-eq].
+          description: Particulate matter formation [Disease incidence].
 
         IR:
           type: Number
