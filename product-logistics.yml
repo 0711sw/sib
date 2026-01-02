@@ -93,10 +93,6 @@ fields:
               description: List of hazard labels (Gefahrenzettel) applicable for the product (e.g. "3", "8").
               contents:
                 type: String
-            packageDescription:
-              type: String
-              optional: true
-              description: Description of the dangerous goods packaging used (it is recomended to use the codes of ADR 6.1.2 Code for designating types of packagings).
             tunnelRestrictionCode:
               type: String
               optional: true
@@ -109,11 +105,15 @@ fields:
               type: Boolean
               optional: true
               description: Indicates whether the product is subject to ADR limited quantity exemptions.
-      batteryWeight:
-        type: Number
+      packageDescription:
+        type: String
         optional: true
-        description: Weight of the battery if it contributes to the dangerous goods classification, in kilograms.
+        description: Description of the dangerous goods packaging used (it is recomended to use the codes of ADR 6.1.2 Code for designating types of packagings).
       numberOfPackages:
         type: Number
         optional: true
         description: Total number of dangerous goods packages for this product.
+      batteryWeight:
+        type: Number
+        optional: true
+        description: Weight of the battery if it contributes to the dangerous goods classification, in kilograms.
