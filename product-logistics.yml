@@ -7,7 +7,7 @@ fields:
     type: Number
     description: Contains the expected shelf life in months.
     optional: true
-    minValue: 0.01
+    minValue: "0.01"
     maxScale: 2
     softFail: true
   numberOfPackages:
@@ -16,7 +16,7 @@ fields:
       Contains the number of packages used for this product. If the product is delivered in
       a single package, it is recommended to leave this field empty.
     optional: true
-    minValue: 1
+    minValue: "1"
     maxScale: 0
   basePackage:
     type: Object
@@ -27,28 +27,28 @@ fields:
         type: Number
         optional: true
         description: Contains the length of the product within its base packaging in millimeters.
-        minValue: 1
+        minValue: "1"
         maxScale: 0
         softFail: true
       width:
         type: Number
         optional: true
         description: Contains the width of the product within its base packaging in millimeters.
-        minValue: 1
+        minValue: "1"
         maxScale: 0
         softFail: true
       height:
         type: Number
         optional: true
         description: Contains the height of the product within its base packaging in millimeters.
-        minValue: 1
+        minValue: "1"
         maxScale: 0
         softFail: true
       weight:
         type: Number
         optional: true
         description: Contains the weight of the product with packaging in kilograms.
-        minValue: 0.001
+        minValue: "0.001"
         maxScale: 3
         softFail: true
   dangerousGoods:
@@ -157,13 +157,13 @@ fields:
         type: Number
         optional: true
         description: Total number of dangerous goods packages for this product.
-        minValue: 1
+        minValue: "1"
         maxScale: 0
         softFail: true
       batteryWeight:
         type: Number
         optional: true
         description: Weight of the battery if it contributes to the dangerous goods classification, in kilograms.
-        minValue: 0.001
+        minValue: "0.001"
         maxScale: 3
         softFail: true

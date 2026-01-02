@@ -104,7 +104,7 @@ fields:
           type: Number
           optional: true
           description: Quantity of this accessory typically used or recommended for use with the product.
-          minValue: 0.001
+          minValue: "0.001"
           maxScale: 3
           softFail: true
         group:
@@ -138,7 +138,7 @@ fields:
         quantity:
           type: Number
           description: Quantity of this component in the set.
-          minValue: 0.001
+          minValue: "0.001"
           maxScale: 3
           softFail: true
 

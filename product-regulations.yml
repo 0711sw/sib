@@ -178,27 +178,27 @@ fields:
               type: Number
               optional: true
               description: Number of batteries of this type contained in the product.
-              minValue: 1
+              minValue: "1"
               maxScale: 0
             weight:
               type: Number
               optional: true
               description: Weight per battery, in kilograms.
-              minValue: 0.001
+              minValue: "0.001"
               maxScale: 3
               softFail: true
             capacity:
               type: Number
               optional: true
               description: Battery capacity in ampere-hours (Ah).
-              minValue: 0.001
+              minValue: "0.001"
               maxScale: 3
               softFail: true
             voltage:
               type: Number
               optional: true
               description: Nominal voltage of the battery in volts. 
-              minValue: 0.001
+              minValue: "0.001"
               maxScale: 3
               softFail: true
   erp:
