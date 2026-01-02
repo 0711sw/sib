@@ -16,6 +16,7 @@ fields:
           type: String
           description: Contains the system name in all uppercase like 'ETIM' or 'ECLASS'.
           pattern: "[A-Z]{1,20}"
+          validationMessage: System name must be 1 to 20 uppercase letters.
         systemVersion:
           type: String
           description: |
@@ -23,6 +24,7 @@ fields:
             as possible (use '10' and not '10.0' unless specified otherwise by the classification
             system.)
           pattern: "[1-9][0-9]{0,2}(\\.[0-9]{1,2})?"
+          validationMessage: Version must be a number like '10' or '10.1'.
         classification:
           type: String
           description: Contains the identifier of the class in which the product belongs. (e.g. EC010203)

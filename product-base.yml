@@ -55,4 +55,11 @@ fields:
       (e.g. "DE" for Germany). Exception codes such as "EU" (European Union), "QU" (unspecified), or "XX" (unknown)
       may also be used where applicable.
     optional: true
+  variantGroup:
+    type: String
+    description: |
+      Contains the variant group identifier of the product. Products that belong to the same
+      variant group are different variants of the same base product (e.g. different colors
+      or sizes).
+    optional: true
   

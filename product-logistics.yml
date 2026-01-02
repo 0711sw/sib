@@ -7,12 +7,17 @@ fields:
     type: Number
     description: Contains the expected shelf life in months.
     optional: true
+    minValue: 0.01
+    maxScale: 2
+    softFail: true
   numberOfPackages:
     type: Number
     description: |
       Contains the number of packages used for this product. If the product is delivered in
       a single package, it is recommended to leave this field empty.
     optional: true
+    minValue: 1
+    maxScale: 0
   basePackage:
     type: Object
     description: Contains information about the product within its basic packaging.
@@ -22,18 +27,30 @@ fields:
         type: Number
         optional: true
         description: Contains the length of the product within its base packaging in millimeters.
+        minValue: 1
+        maxScale: 0
+        softFail: true
       width:
         type: Number
         optional: true
         description: Contains the width of the product within its base packaging in millimeters.
+        minValue: 1
+        maxScale: 0
+        softFail: true
       height:
         type: Number
         optional: true
         description: Contains the height of the product within its base packaging in millimeters.
+        minValue: 1
+        maxScale: 0
+        softFail: true
       weight:
         type: Number
         optional: true
         description: Contains the weight of the product with packaging in kilograms.
+        minValue: 0.001
+        maxScale: 3
+        softFail: true
   dangerousGoods:
     type: Object
     description: |
@@ -56,27 +73,45 @@ fields:
               type: String
               description: Contains the UN number of the hazardous material.
               optional: true
+              pattern: "UN\\s?\\d{4}"
+              validationMessage: UN number must be in the format 'UN XXXX' where X is a digit.
+              softFail: true
             hazardClass:
               type: String
               description: Contains the hazard class of the material, e.g. "3" for flammable liquids.
               optional: true
+              pattern: "[1-9]"
+              validationMessage: Hazard class must 1-9.
+              softFail: true
             hazardDivision:
               type: String
               optional: true
               description: Division within the hazard class, e.g. "1.4" for explosives.
+              pattern: "[1-9](\\.[1-6])?"
+              validationMessage: Division must be in the format 'X' or 'X.Y' where X is 1-9 and Y is 1-6.
+              softFail: true
             transportCategory:
               type: String
               description: Contains the transportation category of this product or its materials.
               optional: true
+              pattern: "[0-4]"
+              validationMessage: Transport category must be 0-4.
+              softFail: true
             hazardIdentificationNumber:
               type: String
               description: |
                 Contains the ADR hazard identification number (HIN), also known as the Kemler code, shown on orange panels during transport.
               optional: true
+              pattern: "(X?\\d{2,3})"
+              validationMessage: Value must be in the format 'NN' or 'NNN', optionally prefixed by 'X'.
+              softFail: true
             packingGroup:
               type: String
               optional: true
               description: Contains the ADR packing group of the hazardous substance, e.g. "II".
+              pattern: "[I]{1,3}"
+              validationMessage: Packing group must be I, II, or III.
+              softFail: true
             properShippingName:
               type: String
               optional: true
@@ -93,14 +128,23 @@ fields:
               description: List of hazard labels (Gefahrenzettel) applicable for the product (e.g. "3", "8").
               contents:
                 type: String
+                pattern: "(1|\\.[1-3]|3|4\\.[1-3]|5\\.[1-2]|6\\.[1-2]|7|8|9)"
+                validationMessage: Hazard label must be one of the recognized ADR hazard labels (e.g. "3", "8").
+                softFail: true
             tunnelRestrictionCode:
               type: String
               optional: true
               description: ADR tunnel restriction code (e.g. "E", "D/E") indicating transport limitations in tunnels.
+              pattern: "[A-E](/[A-E])?"
+              validationMessage: Tunnel restriction code must be a letter A to E, optionally followed by '/A' to '/E'.
+              softFail: true
             waterHazardClass:
               type: String
               optional: true
               description: Water hazard classification (WGK) according to German regulations.
+              pattern: "(nwg|WGK\\s?[1-3]|[1-3])"
+              validationMessage: Water hazard class must be (WGK) 1, 2, 3, or 'nwg'.
+              softFail: true
             limitedQuantity:
               type: Boolean
               optional: true
@@ -113,7 +157,13 @@ fields:
         type: Number
         optional: true
         description: Total number of dangerous goods packages for this product.
+        minValue: 1
+        maxScale: 0
+        softFail: true
       batteryWeight:
         type: Number
         optional: true
         description: Weight of the battery if it contributes to the dangerous goods classification, in kilograms.
+        minValue: 0.001
+        maxScale: 3
+        softFail: true

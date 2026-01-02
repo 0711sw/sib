@@ -28,3 +28,5 @@ fields:
           optional: true
           contents:
             type: String
+            pattern: "[a-z]{2}"
+            validationMessage: A two-letter (lowercase) ISO 639-1 language code is required.
