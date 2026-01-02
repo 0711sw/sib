@@ -45,69 +45,74 @@ fields:
         type: Boolean
         description: Determines if this product is or contains dangerous goods.
         optional: true
-      unNumbers:
+      hazardousMaterials:
         type: List
-        description: Contains the UN numbers of the hazardous materials within the product.
+        description: Lists the hazardous materials contained in this product which make it a dangerous good.
         optional: true
-        contents: 
-          type: String
-      hazardClass:
-        type: String
-        description: Contains the hazard class of this product or its materials, e.g. "3" for flammable liquids.
-        optional: true
-      hazardDivision:
-        type: String
-        optional: true
-        description: Division within the hazard class, e.g. "1.4" for explosives.
-      transportCategory:
-        type: String
-        description: Contains the transportation category of this product or its materials.
-        optional: true
-      hazardIdentificationNumber:
-        type: String
-        description: |
-          Contains the ADR hazard identification number (HIN), also known as the Kemler code, shown on orange panels during transport.
-        optional: true
-      packingGroup:
-        type: String
-        optional: true
-        description: Contains the ADR packing group of the hazardous substance, e.g. "II".
-      properShippingName:
-        type: String
-        optional: true
-        description: Official UN shipping name of the hazardous material.
-        translated: true
-      technicalName:
-        type: String
-        optional: true
-        description: Technical name for the dangerous substance, if required (e.g. for N.O.S. entries).
-        translated: true
-      hazardLabels:
-        type: List
-        optional: true
-        description: List of hazard labels (Gefahrenzettel) applicable for the product (e.g. "3", "8").
         contents:
-          type: String
-      numberOfPackages:
-        type: Number
-        optional: true
-        description: Total number of dangerous goods packages for this product.
+          type: Object
+          fields:
+            unNumber:
+              type: String
+              description: Contains the UN number of the hazardous material.
+              optional: true
+            hazardClass:
+              type: String
+              description: Contains the hazard class of the material, e.g. "3" for flammable liquids.
+              optional: true
+            hazardDivision:
+              type: String
+              optional: true
+              description: Division within the hazard class, e.g. "1.4" for explosives.
+            transportCategory:
+              type: String
+              description: Contains the transportation category of this product or its materials.
+              optional: true
+            hazardIdentificationNumber:
+              type: String
+              description: |
+                Contains the ADR hazard identification number (HIN), also known as the Kemler code, shown on orange panels during transport.
+              optional: true
+            packingGroup:
+              type: String
+              optional: true
+              description: Contains the ADR packing group of the hazardous substance, e.g. "II".
+            properShippingName:
+              type: String
+              optional: true
+              description: Official UN shipping name of the hazardous material.
+              translated: true
+            technicalName:
+              type: String
+              optional: true
+              description: Technical name for the dangerous substance, if required (e.g. for N.O.S. entries).
+              translated: true
+            hazardLabels:
+              type: List
+              optional: true
+              description: List of hazard labels (Gefahrenzettel) applicable for the product (e.g. "3", "8").
+              contents:
+                type: String
+            tunnelRestrictionCode:
+              type: String
+              optional: true
+              description: ADR tunnel restriction code (e.g. "E", "D/E") indicating transport limitations in tunnels.
+            waterHazardClass:
+              type: String
+              optional: true
+              description: Water hazard classification (WGK) according to German regulations.
+            limitedQuantity:
+              type: Boolean
+              optional: true
+              description: Indicates whether the product is subject to ADR limited quantity exemptions.
       packageDescription:
         type: String
         optional: true
         description: Description of the dangerous goods packaging used (it is recomended to use the codes of ADR 6.1.2 Code for designating types of packagings).
-      tunnelRestrictionCode:
-        type: String
+      numberOfPackages:
+        type: Number
         optional: true
-        description: ADR tunnel restriction code (e.g. "E", "D/E") indicating transport limitations in tunnels.
-      waterHazardClass:
-        type: String
-        optional: true
-        description: Water hazard classification (WGK) according to German regulations.
-      limitedQuantity:
-        type: Boolean
-        optional: true
-        description: Indicates whether the product is subject to ADR limited quantity exemptions.
+        description: Total number of dangerous goods packages for this product.
       batteryWeight:
         type: Number
         optional: true

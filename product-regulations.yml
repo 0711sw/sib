@@ -198,289 +198,100 @@ fields:
       Contains ERP energy efficiency classes for defined product categories.
       Only one value per category is allowed.
     fields:
-      seasonalSpaceHeating:
-        type: String
-        description: ERP class for seasonal space heating
+      classifications:
+        type: Object
+        description: Contains energy efficiency classifications for various product categories as defined by ERP regulations.
         optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      seasonalSpaceHeatingMediumTemp55C:
-        type: String
-        description: ERP class for seasonal space heating at 55 °C
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      seasonalSpaceHeatingLowTemp35C:
-        type: String
-        description: ERP class for seasonal space heating at 35 °C
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      waterHeating:
-        type: String
-        description: ERP class for water heating
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      seasonalSpaceHeatingPackage:
-        type: String
-        description: ERP class for combined space heating package
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      seasonalCombinedHeatingPackage:
-        type: String
-        description: ERP class for combined heating and hot water package
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      hotWaterStorageTank:
-        type: String
-        description: ERP class for hot water storage tanks
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      cooling:
-        type: String
-        description: ERP class for cooling
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      heatingColderClimate:
-        type: String
-        description: ERP class for heating in colder climate
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      heatingAverageClimate:
-        type: String
-        description: ERP class for heating in average climate
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      heatingWarmerClimate:
-        type: String
-        description: ERP class for heating in warmer climate
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      solidFuelBoiler:
-        type: String
-        description: ERP class for solid fuel boilers
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      solidFuelPackage:
-        type: String
-        description: ERP class for solid fuel packages
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      lamp:
-        type: String
-        description: ERP class for lamps
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      luminaireApprovedRange:
-        type: String
-        description: ERP class for luminaires (approved range)
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      ledApprovedRange:
-        type: String
-        description: ERP class for LED lighting (approved range)
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      lightSource20192015:
-        type: String
-        description: ERP class for light sources per 2019/2015 regulation
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      localSpaceHeater:
-        type: String
-        description: ERP class for local space heaters
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-      twoDirectionVentilationUnit:
-        type: String
-        description: ERP class for two-direction ventilation units
-        optional: true
-        choices:
-          - A+++
-          - A++
-          - A+
-          - A
-          - B
-          - C
-          - D
-          - E
-          - F
-          - G
-        
+        fields:
+          category:
+            type: String
+            description: Defines the category of classification.
+            choices:
+              # Defines a generic category (based on legacy ETIM code EF000758)
+              - generic
+              # Defines a category according to ISO 25745 - maps to ETIM code EF012512
+              - ISO-25745
+              # Defines a category for motor efficiency - maps to ETIM code EF014979
+              - motor
+              # Defines a category according to EU regulation 2017/1369/EU - maps to ETIM code EF016321
+              - 2017/1369/EU
+              # Defines a category according to EU regulation 2010/30/EU - maps to ETIM code EF016322
+              - 2010/30/EU
+              # Defines a category according to EU regulation 812/2013/EU - maps to ETIM code EF016992
+              - 812/2013/EU
+              # Defines a category according to EU regulation 2019/2013/EU - maps to ETIM code EF017009
+              - 2019/2013/EU
+              # Defines a category according to EU regulation 392/2012/EU - maps to ETIM code EF017012
+              - 392/2012/EU
+              # Defines a category according to EU regulation 2019/2015/EU - maps to ETIM code EF017139
+              - 2019/2015/EU
+              # Defines a category according to EU regulation 1253/2014/EU - maps to ETIM code EF017471
+              - 1253/2014/EU
+              # Defines a category according to EU regulation 2015/1186/EU - maps to ETIM code EF018677
+              - 2015/1186/EU
+              # Defines a category for integrated cooker hood according to 2010/30/EU - maps to ETIM code EF016382
+              - integratedCookerHood201030
+              # Defines a category for space heating - maps to ETIM code EF010855
+              - seasonalSpaceHeating
+              # Defines a category for space heating according to EU regulation 811/2013/EU - maps to ETIM code EF016994
+              - seasonalSpaceHeating8112013
+              # Defines a category for space heating (35 °C) at average conditions - maps to ETIM code EF019182
+              - seasonalHeating35CAverageConditions
+              # Defines a category for space heating (35 °C) at colder conditions - maps to ETIM code EF019183
+              - seasonalHeating35CColderConditions
+              # Defines a category for space heating (35 °C) at warmer conditions - maps to ETIM code EF019184
+              - seasonalHeating35CWarmerConditions
+              # Defines a category for space heating (55 °C) at average conditions - maps to ETIM code EF019185
+              - seasonalHeating55CAverageConditions
+              # Defines a category for space heating (55 °C) at colder conditions - maps to ETIM code EF019186
+              - seasonalHeating55CColderConditions
+              # Defines a category for space heating (55 °C) at warmer conditions - maps to ETIM code EF019187
+              - seasonalHeating55CWarmerConditions
+              # Defines a category for space heating at average conditions - maps to ETIM code EF019227
+              - seasonalSpaceHeatingAverageConditions
+              # Defines a category for space heating at colder conditions - maps to ETIM code EF019228
+              - seasonalSpaceHeatingColderConditions
+              # Defines a category for space heating at warmer conditions - maps to ETIM code EF019229
+              - seasonalSpaceHeatingWarmerConditions
+              # Defines a category for water heating - maps to ETIM code EF010856
+              - waterHeating
+              # Defines a category for water heating according to EU regulation 811/2013/EU - maps to ETIM code EF016995
+              - waterHeating8112013
+              - seasonalSpaceHeatingPackage
+              - seasonalCombinedHeatingPackage
+              - hotWaterStorageTank
+              # Defines a category for air conditioners - maps to ETIM code EF024955
+              - cooling
+              # Defines a category for heating - maps to ETIM code EF024956
+              - heating
+              # Defines a category for refrigeration according to EU regulation 2019/2016/EU - maps to ETIM code EF017010
+              - refrigerator20192016
+              # Defines a category for dishwashers according to EU regulation 2019/2017/EU - maps to ETIM code EF017011
+              - dishwasher20192017
+              # Defines a category for washing and drying machines according to EU regulation 2019/2018/EU - maps to ETIM code EF017013
+              - completeWashDryCycle20192014
+              # Defines a category for washing machines according to EU regulation 2019/2014/EU - maps to ETIM code EF017014
+              - onlyWashing20192014
+              # Defines a category for light sources according to EU regulation 2019/2015/EU - maps to ETIM code EF016835
+              - lightSource20192015
+              - localSpaceHeater
+              - twoDirectionVentilationUnit
+              - solidFuelBoiler
+              - solidFuelPackage
+              - lamp
+              - luminaireApprovedRange
+              - ledApprovedRange
+          class:
+            type: String
+            description: Defines the actual ERP class.
+            choices:
+              - A+++
+              - A++
+              - A+
+              - A
+              - B
+              - C
+              - D
+              - E
+              - F
+              - G
