@@ -1,6 +1,6 @@
 name: urn:sib:product-relations-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Contains information about relations to other products like spareparts,
   accessories, components or successors.
@@ -16,6 +16,12 @@ fields:
         itemNumber:
           type: String
           description: Contains the item number of the successor.
+        shortDescription:
+          type: String
+          description: Contains a short and concise description or remark for the part.
+          optional: true
+          translated: true
+          softFail: true
         type:
           type: String
           description: |
@@ -83,6 +89,7 @@ fields:
                 description: Contains a short and concise description or remark for the part.
                 optional: true
                 translated: true
+                softFail: true
 
   accessories:
     type: List
@@ -100,6 +107,7 @@ fields:
           optional: true
           translated: true
           description: Short, display-friendly name or description of the accessory.
+          softFail: true
         recommendedQuantity:
           type: Number
           optional: true
@@ -135,6 +143,7 @@ fields:
           optional: true
           translated: true
           description: Short, display-friendly name of the set component.
+          softFail: true
         quantity:
           type: Number
           description: Quantity of this component in the set.

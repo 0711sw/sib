@@ -1,6 +1,6 @@
 name: urn:sib:product-features-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Contains (technical) features for a product a specified by one or more
   classification systems like eCl@ss or ETIM. Note: For custom attributes

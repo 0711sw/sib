@@ -1,6 +1,6 @@
 name: urn:sib:product-base-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Contains elemental base data for a product.
 fields:
@@ -24,6 +24,7 @@ fields:
       be provided in 'urn:sib:product-texts-1'.
     optional: true
     translated: true
+    softFail: true
   mainImage:
     type: Asset
     description: Contains the main image to use for the product.

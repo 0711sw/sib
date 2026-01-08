@@ -1,7 +1,7 @@
 name: urn:sib:product-regulations-1
 version: 1
 description: Provides regulative information (CLP, WEEE, REACH, ERP) about a product.
-state: Experimental
+state: Active
 fields:
   germany:
     type: Object

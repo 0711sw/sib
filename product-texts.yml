@@ -1,6 +1,6 @@
 name: urn:sib:product-texts-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Contains several (potentially longer) texts describing the product or its
   characteristics.
@@ -10,19 +10,23 @@ fields:
     description: Contains a detailed description of the product and all of its relevant properties. Note that this should be plain text without any markup.
     optional: true
     translated: true
+    softFail: true
   descriptionHtml:
     type: String
     description: Contains an HTML version of the detailed description.
     optional: true
     translated: true
+    softFail: true
   usageNote:
     type: String
     description: Contains a short and concise hint or recommendation on how to install or use the product. Note that this should be plain text without any markup.
     optional: true
     translated: true
+    softFail: true
   usageNoteHtml:
     type: String
     description: Contains an HTML version of the usage note.
     optional: true
     translated: true
+    softFail: true
   

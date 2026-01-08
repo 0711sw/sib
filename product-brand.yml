@@ -1,6 +1,6 @@
 name: urn:sib:product-brand-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Contains some information for the brand or manufacturer of a product.
   This is most probably stored in an own block and then 'linked' to all

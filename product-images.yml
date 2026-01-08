@@ -1,6 +1,6 @@
 name: urn:sib:product-images-1
 version: 1
-state: Experimental
+state: Active
 description: Provides various images for a product.
 fields:
   images:

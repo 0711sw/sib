@@ -1,6 +1,6 @@
 name: urn:sib:product-documents-1
 version: 1
-state: Experimental
+state: Active
 description: Provides various documents for a product.
 fields:
   documents:

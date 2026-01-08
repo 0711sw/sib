@@ -1,6 +1,6 @@
 name: urn:sib:links-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Describes links between entities. Systems like Durablox will automatically follow these links
   and join the resulting blocks together. This way, e.g. a 'urn:sib:product-brand-1' block can

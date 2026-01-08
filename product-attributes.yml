@@ -1,6 +1,6 @@
 name: urn:sib:product-attributes-1
 version: 1
-state: Experimental
+state: Active
 description: |
   Contains a list of attributes (most probably technical ones) of the product.
   Note that these attributes are only used for rendering and provide little to
