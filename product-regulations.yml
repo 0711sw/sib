@@ -209,7 +209,7 @@ fields:
       Only one value per category is allowed.
     fields:
       classifications:
-        type: Object
+        type: List
         description: Contains energy efficiency classifications for various product categories as defined by ERP regulations.
         optional: true
         fields:
@@ -279,7 +279,7 @@ fields:
               # Defines a category for dishwashers according to EU regulation 2019/2017/EU - maps to ETIM code EF017011
               - dishwasher20192017
               # Defines a category for washing and drying machines according to EU regulation 2019/2018/EU - maps to ETIM code EF017013
-              - completeWashDryCycle20192014
+              - completeWashDryCycle20192018
               # Defines a category for washing machines according to EU regulation 2019/2014/EU - maps to ETIM code EF017014
               - onlyWashing20192014
               # Defines a category for light sources according to EU regulation 2019/2015/EU - maps to ETIM code EF016835
