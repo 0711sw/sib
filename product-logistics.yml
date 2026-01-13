@@ -136,9 +136,14 @@ fields:
       waterHazardClass:
         type: String
         optional: true
-        description: Water hazard classification (WGK) according to German regulations.
-        pattern: "(nwg|WGK\\s?[1-3]|[1-3])"
-        validationMessage: Water hazard class must be (WGK) 1, 2, 3, or 'nwg'.
+        description: Water hazard classification (WGK) according to German regulations (AwSV / UBA).
+        choices:
+          - nwg       # not hazardous to water
+          - awg       # generally hazardous to water
+          - WGK 1     # slightly hazardous to water
+          - WGK 2     # obviously hazardous to water
+          - WGK 3     # highly hazardous to water
+        validationMessage: Water hazard classification (WGK) must be one of 'nwg', 'awg', 'WGK 1', 'WGK 2', or 'WGK 3'.
         softFail: true
       limitedQuantity:
         type: Boolean
