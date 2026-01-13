@@ -331,11 +331,10 @@ fields:
                 - E
                 - F
                 - G
-                # only for motor efficency (Class motor)
-                - IE1
-                - IE2
-                - IE3
-                - IE4
-                - IE5
-                - IE6
-                - IE7
+                # Motor Efficiency according to IEC 60034-30-1:2014
+                # Defines International Efficiency (IE) classes for rotating electrical machines
+                - IE1  # Standard Efficiency (baseline)
+                - IE2  # High Efficiency (typical for new motors)
+                - IE3  # Premium Efficiency (mandatory in many regions)
+                - IE4  # Super Premium Efficiency (advanced designs)
+                - IE5  # Ultra Premium Efficiency (highest current standard)
