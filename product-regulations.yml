@@ -243,10 +243,8 @@ fields:
                 - 2015/1186/EU
                 # Defines a category for integrated cooker hood according to 2010/30/EU - maps to ETIM code EF016382
                 - integratedCookerHood201030
-                # Defines a category for space heating - maps to ETIM code EF010855
-                - seasonalSpaceHeating
                 # Defines a category for space heating according to EU regulation 811/2013/EU - maps to ETIM code EF016994
-                - seasonalSpaceHeating8112013
+                - seasonalSpaceHeating
                 # Defines a category for space heating (35 °C) at average conditions - maps to ETIM code EF019182
                 - seasonalHeating35CAverageConditions
                 # Defines a category for space heating (35 °C) at colder conditions - maps to ETIM code EF019183
@@ -265,10 +263,8 @@ fields:
                 - seasonalSpaceHeatingColderConditions
                 # Defines a category for space heating at warmer conditions - maps to ETIM code EF019229
                 - seasonalSpaceHeatingWarmerConditions
-                # Defines a category for water heating - maps to ETIM code EF010856
-                - waterHeating
                 # Defines a category for water heating according to EU regulation 811/2013/EU - maps to ETIM code EF016995
-                - waterHeating8112013
+                - waterHeating
                 - seasonalSpaceHeatingPackage
                 - seasonalCombinedHeatingPackage
                 - hotWaterStorageTank
@@ -307,6 +303,7 @@ fields:
                 - E
                 - F
                 - G
+                # only for motor efficency (Class motor)
                 - IE1
                 - IE2
                 - IE3
