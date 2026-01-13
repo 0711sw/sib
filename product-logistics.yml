@@ -64,12 +64,12 @@ fields:
         optional: true
       unNumbers:
         type: List
-        description: Contains the UN numbers of the hazardous materials.
+        description: List of UN numbers for hazardous goods. Each entry must be a four-digit number without prefix (e.g. "1203" for gasoline).
         optional: true
         contents:
           type: String
-          pattern: "UN\\s?\\d{4}"
-          validationMessage: UN number must be in the format 'UN XXXX' where X is a digit.
+          pattern: "\\d{4}"
+          validationMessage: Must be a 4-digit UN number (e.g. "1203") without letters or prefixes like "UN".
           softFail: true
       hazardClass:
         type: String
