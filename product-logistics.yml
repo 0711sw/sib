@@ -28,21 +28,21 @@ fields:
         optional: true
         description: Contains the length of the product within its base packaging in millimeters.
         minValue: "1"
-        maxScale: 0
+        maxScale: 1
         softFail: true
       width:
         type: Number
         optional: true
         description: Contains the width of the product within its base packaging in millimeters.
         minValue: "1"
-        maxScale: 0
+        maxScale: 1
         softFail: true
       height:
         type: Number
         optional: true
         description: Contains the height of the product within its base packaging in millimeters.
         minValue: "1"
-        maxScale: 0
+        maxScale: 1
         softFail: true
       weight:
         type: Number
