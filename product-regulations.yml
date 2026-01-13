@@ -219,76 +219,104 @@ fields:
               type: String
               description: Defines the category of classification.
               choices:
-                # Defines a generic category (based on legacy ETIM code EF000758)
-                - generic
-                # Defines a category according to ISO 25745 - maps to ETIM code EF012512
-                - ISO-25745
-                # Defines a category for motor efficiency - maps to ETIM code EF014979
-                - motor
-                # Defines a category according to EU regulation 2017/1369/EU - maps to ETIM code EF016321
-                - 2017/1369/EU
-                # Defines a category according to EU regulation 2010/30/EU - maps to ETIM code EF016322
-                - 2010/30/EU
-                # Defines a category according to EU regulation 812/2013/EU - maps to ETIM code EF016992
-                - 812/2013/EU
-                # Defines a category according to EU regulation 2019/2013/EU - maps to ETIM code EF017009
-                - 2019/2013/EU
-                # Defines a category according to EU regulation 392/2012/EU - maps to ETIM code EF017012
-                - 392/2012/EU
-                # Defines a category according to EU regulation 2019/2015/EU - maps to ETIM code EF017139
-                - 2019/2015/EU
-                # Defines a category according to EU regulation 1253/2014/EU - maps to ETIM code EF017471
-                - 1253/2014/EU
-                # Defines a category according to EU regulation 2015/1186/EU - maps to ETIM code EF018677
-                - 2015/1186/EU
-                # Defines a category for integrated cooker hood according to 2010/30/EU - maps to ETIM code EF016382
-                - integratedCookerHood201030
-                # Defines a category for space heating according to EU regulation 811/2013/EU - maps to ETIM code EF016994
+                # === HVAC SECTOR  ===
+                
+                # Space Heating - General
+                # Maps to ETIM code EF016994 - DQR: jahresz. bed. Raumheizung - BMDG: SPACE_HEATING
                 - seasonalSpaceHeating
-                # Defines a category for space heating (35 °C) at average conditions - maps to ETIM code EF019182
-                - seasonalHeating35CAverageConditions
-                # Defines a category for space heating (35 °C) at colder conditions - maps to ETIM code EF019183
-                - seasonalHeating35CColderConditions
-                # Defines a category for space heating (35 °C) at warmer conditions - maps to ETIM code EF019184
-                - seasonalHeating35CWarmerConditions
-                # Defines a category for space heating (55 °C) at average conditions - maps to ETIM code EF019185
-                - seasonalHeating55CAverageConditions
-                # Defines a category for space heating (55 °C) at colder conditions - maps to ETIM code EF019186
-                - seasonalHeating55CColderConditions
-                # Defines a category for space heating (55 °C) at warmer conditions - maps to ETIM code EF019187
-                - seasonalHeating55CWarmerConditions
-                # Defines a category for space heating at average conditions - maps to ETIM code EF019227
+                
+                # Space Heating - Climate Zones (Regulation EU 206/2012)
+                # Maps to ETIM code EF019227 - DQR: Heizung mittlere Klimazone - BMDG: HEATING_MEDIUM
                 - seasonalSpaceHeatingAverageConditions
-                # Defines a category for space heating at colder conditions - maps to ETIM code EF019228
+                # Maps to ETIM code EF019228 - DQR: Heizung kältere Klimazone - BMDG: HEATING_COLDER
                 - seasonalSpaceHeatingColderConditions
-                # Defines a category for space heating at warmer conditions - maps to ETIM code EF019229
+                # Maps to ETIM code EF019229 - DQR: Heizung wärmere Klimazone - BMDG: HEATING_WARMER
                 - seasonalSpaceHeatingWarmerConditions
-                # Defines a category for water heating according to EU regulation 811/2013/EU - maps to ETIM code EF016995
+                
+                # Space Heating - 55°C (Regulation EU 813/2013)
+                # Maps to ETIM code EF019185 - DQR: jahresz. bed. Raumheizung mitteltemp. 55C - BMDG: SPACE_HEATING_55C
+                - seasonalHeating55CAverageConditions
+                # Maps to ETIM code EF019186 - NO DQR/BMDG (climate variant)
+                - seasonalHeating55CColderConditions
+                # Maps to ETIM code EF019187 - NO DQR/BMDG (climate variant)
+                - seasonalHeating55CWarmerConditions
+                
+                # Space Heating - 35°C (Regulation EU 813/2013)
+                # Maps to ETIM code EF019182 - DQR: jahresz. bed. Raumheizung niedertemp. 35C - BMDG: SPACE_HEATING_35C
+                - seasonalHeating35CAverageConditions
+                # Maps to ETIM code EF019183 - NO DQR/BMDG (climate variant)
+                - seasonalHeating35CColderConditions
+                # Maps to ETIM code EF019184 - NO DQR/BMDG (climate variant)
+                - seasonalHeating35CWarmerConditions
+                
+                # Water Heating (Regulation EU 811/2013 + 812/2013)
+                # Maps to ETIM code EF016995 - DQR: Warmwasseraufbereitung - BMDG: WATER_HEATING
                 - waterHeating
+                
+                # Package Systems
+                # DQR: jahresz. Raumheizung Verbundanlage - BMDG: SPACE_HEATING_COMPOUND
                 - seasonalSpaceHeatingPackage
+                # DQR: jahresz. bed. Kombiheizung Verbundanlage - BMDG: COMBI_HEATING_COMPOUND
                 - seasonalCombinedHeatingPackage
+                # DQR: Warmwasseraufbereitung Verbundanlage - BMDG: WATER_HEATING_COMPOUND
+                - waterHeatingPackage
+                # Maps to ETIM code EF016992 - DQR: Warmwasserspeicher - BMDG: HOT_WATER_TANK
                 - hotWaterStorageTank
-                # Defines a category for air conditioners - maps to ETIM code EF024955
+                
+                # Climate Control (Regulation EU 206/2012)
+                # Maps to ETIM code EF024955 - DQR: Kühlung - BMDG: COOLING
                 - cooling
-                # Defines a category for heating - maps to ETIM code EF024956
+                # Maps to ETIM code EF024956 - NO DQR/BMDG (generic heating)
                 - heating
-                # Defines a category for refrigeration according to EU regulation 2019/2016/EU - maps to ETIM code EF017010
-                - refrigerator20192016
-                # Defines a category for dishwashers according to EU regulation 2019/2017/EU - maps to ETIM code EF017011
-                - dishwasher20192017
-                # Defines a category for washing and drying machines according to EU regulation 2019/2014/EU - maps to ETIM code EF017013
-                - completeWashDryCycle20192014
-                # Defines a category for washing machines according to EU regulation 2019/2014/EU - maps to ETIM code EF017014
-                - onlyWashing20192014
-                # Defines a category for light sources according to EU regulation 2019/2015/EU - maps to ETIM code EF016835
-                - lightSource20192015
-                - localSpaceHeater
-                - twoDirectionVentilationUnit
+                
+                # Solid Fuel (Regulation EU 2015/1189)
+                # DQR: Festbrennstoffkessel - BMDG: SOLID_FUEL_BOILER
                 - solidFuelBoiler
+                # DQR: Festbrennstoffe Verbundanlage - BMDG: SOLID_FUEL_BOILER_COMPOUND
                 - solidFuelPackage
+                
+                # Lighting
+                # Maps to ETIM code EF017139 - DQR: Leuchtmittel 2019/2015 - BMDG: LIGHT_SOURCES
+                - lightBulb
+                # Maps to ETIM code EF016835 - NO DQR/BMDG (fixtures only)
+                - lightFixture
+                # DQR: Lampe - BMDG: LAMP (legacy Regulation EG 244/2009)
                 - lamp
+                # DQR: Leuchter genehmigt von/bis - BMDG: CHANDELIER
                 - luminaireApprovedRange
+                # DQR: LED von/bis - BMDG: LED
                 - ledApprovedRange
+                
+                # Local Heating & Ventilation
+                # Maps to ETIM code EF018677 - DQR: Einzelraumheizgerät - BMDG: ROOM_HEATER
+                - localSpaceHeater
+                # Maps to ETIM code EF017471 - DQR: Zwei-Richtung-Lüftungsgerät - BMDG: BI_VENTILATION
+                - twoDirectionVentilationUnit
+                
+                # === (OUT OF HVAC SCOPE) ===
+                
+                # Maps to ETIM code EF000758 (legacy generic category)
+                - generic
+                # Maps to ETIM code EF012512 (ISO 25745 - elevators, escalators, moving walks)
+                - buildingTransportSystems
+                # Maps to ETIM code EF014979 (motor efficiency)
+                - motor
+                # Maps to ETIM code EF016321 (framework regulation EU 2017/1369)
+                - 2017/1369/EU
+                # Maps to ETIM code EF017009 (electronic displays - monitors, TVs)
+                - electronicDisplays
+                # Maps to ETIM code EF017012 (tumble dryers)
+                - tumbleDryer
+                # Maps to ETIM code EF016382 (cooker hoods)
+                - integratedCookerHood
+                # Maps to ETIM code EF017010 (refrigerators)
+                - refrigerator
+                # Maps to ETIM code EF017011 (dishwashers)
+                - dishwasher
+                # Maps to ETIM code EF017013 (washer-dryers)
+                - washerDryer
+                # Maps to ETIM code EF017014 (washing machines)
+                - washingMachine
             class:
               type: String
               description: Defines the actual ERP class.
@@ -303,12 +331,10 @@ fields:
                 - E
                 - F
                 - G
-                # only for motor efficency (Class motor)
-                - IE1
-                - IE2
-                - IE3
-                - IE4
-                - IE5
-                - IE6
-                - IE7
-                
+                # Motor Efficiency according to IEC 60034-30-1:2014
+                # Defines International Efficiency (IE) classes for rotating electrical machines
+                - IE1  # Standard Efficiency (baseline)
+                - IE2  # High Efficiency (typical for new motors)
+                - IE3  # Premium Efficiency (mandatory in many regions)
+                - IE4  # Super Premium Efficiency (advanced designs)
+                - IE5  # Ultra Premium Efficiency (highest current standard)
