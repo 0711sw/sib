@@ -21,7 +21,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const token = await core.getIDToken('https://t01.durablox.net');
+            const token = await core.getIDToken('https://xxx.durablox.net');
             core.setSecret(token);
             core.setOutput('token', token);
 
