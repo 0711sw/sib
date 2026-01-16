@@ -1,0 +1,43 @@
+name: Deploy Sandbox
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get OIDC token
+        id: oidc
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken('https://t01.durablox.net');
+            core.setSecret(token);
+            core.setOutput('token', token);
+
+      - name: Deploy descriptors to t01.durablox.net
+        run: |
+          token="${{ steps.oidc.outputs.token }}"
+          for file in *.yml; do
+            echo "Uploading $file..."
+            resp=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X PUT https://t01.durablox.net/descriptor/v1 \
+              -H "Authorization: Bearer $token" \
+              -H "Content-Type: application/x-yaml" \
+              --data-binary "@$file")
+            if [ "$resp" -ge 300 ]; then
+              echo "::error file=$file::Upload failed with status $resp"
+              exit 1
+            fi
+            echo "$file uploaded successfully (status $resp)"
+          done
