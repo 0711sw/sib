@@ -1,147 +1,125 @@
 # Standard Information Block (SIB) Schema Format
 
-This document describes the YAML-based schema format for **Standard
-Information Blocks (SIBs)**.\
-The format allows defining reusable blocks of structured JSON data with
-strict typing, validation rules, and metadata.
+This document describes the YAML-based schema format for **Standard Information Blocks (SIBs)**.
+The format allows defining reusable blocks of structured JSON data with strict typing, validation rules, and metadata.
 
-------------------------------------------------------------------------
+---
 
 ## Overview
 
 A **Block Descriptor** defines:
 
--   **Metadata** about the block (name, version, state, description,
-    documentation URL).
--   **Fields** that make up the block (typed, validated, optionally
-    nested).
+- **Metadata** about the block (name, version, state, description, documentation URL).
+- **Fields** that make up the block (typed, validated, optionally nested).
 
 Each descriptor is written in **YAML**.
 
-------------------------------------------------------------------------
+---
 
 ## Block Descriptor
 
-``` yaml
-name: urn:sib:product:logistics-1
+```yaml
+name: urn:sib:product-base-1
 version: 1
-description: "Logistics information for product delivery"
+description: "Contains elemental base data for a product."
 state: Active
 fields:
-  trackingNumber:
+  itemNumber:
     type: String
-    description: "Unique tracking ID"
-    pattern: "^[A-Z0-9]{10,20}$"
+    description: "Unique item identifier"
   weight:
     type: Number
     minValue: "0"
-  attachments:
-    type: List
-    contents:
-      type: Asset
-      acceptedFileExtensions: ["jpg", "png", "pdf"]
+  mainImage:
+    type: Asset
+    optional: true
+    acceptedFileExtensions: ["jpg", "png", "pdf"]
 ```
 
 ### Properties
 
-  ------------------------------------------------------------------------------------------
-  Field                Type        Required   Description
-  -------------------- ----------- ---------- ----------------------------------------------
-  `name`               `string`    ✅         Must match pattern
-                                              `urn:namespace:name-MajorVersion` (e.g.,
-                                              `urn:sib:product:logistics-1`).
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | `string` | Yes | Unique identifier, typically in URN format (e.g., `urn:sib:product-base-1`). |
+| `version` | `integer` | Yes | The version number of the descriptor. |
+| `description` | `string` | No | A short explanation of the descriptor's purpose. |
+| `state` | `enum` | Yes | One of: `Experimental`, `Active`, `Deprecated`. |
+| `fields` | `object` | Yes | The set of fields making up the descriptor. |
 
-  `version`            `integer`   ✅         The version number of the descriptor.
-
-  `description`        `string`    ❌         A short explanation of the descriptor's
-                                              purpose.
-
-  `state`              `enum`      ✅         One of: `Experimental`, `Active`,
-                                              `Deprecated`.
-
-  `fields`             `object`    ✅         The set of fields making up the descriptor.
-  ------------------------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+---
 
 ## Field Types
 
-Fields are defined with a `type` discriminator.\
+Fields are defined with a `type` discriminator.
 Supported types:
 
--   **String**
--   **Number**
--   **List**
--   **Asset**
--   **Date**
--   **DateTime**
--   **Boolean**
--   **Object**
+- **String**
+- **Number**
+- **List**
+- **Asset**
+- **Date**
+- **Boolean**
+- **Object**
 
 ### Common Field Properties
 
-  ------------------------------------------------------------------------------
-  Property        Type       Required   Description
-  --------------- ---------- ---------- ----------------------------------------
-  `optional`      `bool`     ❌         If `true`, the field may be omitted.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `optional` | `bool` | No | If `true`, the field may be omitted. |
+| `description` | `string` | No | Explanation of the field's meaning/purpose. |
 
-  `description`   `string`   ❌         Explanation of the field's
-                                        meaning/purpose.
-  ------------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+---
 
 ### String Field
 
-``` yaml
+```yaml
 type: String
 choices: ["Draft", "Shipped", "Delivered"]
-pattern: "^[A-Za-z]+$"
 minLength: 3
 maxLength: 20
 translated: true
+softFail: true
 ```
 
-  --------------------------------------------------------------------------------
-  Property       Type         Required   Description
-  -------------- ------------ ---------- -----------------------------------------
-  `choices`      `[string]`   ❌         Enumerated allowed values.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `choices` | `[string]` | No | Enumerated allowed values. |
+| `pattern` | `string` | No | Regular expression for value validation. |
+| `validationMessage` | `string` | No | Custom error message shown when `pattern` or `choices` validation fails. |
+| `minLength` | `integer` | No | Minimum allowed length. |
+| `maxLength` | `integer` | No | Maximum allowed length. |
+| `translated` | `bool` | No | If `true`, field values can be a localized map (e.g., `{"en": "Hello", "de": "Hallo"}`). |
+| `softFail` | `bool` | No | If `true`, validation failures produce warnings instead of errors. |
+| `acceptUntrimmed` | `bool` | No | If `true`, leading/trailing whitespace is accepted. Default: `false`. |
 
-  `pattern`      `string`     ❌         Regular expression for value validation.
-
-  `minLength`    `integer`    ❌         Minimum allowed length.
-
-  `maxLength`    `integer`    ❌         Maximum allowed length.
-
-  `translated`   `bool`       ❌         Indicates if field values can be
-                                         localized.
-  --------------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+---
 
 ### Number Field
 
-``` yaml
+```yaml
 type: Number
 minValue: "0.0"
 maxValue: "100.0"
+minScale: 2
+maxScale: 3
+softFail: true
 ```
 
-  ---------------------------------------------------------------------------
-  Property     Type       Required   Description
-  ------------ ---------- ---------- ----------------------------------------
-  `minValue`   `string`   ❌         Minimum allowed numeric value.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `minValue` | `string` | No | Minimum allowed numeric value. |
+| `maxValue` | `string` | No | Maximum allowed numeric value. |
+| `minScale` | `integer` | No | Minimum decimal places. Values with fewer decimals are padded with zeros. |
+| `maxScale` | `integer` | No | Maximum decimal places. Values with more decimals produce an error. |
+| `softFail` | `bool` | No | If `true`, validation failures produce warnings instead of errors. |
 
-  `maxValue`   `string`   ❌         Maximum allowed numeric value.
-  ---------------------------------------------------------------------------
+Values for `minValue` and `maxValue` are strings to support arbitrary decimal precision.
 
-> Values are strings to support decimal precision.
-
-------------------------------------------------------------------------
+---
 
 ### List Field
 
-``` yaml
+```yaml
 type: List
 minOccur: 1
 maxOccur: 10
@@ -149,64 +127,52 @@ contents:
   type: String
 ```
 
-  ----------------------------------------------------------------------------------
-  Property     Type          Required   Description
-  ------------ ------------- ---------- --------------------------------------------
-  `contents`   `FieldType`   ✅         The type of items in the list.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `contents` | `FieldType` | Yes | The type of items in the list. |
+| `minOccur` | `integer` | No | Minimum number of elements. |
+| `maxOccur` | `integer` | No | Maximum number of elements. |
 
-  `minOccur`   `integer`     ❌         Minimum number of elements.
-
-  `maxOccur`   `integer`     ❌         Maximum number of elements.
-  ----------------------------------------------------------------------------------
-
-------------------------------------------------------------------------
+---
 
 ### Asset Field
 
-``` yaml
+```yaml
 type: Asset
 acceptedFileExtensions: ["jpg", "png", "tar.gz"]
 ```
 
-  ------------------------------------------------------------------------------------------
-  Property                   Type         Required   Description
-  -------------------------- ------------ ---------- ---------------------------------------
-  `acceptedFileExtensions`   `[string]`   ❌         List of valid lowercase file
-                                                     extensions.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `acceptedFileExtensions` | `[string]` | No | List of valid lowercase file extensions. |
 
-  ------------------------------------------------------------------------------------------
+---
 
-------------------------------------------------------------------------
+### Date Field
 
-### Date & DateTime Fields
-
-``` yaml
+```yaml
 type: Date
 ```
 
-``` yaml
-type: DateTime
-```
+- No additional properties.
+- Values must be valid ISO-8601 dates in the format `YYYY-MM-DD`.
 
--   No additional properties.
--   Values must be valid ISO-8601 dates or datetimes.
-
-------------------------------------------------------------------------
+---
 
 ### Boolean Field
 
-``` yaml
+```yaml
 type: Boolean
 ```
 
--   Represents a true/false flag.
--   No additional properties.
+- Represents a true/false flag.
+- No additional properties.
 
-------------------------------------------------------------------------
+---
 
 ### Object Field
 
-``` yaml
+```yaml
 type: Object
 fields:
   street:
@@ -215,38 +181,44 @@ fields:
     type: String
 ```
 
-  --------------------------------------------------------------------------
-  Property   Type                   Required   Description
-  ---------- ---------------------- ---------- -----------------------------
-  `fields`   `map[string, Field]`   ✅         Nested fields of the object.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `fields` | `map[string, Field]` | Yes | Nested fields of the object. |
 
-  --------------------------------------------------------------------------
+---
 
-------------------------------------------------------------------------
+## Severity Levels
+
+Validation produces messages at different severity levels:
+
+- **Hint** — Suggestions for completeness (e.g., missing description).
+- **Warning** — Potentially problematic but not invalid. Used when `softFail: true`.
+- **Error** — Data is invalid and rejected.
+
+---
 
 ## Validation Rules
 
-The following rules are enforced:
+The following rules are enforced when validating data against a schema:
 
-1.  **Block Descriptor**
-    -   `name` must follow pattern: `urn:namespace:name-MajorVersion`.
-    -   Missing `description` → **Hint**.
-2.  **Strings**
-    -   Invalid regex in `pattern` → **Error**.
-    -   `minLength` must not exceed `maxLength`.
-3.  **Numbers**
-    -   `minValue` and `maxValue` must be valid decimals.
-    -   `minValue` ≤ `maxValue`.
-4.  **Lists**
-    -   `minOccur` ≤ `maxOccur`.
-5.  **Assets**
-    -   Each extension must be lowercase and start with a character and
-        then either more characters or dots. Examples: `zip`, `tar.gz`.
+### Strings
 
-------------------------------------------------------------------------
+- Value not in `choices` produces an error (or warning if `softFail: true`).
+- Value doesn't match `pattern` produces an error (or warning if `softFail: true`).
+- Leading/trailing whitespace produces an error (or warning if `softFail: true`), unless `acceptUntrimmed: true`.
+- Value shorter than `minLength` or longer than `maxLength` produces an error (or warning if `softFail: true`).
 
-### Severity Levels
+### Numbers
 
--   `Hint` -- Suggestions for completeness (e.g., missing description).
--   `Warning` -- Potentially problematic but not invalid.
--   `Error` -- Schema is invalid and rejected.
+- Value below `minValue` or above `maxValue` produces an error (or warning if `softFail: true`).
+- Too many decimal places (exceeds `maxScale`) produces an error (or warning if `softFail: true`).
+- Values with fewer decimal places than `minScale` are automatically padded with zeros.
+
+### Lists
+
+- Fewer items than `minOccur` or more items than `maxOccur` produces an error.
+
+### Assets
+
+- File extension not in `acceptedFileExtensions` produces an error.
+- Each extension must be lowercase (e.g., `jpg`, `tar.gz`).

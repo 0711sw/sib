@@ -53,6 +53,17 @@ The structure of descriptors is defined here:
 -   [urn:sib:item-base-1](item-base.yml)\
     Provides information for an actual physical item.
 
+### Experimental
+
+-   [urn:sib:product-faq-1](product-faq.yml)\
+    Provides frequently asked questions (FAQ) and answers for a product.
+
+-   [urn:sib:product-lca-1](product-lca.yml)\
+    Life Cycle Assessment (LCA) data according to EN 15804.
+
+-   [urn:sib:product-maintenance-1](product-maintenance.yml)\
+    Contains maintenance and replacement information for a product.
+
 ## Development
 Use `./test.sh` to check your descriptors locally.
 
