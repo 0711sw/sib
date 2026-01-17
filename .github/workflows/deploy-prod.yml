@@ -45,6 +45,7 @@ jobs:
 
   deploy-p01:
     name: Deploy to p01.durablox.com
+    needs: deploy-x01
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -78,6 +79,7 @@ jobs:
 
   deploy-p02:
     name: Deploy to p02.durablox.com
+    needs: deploy-x01
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -111,6 +113,7 @@ jobs:
 
   deploy-p03:
     name: Deploy to p03.durablox.com
+    needs: deploy-x01
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
