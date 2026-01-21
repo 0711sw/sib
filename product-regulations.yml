@@ -209,20 +209,24 @@ fields:
       Only one value per category is allowed.
     fields:
       erpLabel:
-        type: Asset
+        type: List
         optional: true
-        description: Energy label document as required by applicable ERP regulations (e.g., EU 2017/1369).
-        acceptedFileExtensions:
-          - jpg
-          - jpeg
-          - png
-          - pdf
+        description: Energy label documents as required by applicable ERP regulations (e.g., EU 2017/1369). Multiple labels can be provided for different markets or product variants.
+        contents:
+          type: Asset
+          acceptedFileExtensions:
+            - jpg
+            - jpeg
+            - png
+            - pdf
       erpDatasheet:
-        type: Asset
+        type: List
         optional: true
-        description: Product information sheet (datasheet) containing technical energy efficiency data as required by ERP regulations.
-        acceptedFileExtensions:
-          - pdf
+        description: Product information sheets (datasheets) containing technical energy efficiency data as required by ERP regulations. Multiple datasheets can be provided for different markets or product variants.
+        contents:
+          type: Asset
+          acceptedFileExtensions:
+            - pdf
       classifications:
         type: List
         description: Contains energy efficiency classifications for various product categories as defined by ERP regulations.
