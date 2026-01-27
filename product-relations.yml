@@ -83,7 +83,10 @@ fields:
                 optional: true
               itemNumber:
                 type: String
-                description: Contains the item number of the sparepart.
+                description: | 
+                  Contains the spare part's item number. Can be left blank for text 
+                  descriptions or other entries.
+                optional: true
               shortDescription:
                 type: String
                 description: Contains a short and concise description or remark for the part.
