@@ -19,6 +19,28 @@ fields:
         type:
           type: String
           description: Contains the type of image being supplied.
+          softFail: true
+          choices:
+            # Product image - DQR: B_, BMDG: P01
+            - COLORED_IMAGE
+            # Product image (black & white) - DQR: S_
+            - BW_IMAGE
+            # Dimensioned drawing - DQR: V_, BMDG: P08
+            - MEASURED_DRAWING
+            # Exploded drawing - DQR: X_, BMDG: P10
+            - EXPLODED_DRAWING
+            # Line drawing - DQR: U_, BMDG: P07
+            - DRAWING
+            # Detailed view - DQR: DT, BMDG: P13
+            - DETAILED_IMAGE
+            # Logo - DQR: LO, BMDG: P05
+            - LOGO
+            # Pictogram/Icon
+            - ICON
+            # Energy icon
+            - ERP_ICON
+            # Seal of approval
+            - SEAL_OF_APPROVAL
         image:
           type: Asset
           description: Contains the name or path of the asset to use as image.          

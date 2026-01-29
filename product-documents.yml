@@ -19,6 +19,90 @@ fields:
         type:
           type: String
           description: Contains the type of document being supplied.
+          softFail: true
+          choices:
+            # Safety data sheet - DQR: GG, BMDG: S02
+            - MSDS
+            # Product data sheet - DQR: DB
+            - ITEM_DATASHEET
+            # Technical data sheet - BMDG: S01
+            - TECHNICAL_DATASHEET
+            # Wiring diagram - BMDG: P12
+            - WIRING_DIAGRAM
+            # Circuit diagram - DQR: SB
+            - CIRCUIT_DIAGRAM
+            # Technical drawing - DQR: TZ
+            - TECHNICAL_DRAWING
+            # Declaration of performance - DQR: LE, BMDG: D03
+            - DOP
+            # Declaration RoHS - BMDG: D01
+            - ROHS
+            # Declaration of Conformity - BMDG: D02
+            - COC
+            # Declaration of conformity CE - DQR: CE, BMDG: D04
+            - DOC
+            # Warranty statement - BMDG: D05
+            - WARRANTY
+            # REACH - BMDG: D06
+            - REACH
+            # WEEE - BMDG: D07
+            - WEEE
+            # Approval - DQR: ZL
+            - APPROVAL
+            # Luminaire data
+            - LUMINAIRE_DATA
+            # Light cone diagram
+            - LIGHT_CONE_DIAGRAM
+            # Light distribution curve
+            - LIGHT_DISTRIBUTION_CURVE
+            # Installation manual - DQR: MA, BMDG: M01
+            - INSTALLATION_MANUAL
+            # Planning instructions - DQR: PA
+            - PLANNING
+            # User manual - DQR: IS, BMDG: M02
+            - USER_MANUAL
+            # Maintenance manual - DQR: WA, BMDG: M03
+            - MAINTENANCE_MANUAL
+            # Maintenance instructions - DQR: PF
+            - MAINTENANCE_INSTRUCTION
+            # Manual - BMDG: M04
+            - OTHER_MANUAL
+            # Spare parts list
+            - SPARE_PARTS_LIST
+            # IE (Motor efficiency) - BMDG: L02
+            - MOTOR_EFFICIENCY
+            # ECO Label - BMDG: L03
+            - ECO_LABEL
+            # UBA - DQR: UP
+            - UBA_LIST
+            # Approval for drinking water - BMDG: A01
+            - ACS
+            # Approval for Exclassification - DQR: EX, BMDG: A02
+            - EXPLOSION_PROTECTION
+            # Other approval/certificate - BMDG: A03
+            - CERTIFICATE
+            # Certificate of sustainability - DQR: NZ
+            - CERTIFICATE_SUSTAINABILITY
+            # WELL-Label - DQR: WL
+            - WELL_LABEL
+            # Fire protection - DQR: BS
+            - FIRE_PROTECTION
+            # Corrosion protection - DQR: KS
+            - CORROSION_PROTECTION
+            # Company protection - DQR: VD
+            - VDS_APPROVAL
+            # Noise protection verification - DQR: SS
+            - NOISE_PROTECTION_VERIFICATION
+            # Test report lithium batteries - DQR: PL, BMDG: S03
+            - TEST_REPORT_LITHIUM_BATTERY
+            # EPD - environmental product declaration - DQR: EPD
+            - ENVIRONMENTAL_PRODUCT_DECLARATION
+            # environmental code of practice (ECOP)
+            - ENVIRONMENTAL_CODE_OF_PRACTICE
+            # German sustainable building quality seal - DQR: QNG
+            - SUSTAINABLE_BUILDING_QUALITY_SEAL
+            # EU Data Act
+            - EU_DATA_ACT
         document:      
           type: Asset
           description: Contains the name or path of the asset to use as document.
