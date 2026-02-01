@@ -112,9 +112,20 @@ fields:
       pictograms:
         type: List
         optional: true
-        contents: 
+        description: List of GHS hazard pictograms required under CLP Regulation.
+        contents:
           type: String
-        description: List of hazard pictograms required under CLP.
+          softFail: true
+          choices:
+            - GHS01  # Exploding bomb
+            - GHS02  # Flame
+            - GHS03  # Flame over circle
+            - GHS04  # Gas cylinder
+            - GHS05  # Corrosion
+            - GHS06  # Skull and crossbones
+            - GHS07  # Exclamation mark
+            - GHS08  # Health hazard
+            - GHS09  # Environment
       tradeName:
         type: String
         optional: true
@@ -126,7 +137,33 @@ fields:
       storageClass:
         type: String
         optional: true
-        description: Storage class as defined by national or international standards (e.g., TRGS 510 in Germany).
+        description: Storage class according to TRGS 510 (Germany).
+        softFail: true
+        choices:
+          - "1"      # Explosive substances
+          - "2A"     # Compressed, liquefied or dissolved gases
+          - "2B"     # Aerosols
+          - "3"      # Flammable liquids
+          - "4.1A"   # Other explosive substances
+          - "4.1B"   # Flammable solids
+          - "4.2"    # Pyrophoric or self-heating substances
+          - "4.3"    # Substances which emit flammable gases in contact with water
+          - "5.1A"   # Strongly oxidizing substances
+          - "5.1B"   # Oxidizing substances
+          - "5.1C"   # Ammonium nitrate and ammonium nitrate preparations
+          - "5.2"    # Organic peroxides
+          - "6.1A"   # Combustible toxic substances
+          - "6.1B"   # Non-combustible toxic substances
+          - "6.1C"   # Toxic substances or mixtures (CMR)
+          - "6.1D"   # Other toxic substances
+          - "6.2"    # Infectious substances
+          - "7"      # Radioactive substances
+          - "8A"     # Combustible corrosive substances
+          - "8B"     # Non-combustible corrosive substances
+          - "10"     # Combustible liquids (not LGK 3)
+          - "11"     # Combustible solids
+          - "12"     # Non-combustible liquids
+          - "13"     # Non-combustible solids
       b2bOnly:
         type: Boolean
         optional: true
