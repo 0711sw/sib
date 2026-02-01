@@ -158,6 +158,13 @@ fields:
         description: |
           Maximum quantity per inner packaging allowed under LQ exemption (e.g. "1 L", "500 g").
           Only relevant if limitedQuantity is true.
+      dangerousGoodsPointsPerOrderUnit:
+        type: Number
+        optional: true
+        description: Dangerous goods points per order quantity unit for calculating the 1000-point rule (ADR 1.1.3.6).
+        minValue: "0"
+        maxScale: 3
+        softFail: true
       packageDescription:
         type: String
         optional: true
