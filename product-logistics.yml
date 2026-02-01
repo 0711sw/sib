@@ -149,6 +149,12 @@ fields:
         type: Boolean
         optional: true
         description: Indicates whether the product is subject to ADR limited quantity exemptions.
+      limitedQuantityMaxPerPackage:
+        type: String
+        optional: true
+        description: |
+          Maximum quantity per inner packaging allowed under LQ exemption (e.g. "1 L", "500 g").
+          Only relevant if limitedQuantity is true.
       packageDescription:
         type: String
         optional: true
