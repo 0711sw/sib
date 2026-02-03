@@ -12,8 +12,39 @@ fields:
     type: String
     description: Contains the serial number of the item.
     optional: true
+  batchNumber:
+    type: String
+    description: |
+      Unique identifier of the production batch in which the item was manufactured.
+      Corresponds to IDTA 02006-3-0-1 BatchNumber (0112/2///61360_7#ABB002#001).
+    optional: true
   manufacturedAt:
     type: Date
-    description: Contains the date on which this item has been manufactured.
+    description: |
+      Date on which this item has been manufactured.
+      Corresponds to IDTA 02006-3-0-1 DateOfManufacture (0173-1#02-AAR972#002).
     optional: true
-  
+  hardwareVersion:
+    type: String
+    description: |
+      Version of the hardware supplied with the device.
+      Corresponds to IDTA 02006-3-0-1 HardwareVersion (0173-1#02-AAN270#002).
+    optional: true
+  firmwareVersion:
+    type: String
+    description: |
+      Version of the firmware installed on the device.
+      Corresponds to IDTA 02006-3-0-1 FirmwareVersion (0173-1#02-AAM985#002).
+    optional: true
+  softwareVersion:
+    type: String
+    description: |
+      Version of the software installed on the device.
+      Corresponds to IDTA 02006-3-0-1 SoftwareVersion (0173-1#02-AAM737#002).
+    optional: true
+  facilityMarking:
+    type: String
+    description: |
+      Identification of the manufacturing facility or production site.
+      Used for traceability and quality control purposes.
+    optional: true
