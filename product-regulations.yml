@@ -289,7 +289,7 @@ fields:
                 # Maps to ETIM code EF019229 - DQR: Heizung wärmere Klimazone - BMDG: HEATING_WARMER
                 - seasonalSpaceHeatingWarmerConditions
                 
-                # Space Heating - 55°C (Regulation EU 813/2013)
+                # Space Heating - 55°C (Regulation EU 811/2013)
                 # Maps to ETIM code EF019185 - DQR: jahresz. bed. Raumheizung mitteltemp. 55C - BMDG: SPACE_HEATING_55C
                 - seasonalHeating55CAverageConditions
                 # Maps to ETIM code EF019186 - NO DQR/BMDG (climate variant)
@@ -297,7 +297,7 @@ fields:
                 # Maps to ETIM code EF019187 - NO DQR/BMDG (climate variant)
                 - seasonalHeating55CWarmerConditions
                 
-                # Space Heating - 35°C (Regulation EU 813/2013)
+                # Space Heating - 35°C (Regulation EU 811/2013)
                 # Maps to ETIM code EF019182 - DQR: jahresz. bed. Raumheizung niedertemp. 35C - BMDG: SPACE_HEATING_35C
                 - seasonalHeating35CAverageConditions
                 # Maps to ETIM code EF019183 - NO DQR/BMDG (climate variant)
@@ -319,29 +319,31 @@ fields:
                 # Maps to ETIM code EF016992 - DQR: Warmwasserspeicher - BMDG: HOT_WATER_TANK
                 - hotWaterStorageTank
                 
-                # Climate Control (Regulation EU 206/2012)
+                # Climate Control (Regulation EU 626/2011)
                 # Maps to ETIM code EF024955 - DQR: Kühlung - BMDG: COOLING
                 - cooling
                 # Maps to ETIM code EF024956 - NO DQR/BMDG (generic heating)
                 - heating
                 
-                # Solid Fuel (Regulation EU 2015/1189)
+                # Solid Fuel (Regulation EU 2015/1187)
                 # DQR: Festbrennstoffkessel - BMDG: SOLID_FUEL_BOILER
                 - solidFuelBoiler
                 # DQR: Festbrennstoffe Verbundanlage - BMDG: SOLID_FUEL_BOILER_COMPOUND
                 - solidFuelPackage
                 
                 # Lighting
+                # Light sources (Regulation EU 2019/2015)
                 # Maps to ETIM code EF017139 - DQR: Leuchtmittel 2019/2015 - BMDG: LIGHT_SOURCES
-                - lightBulb
-                # Maps to ETIM code EF016835 - NO DQR/BMDG (fixtures only)
-                - lightFixture
+                - lightSources
+                - lightBulb  # DEPRECATED - use lightSources instead
                 # DQR: Lampe - BMDG: LAMP (legacy Regulation EG 244/2009)
-                - lamp
+                - lamp  # DEPRECATED - use lightSources instead
                 # DQR: Leuchter genehmigt von/bis - BMDG: CHANDELIER
-                - luminaireApprovedRange
+                - luminaireApprovedRange  # DEPRECATED - use lightSources instead
                 # DQR: LED von/bis - BMDG: LED
-                - ledApprovedRange
+                - ledApprovedRange  # DEPRECATED - use lightSources instead
+                # Maps to ETIM code EF016835 - NO DQR/BMDG (fixtures only)
+                - lightFixture  # DEPRECATED - use lightSources instead
                 
                 # Local Heating & Ventilation
                 # Maps to ETIM code EF018677 - DQR: Einzelraumheizgerät - BMDG: ROOM_HEATER
@@ -363,8 +365,10 @@ fields:
                 - electronicDisplays
                 # Maps to ETIM code EF017012 (tumble dryers)
                 - tumbleDryer
+                # Range hoods (Regulation EU 65/2014)
+                - rangeHood
                 # Maps to ETIM code EF016382 (cooker hoods)
-                - integratedCookerHood
+                - integratedCookerHood  # DEPRECATED - use rangeHood instead
                 # Maps to ETIM code EF017010 (refrigerators)
                 - refrigerator
                 # Maps to ETIM code EF017011 (dishwashers)
@@ -373,6 +377,14 @@ fields:
                 - washerDryer
                 # Maps to ETIM code EF017014 (washing machines)
                 - washingMachine
+                # Tyres (Regulation EU 2020/740)
+                - tyres
+                # Ovens (Regulation EU 65/2014)
+                - oven
+                # Professional refrigerated storage cabinets (Regulation EU 2015/1094)
+                - professionalRefrigeratedCabinet
+                # Commercial refrigerators (Regulation EU 2019/2018)
+                - commercialRefrigerator
             class:
               type: String
               description: Defines the actual ERP class.
