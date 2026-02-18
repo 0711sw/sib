@@ -74,7 +74,8 @@ Supported types:
 
 | Property | Type | Required | Description |
 |----------|------|----------|-------------|
-| `optional` | `bool` | No | If `true`, the field may be omitted. |
+| `optional` | `bool` | No | If `true`, the field may be omitted. Default: `false`. |
+| `deprecated` | `bool` | No | If `true`, the field is deprecated. Deprecated fields **must** be `optional: true`. Providing a value for a deprecated field produces a warning. Default: `false`. |
 | `description` | `string` | No | Explanation of the field's meaning/purpose. |
 
 ---
