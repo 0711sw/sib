@@ -149,12 +149,12 @@ contents:
 
 ```yaml
 type: Asset
-acceptedFileExtensions: ["jpg", "png", "tar.gz"]
+acceptedFileExtensions: ["jpg", "png", "pdf"]
 ```
 
 | Property | Type | Required | Description |
 |----------|------|----------|-------------|
-| `acceptedFileExtensions` | `[string]` | No | List of valid lowercase file extensions. |
+| `acceptedFileExtensions` | `[string]` | No | List of valid lowercase file extensions (e.g., `jpg`, `png`, `pdf`). Each entry must be a simple extension without dots. |
 
 ---
 
@@ -231,4 +231,4 @@ The following rules are enforced when validating data against a schema:
 ### Assets
 
 - File extension not in `acceptedFileExtensions` produces an error.
-- Each extension must be lowercase (e.g., `jpg`, `tar.gz`).
+- Each extension must be a simple lowercase string (e.g., `jpg`, `png`). Extensions are parsed from the last dot in the filename.
