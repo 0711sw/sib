@@ -73,15 +73,15 @@ fields:
           softFail: true
       hazardClass:
         type: String
-        description: Contains the hazard class of the material, e.g. "3" for flammable liquids.
+        description: Contains the hazard class of the material, e.g. "3" for flammable liquids or "2.1" for flammable gases.
         optional: true
-        pattern: "[1-9]"
-        validationMessage: Hazard class must 1-9.
+        pattern: "[1-9](\\.[1-6])?"
+        validationMessage: Hazard class must be in the format 'X' or 'X.Y' where X is 1-9 and Y is 1-6 (e.g. "3", "2.1").
         softFail: true
       hazardDivision:
         type: String
         optional: true
-        description: Division within the hazard class, e.g. "1.4" for explosives.
+        description: "Deprecated: Use hazardClass instead, which now accepts both class and division (e.g. \"2.1\"). This field is kept for backwards compatibility."
         pattern: "[1-9](\\.[1-6])?"
         validationMessage: Division must be in the format 'X' or 'X.Y' where X is 1-9 and Y is 1-6.
         softFail: true
