@@ -26,9 +26,14 @@ All YAML files in the root directory are block descriptors. Each defines:
 - **Metadata**: name (URN), version, state, description
 - **Fields**: typed data fields with validation rules
 
+### Versioning
+SIB uses a two-level versioning scheme:
+- **Major version** - encoded in the URN name (e.g., `urn:sib:product-logistics-1`). New major version = new block, for breaking changes.
+- **Minor version** - the `version` field (integer). Incremented for backwards-compatible changes (adding/removing optional fields, relaxing patterns).
+
 ### URN Naming Pattern
 ```
-urn:sib:<name>-<version>
+urn:sib:<name>-<major-version>
 ```
 Examples: `urn:sib:product-base-1`, `urn:sib:links-1`
 

@@ -40,11 +40,20 @@ fields:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `name` | `string` | Yes | Unique identifier, typically in URN format (e.g., `urn:sib:product-base-1`). |
-| `version` | `integer` | Yes | The version number of the descriptor. |
+| `name` | `string` | Yes | Unique identifier in URN format (e.g., `urn:sib:product-base-1`). The trailing number is the **major version**. |
+| `version` | `integer` | Yes | The **minor version** of the descriptor. Incremented for backwards-compatible changes (e.g., adding optional fields, removing fields, adjusting patterns). |
 | `description` | `string` | No | A short explanation of the descriptor's purpose. |
 | `state` | `enum` | Yes | One of: `Experimental`, `Active`, `Deprecated`. |
 | `fields` | `object` | Yes | The set of fields making up the descriptor. |
+
+### Versioning
+
+SIB descriptors use a two-level versioning scheme:
+
+- **Major version** — encoded in the URN name (e.g., `urn:sib:product-logistics-1`). A new major version creates a new block and is used for breaking changes that are not backwards-compatible.
+- **Minor version** — the `version` field (integer). Incremented for backwards-compatible changes such as adding optional fields, removing optional fields, or relaxing validation patterns.
+
+A descriptor at `urn:sib:product-logistics-1` with `version: 2` represents major version 1, minor version 2.
 
 ---
 

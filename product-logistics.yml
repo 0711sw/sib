@@ -1,5 +1,5 @@
 name: urn:sib:product-logistics-1
-version: 1
+version: 2
 description: Provides information about transportation and storage of a product.
 state: Active
 fields:
@@ -77,13 +77,6 @@ fields:
         optional: true
         pattern: "[1-9](\\.[1-6])?"
         validationMessage: Hazard class must be in the format 'X' or 'X.Y' where X is 1-9 and Y is 1-6 (e.g. "3", "2.1").
-        softFail: true
-      hazardDivision:
-        type: String
-        optional: true
-        description: "Deprecated: Use hazardClass instead, which now accepts both class and division (e.g. \"2.1\"). This field is kept for backwards compatibility."
-        pattern: "[1-9](\\.[1-6])?"
-        validationMessage: Division must be in the format 'X' or 'X.Y' where X is 1-9 and Y is 1-6.
         softFail: true
       transportCategory:
         type: String
