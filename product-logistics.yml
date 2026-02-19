@@ -81,6 +81,7 @@ fields:
       hazardDivision:
         type: String
         optional: true
+        deprecated: true
         description: "Deprecated: Use hazardClass instead, which now accepts both class and division (e.g. \"2.1\"). This field is kept for backwards compatibility."
         pattern: "[1-9](\\.[1-6])?"
         validationMessage: Division must be in the format 'X' or 'X.Y' where X is 1-9 and Y is 1-6.
