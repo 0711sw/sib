@@ -20,8 +20,25 @@ fields:
   epdVersion:
     type: String
     optional: true
-    description: Version string of the EPD dataset (e.g., 00.01.000) in correspondece to the epdID.
-  
+    description: Version string of the EPD dataset (e.g., 00.01.000) in correspondence to the epdID.
+
+  registrationNumber:
+    type: String
+    optional: true
+    description: |
+      Public registration number assigned by the programme operator
+      (e.g., "EPD-IES-0026045:001"). Used for official referencing and
+      verification of the EPD in the programme operator's registry.
+
+  programmeOperator:
+    type: String
+    optional: true
+    description: |
+      Name of the programme operator that published and registered the EPD
+      (e.g., "The International EPD System", "IBU", "BRE"). Required to
+      identify the governing programme and its specific rules (PCR) under
+      which the EPD was created and verified.
+
   title:
     type: String
     optional: true
@@ -32,8 +49,17 @@ fields:
     type: Date
     optional: true
     description: |
-      Publication date of the EPD according to EN 15804 and ECO Platform.
-      Needed for version tracking and regulatory conformity.
+      Initial publication date of the EPD (referred to as "initial version date"
+      by EPD International). Needed for version tracking and regulatory conformity.
+
+  versionDate:
+    type: Date
+    optional: true
+    description: |
+      Date of the most recent revision of the EPD (referred to as "version date"
+      by EPD International). Only applicable when the EPD has been updated after
+      its initial publication. If the EPD has never been revised, this field
+      should be omitted.
 
   validFrom:
     type: Date
@@ -50,26 +76,54 @@ fields:
 
   declaredUnitQuantity:
     type: Number
-    description: Declared quantity to which all environmental impacts refer. (EN 15804 §5.3.2 + §6.3.4)
+    optional: true
+    description: |
+      Declared quantity to which all environmental impacts refer (EN 15804 §5.3.2 + §6.3.4).
+      Required when the EPD uses a declared unit. Some EPDs use only a functional unit instead.
 
   declaredUnitUnit:
     type: String
+    optional: true
     description: |
-      Unit of the declared quantity according to EN 15804. Defines the 
-      reference basis of all environmental indicators.
+      Unit of the declared quantity according to EN 15804. Defines the
+      reference basis of all environmental indicators when using a declared unit.
     choices:
       - PCE   # Functional or discrete products
-      - KGM      # Weight-based materials
-      - MTK      # Surface-based building products
-      - MTQ      # Volumetric materials
-      - MTR       # Linear products
-      - KWH     # Energy-delivering products
-      - SET     # Installation sets or kits
+      - KGM   # Weight-based materials
+      - MTK   # Surface-based building products
+      - MTQ   # Volumetric materials
+      - MTR   # Linear products
+      - KWH   # Energy-delivering products
+      - SET   # Installation sets or kits
+
+  functionalUnitQuantity:
+    type: Number
+    optional: true
+    description: |
+      Quantity of the functional unit to which all environmental impacts refer (EN 15804 §5.3).
+      Required when the EPD uses a functional unit. An EPD may provide both a declared
+      and a functional unit simultaneously.
+
+  functionalUnitUnit:
+    type: String
+    optional: true
+    description: |
+      Unit of the functional unit according to EN 15804.
+    choices:
+      - PCE   # Functional or discrete products
+      - KGM   # Weight-based materials
+      - MTK   # Surface-based building products
+      - MTQ   # Volumetric materials
+      - MTR   # Linear products
+      - KWH   # Energy-delivering products
+      - SET   # Installation sets or kits
 
   functionalUnitDescription:
     type: String
     optional: true
-    description: Functional description of the declared unit. (EN 15804 §5.3)
+    description: |
+      Human-readable description of the functional unit, including performance
+      characteristics and reference service life where applicable (EN 15804 §5.3).
 
   referenceServiceLife:
     type: Number
@@ -105,7 +159,10 @@ fields:
   impacts:
     type: List
     optional: true
-    description: Impact indicators (EN 15804+A2)
+    description: |
+      Environmental impact indicators per life cycle stage according to EN 15804+A2.
+      All values refer to the declared unit. If no declared unit is provided,
+      values refer to the functional unit.
     contents:
       type: Object
       fields:
@@ -319,6 +376,16 @@ fields:
           type: Number
           optional: true
           description: Materials for energy recovery [kg].
+
+        EEE:
+          type: Number
+          optional: true
+          description: Exported electrical energy [MJ].
+
+        EET:
+          type: Number
+          optional: true
+          description: Exported thermal energy [MJ].
 
         # --- Additional LCIA Indicators ---
         PM:
