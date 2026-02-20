@@ -53,6 +53,7 @@ Examples: `urn:sib:product-base-1`, `urn:sib:links-1`
 
 ### Common Field Properties
 - `optional: true` - field can be omitted
+- `deprecated: true` - field is deprecated (must also be `optional: true`). Always use the `deprecated` boolean attribute, not just a text hint in the description.
 - `translated: true` - field supports localization
 - `softFail: true` - validation failures are warnings, not errors
 
