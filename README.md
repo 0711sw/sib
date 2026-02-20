@@ -10,6 +10,11 @@ exchanged between systems of different providers.
 The structure of descriptors is defined here:
 [Schema](SIB_SCHEMA_FORMAT.md)
 
+## Query API
+
+How block data is retrieved from a SIB-compatible endpoint:
+[Query API](QUERY.md)
+
 ## Blocks
 
 -   [urn:sib:links-1](links.yml)\

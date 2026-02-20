@@ -98,7 +98,7 @@ softFail: true
 | `validationMessage` | `string` | No | Custom error message shown when `pattern` or `choices` validation fails. |
 | `minLength` | `integer` | No | Minimum allowed length. |
 | `maxLength` | `integer` | No | Maximum allowed length. |
-| `translated` | `bool` | No | If `true`, field values can be a localized map (e.g., `{"en": "Hello", "de": "Hallo"}`). |
+| `translated` | `bool` | No | If `true`, field values can be a localized map (e.g., `{"en": "Hello", "de": "Hallo"}`). See [Query API — Translated Fields](QUERY.md#translated-fields) for how these are resolved on output. |
 | `softFail` | `bool` | No | If `true`, validation failures produce warnings instead of errors. |
 | `acceptUntrimmed` | `bool` | No | If `true`, leading/trailing whitespace is accepted. Default: `false`. |
 
@@ -155,6 +155,8 @@ acceptedFileExtensions: ["jpg", "png", "pdf"]
 | Property | Type | Required | Description |
 |----------|------|----------|-------------|
 | `acceptedFileExtensions` | `[string]` | No | List of valid lowercase file extensions (e.g., `jpg`, `png`, `pdf`). Each entry must be a simple extension without dots. |
+
+See [Query API — Asset Fields](QUERY.md#asset-fields) for how asset data is transformed on output.
 
 ---
 
