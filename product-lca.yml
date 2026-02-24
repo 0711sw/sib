@@ -10,7 +10,7 @@ description: |
 
 fields:
 
-  epdID:
+  epdId:
     type: String
     optional: true
     description: |
@@ -20,7 +20,7 @@ fields:
   epdVersion:
     type: String
     optional: true
-    description: Version string of the EPD dataset (e.g., 00.01.000) in correspondence to the epdID.
+    description: Version string of the EPD dataset (e.g., 00.01.000) in correspondence to the epdId.
 
   registrationNumber:
     type: String
