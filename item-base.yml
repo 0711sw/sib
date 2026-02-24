@@ -24,6 +24,11 @@ fields:
       Date on which this item has been manufactured.
       Corresponds to IDTA 02006-3-0-1 DateOfManufacture (0173-1#02-AAR972#002).
     optional: true
+  deliveredAt:
+    type: Date
+    description: |
+      Date on which this item has been delivered to the customer or end user.
+    optional: true
   hardwareVersion:
     type: String
     description: |
@@ -48,3 +53,23 @@ fields:
       Identification of the manufacturing facility or production site.
       Used for traceability and quality control purposes.
     optional: true
+  customAttributes:
+    type: Array
+    description: |
+      List of custom key-value attributes specific to this item instance.
+      Used for additional metadata that does not fit into the standard fields.
+    optional: true
+    items:
+      type: Object
+      fields:
+        code:
+          type: String
+          description: Machine-readable identifier for the attribute.
+          optional: true
+        label:
+          type: String
+          translated: true
+          description: Human-readable label for the attribute.
+        value:
+          type: String
+          description: The attribute value.
