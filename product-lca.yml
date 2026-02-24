@@ -61,12 +61,6 @@ fields:
       its initial publication. If the EPD has never been revised, this field
       should be omitted.
 
-  validFrom:
-    type: Date
-    optional: true
-    description: |
-      Start of the EPD validity period (EN 15804 mandatory validity information).
-
   validTo:
     type: Date
     optional: true
