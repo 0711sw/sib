@@ -54,12 +54,12 @@ fields:
       Used for traceability and quality control purposes.
     optional: true
   customAttributes:
-    type: Array
+    type: List
     description: |
       List of custom key-value attributes specific to this item instance.
       Used for additional metadata that does not fit into the standard fields.
     optional: true
-    items:
+    contents:
       type: Object
       fields:
         code:
