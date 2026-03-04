@@ -24,7 +24,11 @@ fields:
           softFail: true
         type:
           type: String
+          deprecated: true
+          optional: true
           description: |
+            Deprecated: As most suppliers cannot provide this information, this field is deprecated and should not be used anymore.
+
             Describes whether this successor is a sort of drop-in replacement
             or more or less a similar product which might be used but may come
             with some complexity during installation.
