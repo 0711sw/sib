@@ -106,6 +106,13 @@ fields:
         document:      
           type: Asset
           description: Contains the name or path of the asset to use as document.
+          optional: true
+        url:
+          type: String
+          description: |
+            Contains a URL linking to the document. Note that a real document as asset is preferred, but this can be used as fallback if no asset is available. 
+            If both a document asset and a URL are provided, the asset should be preferred.
+          optional: true
         contentLanguages:
           type: List
           description: Contains the languages this document is available in, using ISO 639-1 codes (e.g. "en" for English, "de" for German).
