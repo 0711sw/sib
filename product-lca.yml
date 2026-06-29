@@ -133,6 +133,15 @@ fields:
       - internal
       - external
 
+  multiplier:
+    type: Number
+    optional: true
+    description: |
+      Contains a multiplier factor for scaling the environmental impacts.
+      This is used for EPDs which are shared across multiple products or product variants. 
+      The multiplier is applied to all environmental impact indicators.
+      If the multiplier is not provided, it defaults to 1.0 (no scaling).
+
   scenarios:
     type: List
     optional: true
