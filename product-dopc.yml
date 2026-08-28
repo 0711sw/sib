@@ -1,0 +1,388 @@
+name: urn:sib:product-dopc-1
+version: 1
+state: Experimental
+description: |
+  Declaration of Performance and Conformity (DoPC) according to the
+  Construction Products Regulation (EU) 2024/3110 (CPR 2024), Art. 13-17
+  and Annex V. The DoPC merges the former Declaration of Performance (DoP,
+  CPR 305/2011) and the Declaration of Conformity into a single declaration
+  covering declared performances per essential characteristic, conformity
+  with applicable product requirements, and (phased in) environmental
+  sustainability characteristics per Annex II.
+
+  The DoPC obligation applies per product family once a harmonised
+  technical specification (hTS) adopted under CPR 2024 becomes applicable
+  to that family (see the CPR Working Plan 2026-2029, COM(2025) 772).
+  Products still covered by hENs/EADs issued under CPR 305/2011 continue
+  to use the classic DoP; use `product-documents` (type DOP) for those.
+
+  Manufacturer identity is intentionally NOT duplicated here - it lives in
+  `urn:sib:product-brand-1` (manufacturer, GPSR-aligned). Full EPD data
+  lives in `urn:sib:product-lca-1`; this block only carries the values
+  declared as regulatory environmental characteristics and a reference to
+  the underlying EPD dataset.
+
+fields:
+
+  dopcNumber:
+    type: String
+    description: |
+      Unique reference number of the DoPC assigned by the manufacturer
+      (Annex V). Identifies this declaration across its versions.
+
+  uniqueIdentificationCode:
+    type: String
+    description: |
+      Unique identification code of the product-type as stated in the
+      DoPC (CPR 2024 Art. 15). Distinct from GTIN/itemNumber in
+      `product-base`, although manufacturers may choose the same value.
+
+  issuedAt:
+    type: Date
+    optional: true
+    description: Date of issue of this version of the DoPC.
+
+  placeOfIssue:
+    type: String
+    optional: true
+    description: Place of issue as stated on the declaration.
+
+  signatory:
+    type: Object
+    optional: true
+    description: Person signing for and on behalf of the manufacturer.
+    fields:
+      name:
+        type: String
+        description: Full name of the signatory.
+      function:
+        type: String
+        optional: true
+        description: Function/role of the signatory within the manufacturer.
+
+  intendedUse:
+    type: String
+    translated: true
+    description: |
+      Intended use or uses of the product in accordance with the
+      applicable harmonised technical specification.
+
+  annexViiProductFamily:
+    type: Object
+    optional: true
+    description: Product family according to CPR 2024 Annex VII.
+    fields:
+      number:
+        type: String
+        pattern: "[0-9]{1,2}"
+        validationMessage: Annex VII family number must be 1 or 2 digits.
+        description: Family number in Annex VII (e.g. '11' for sanitary appliances).
+      code:
+        type: String
+        optional: true
+        pattern: "[A-Z]{3}"
+        validationMessage: CPR Acquis code must be exactly 3 uppercase letters.
+        description: Three-letter CPR Acquis code (e.g. 'SAP', 'SHA', 'PTA').
+      name:
+        type: String
+        optional: true
+        description: Family name as listed in Annex VII / the CPR Working Plan.
+
+  harmonisedTechnicalSpecification:
+    type: Object
+    description: |
+      The harmonised technical specification under which performance
+      was assessed. Must be an hTS adopted under CPR 2024 - if the
+      product is still covered under CPR 305/2011, this block does
+      not apply (use a classic DoP via `product-documents`).
+    fields:
+      kind:
+        type: String
+        description: Type of the specification.
+        choices:
+          - HEN     # harmonised European standard made mandatory by implementing act
+          - EAD     # European Assessment Document (via ETA route, CPR 2024 Art. 31 ff.)
+      reference:
+        type: String
+        description: |
+          Reference of the hEN including version/date (e.g. 'EN 12566-3:20xx')
+          or the EAD number.
+      etaReference:
+        type: String
+        optional: true
+        description: |
+          Reference of the European Technical Assessment (ETA) if the
+          EAD route is used.
+
+  avsSystems:
+    type: List
+    minOccur: 1
+    description: |
+      Assessment and verification systems (AVS) applied, per CPR 2024
+      Annex IX. Note: CPR 2024 replaces the AVCP terminology of
+      CPR 305/2011. Several systems can apply to one product, e.g. a
+      performance system plus system 3+ for the validation of
+      environmental sustainability characteristics.
+    contents:
+      type: Object
+      fields:
+        subject:
+          type: String
+          description: What the system applies to.
+          choices:
+            - PERFORMANCE                   # essential characteristics
+            - ENVIRONMENTAL_SUSTAINABILITY  # Annex II characteristics, typically system 3+
+            - PRODUCT_REQUIREMENTS          # Annex III requirements
+        system:
+          type: String
+          description: AVS system level per CPR 2024 Annex IX.
+          choices:
+            - "1+"
+            - "1"
+            - "2+"
+            - "3+"
+            - "3"
+            - "4"
+
+  notifiedBodies:
+    type: List
+    optional: true
+    description: |
+      Notified bodies involved in assessment, verification or validation
+      (including validation bodies under system 3+).
+    contents:
+      type: Object
+      fields:
+        name:
+          type: String
+          description: Name of the notified body.
+        number:
+          type: String
+          pattern: "[0-9]{4}"
+          validationMessage: Notified body number must be 4 digits.
+          description: Four-digit NANDO identification number.
+        task:
+          type: String
+          optional: true
+          description: |
+            Task performed (e.g. 'certificate of constancy of performance',
+            'validation of environmental sustainability declaration').
+        certificateNumber:
+          type: String
+          optional: true
+          description: Number of the certificate or validation report issued.
+
+  declaredPerformances:
+    type: List
+    minOccur: 1
+    description: |
+      Declared performance per essential characteristic as required by
+      the applicable hTS. Use 'NPD' (no performance determined) where
+      permitted for characteristics not declared.
+    contents:
+      type: Object
+      fields:
+        essentialCharacteristic:
+          type: String
+          description: |
+            Name or code of the essential characteristic exactly as
+            designated in the hTS (e.g. 'Reaction to fire',
+            'Thermal conductivity').
+        performance:
+          type: String
+          description: |
+            Declared performance: value, class or level as designated in
+            the hTS (e.g. 'A1', '0.035', 'Pass'), or 'NPD'.
+        unit:
+          type: String
+          optional: true
+          description: Unit of the declared value, if the performance is a value.
+        basicRequirement:
+          type: String
+          optional: true
+          description: |
+            Basic requirement for construction works (CPR 2024 Annex I)
+            the characteristic relates to, where stated in the hTS
+            (e.g. 'BRCW 2 - Safety in case of fire').
+        assessmentMethod:
+          type: String
+          optional: true
+          description: Test/assessment method reference where relevant.
+
+  environmentalCharacteristics:
+    type: List
+    optional: true
+    description: |
+      Environmental sustainability characteristics declared per CPR 2024
+      Annex II, phased in per product family via the hTS (starting with
+      climate change potential). Indicator codes follow EN 15804+A2 and
+      are identical to those in `urn:sib:product-lca-1` (e.g. GWP_TOTAL,
+      GWP_FOSSIL, ODP, AP). This list carries only the regulatory declared
+      values; the full EPD dataset belongs in `urn:sib:product-lca-1`.
+    contents:
+      type: Object
+      fields:
+        indicator:
+          type: String
+          description: |
+            EN 15804+A2 indicator code, identical to the field names of
+            `impacts` in urn:sib:product-lca-1. Keep this list in sync
+            with product-lca when indicators are added there.
+          choices:
+            # ============================================================
+            # CPR 2024 Annex II - the 19 predetermined environmental
+            # essential characteristics (declaration phased in until
+            # 2032, climate change indicators first):
+            # ============================================================
+            # --- Impact indicators (EN 15804+A2 core, all Annex II) ---
+            - GWP_FOSSIL
+            - GWP_BIOGENIC
+            - GWP_LULUC
+            - GWP_TOTAL
+            - ODP
+            - AP
+            - EP_FRESHWATER
+            - EP_MARINE
+            - EP_TERRESTRIAL
+            - POCP
+            - ADP_MINERALS_METALS
+            - ADP_FOSSIL
+            - WDP
+            # --- Additional indicators (EN 15804+A2, all Annex II) ---
+            - PM
+            - IR
+            - ETP_FW
+            - HTP_C
+            - HTP_NC
+            - SQP
+            # ============================================================
+            # Beyond Annex II - resource use, waste and output flows.
+            # Not predetermined characteristics, but individual hTS may
+            # require them: the first standardisation request under
+            # CPR 2024 (M/615, cement) mandates the full EN 15804
+            # indicator set.
+            # ============================================================
+            # --- Resource use ---
+            - PERE
+            - PERM
+            - PERT
+            - PENRE
+            - PENRM
+            - PENRT
+            - SM
+            - RSF
+            - NRSF
+            - FW
+            # --- Waste categories ---
+            - HWD
+            - NHWD
+            - RWD
+            # --- Output flows ---
+            - CRU
+            - MFR
+            - MER
+            - EEE
+            - EET
+        stage:
+          type: String
+          description: |
+            Life cycle stage/module coverage of the declared value, per
+            EN 15804 Table 2. Field name and choices are identical to
+            `impacts[].stage` in urn:sib:product-lca-1 (CPR/EN 15804
+            call these 'modules').
+          choices:
+            # PRODUCT STAGE
+            - A1
+            - A2
+            - A3
+            # CONSTRUCTION STAGE
+            - A4
+            - A5
+            # USE STAGE
+            - B1
+            - B2
+            - B3
+            - B4
+            - B5
+            - B6
+            - B7
+            # END-OF-LIFE STAGE
+            - C1
+            - C2
+            - C3
+            - C4
+            # BEYOND SYSTEM BOUNDARY
+            - D
+            # AGGREGATED STAGES
+            - A1-A3
+            - A4-A5
+            - B1-B7
+            - C1-C4
+            - A1-A5
+            - A1-D
+        value:
+          type: Number
+          description: Declared value per declared unit.
+        unit:
+          type: String
+          description: Unit of the indicator (e.g. 'kg CO2-eq').
+        validated:
+          type: Boolean
+          optional: true
+          description: |
+            Whether the value was validated by a notified body under
+            AVS system 3+.
+
+  epdId:
+    type: String
+    optional: true
+    description: |
+      ILCD UUID of the underlying EPD dataset. References the `epdId`
+      field in `urn:sib:product-lca-1` to link the regulatory declaration
+      to the full environmental dataset.
+
+  productRequirementsConformity:
+    type: Object
+    optional: true
+    description: |
+      Conformity part of the DoPC: conformity of the product with the
+      applicable product requirements (CPR 2024 Annex III), established
+      by delegated acts per product family. Optional because product
+      requirement delegated acts are adopted per family and later than
+      the performance hTS.
+    fields:
+      conforms:
+        type: Boolean
+        description: Declaration that the product conforms to the applicable requirements.
+      applicableActs:
+        type: List
+        optional: true
+        description: |
+          CELEX numbers of the delegated acts establishing the applicable
+          product requirements (e.g. '32027Rxxxx').
+        contents:
+          type: String
+      remarks:
+        type: String
+        optional: true
+        translated: true
+        description: Additional statements as included in the declaration.
+
+  permalink:
+    type: String
+    optional: true
+    pattern: "https?://.+"
+    validationMessage: Permalink must be a valid http(s) URL.
+    description: |
+      Permanent link to the DoPC as referred to in CPR 2024
+      Art. 16(2)(e), usable as data-carrier target on the product or
+      its label.
+
+  humanReadableCopy:
+    type: Asset
+    optional: true
+    acceptedFileExtensions: ["pdf"]
+    description: |
+      Human-readable copy of the DoPC. The machine-readable
+      representation is this block itself (cf. CPR 2024 Art. 16(3) on
+      human- and machine-readable interoperability of the DoPC).
