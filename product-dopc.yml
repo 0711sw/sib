@@ -1,5 +1,5 @@
 name: urn:sib:product-dopc-1
-version: 1
+version: 2
 state: Experimental
 description: |
   Declaration of Performance and Conformity (DoPC) according to the
@@ -16,11 +16,12 @@ description: |
   Products still covered by hENs/EADs issued under CPR 305/2011 continue
   to use the classic DoP; use `product-documents` (type DOP) for those.
 
-  Manufacturer identity is intentionally NOT duplicated here - it lives in
-  `urn:sib:product-brand-1` (manufacturer, GPSR-aligned). Full EPD data
-  lives in `urn:sib:product-lca-1`; this block only carries the values
-  declared as regulatory environmental characteristics and a reference to
-  the underlying EPD dataset.
+  No data that already has a home is duplicated here. Manufacturer
+  identity lives in `urn:sib:product-brand-1` (manufacturer,
+  GPSR-aligned). Environmental values live in `urn:sib:product-lca-1`;
+  this block only records which environmental characteristics are
+  declared and references the exact EPD revision they are taken from
+  via `epdId` and `epdVersion`.
 
 fields:
 
@@ -215,10 +216,19 @@ fields:
     description: |
       Environmental sustainability characteristics declared per CPR 2024
       Annex II, phased in per product family via the hTS (starting with
-      climate change potential). Indicator codes follow EN 15804+A2 and
-      are identical to those in `urn:sib:product-lca-1` (e.g. GWP_TOTAL,
-      GWP_FOSSIL, ODP, AP). This list carries only the regulatory declared
-      values; the full EPD dataset belongs in `urn:sib:product-lca-1`.
+      climate change potential).
+
+      This list states WHICH characteristics are declared as part of this
+      declaration and whether they were validated - it deliberately does
+      NOT repeat the values. The values are resolved from
+      `urn:sib:product-lca-1` via the `epdId` and `epdVersion` given
+      below, which together address an immutable EPD revision. Copying
+      them here would create a second source of truth that can silently
+      drift from the dataset the declaration was actually based on.
+
+      Note that the values in product-lca refer to its declared or
+      functional unit and are subject to its `multiplier`; both must be
+      taken into account when resolving a declared characteristic.
     contents:
       type: Object
       fields:
@@ -320,18 +330,21 @@ fields:
             - C1-C4
             - A1-A5
             - A1-D
-        value:
-          type: Number
-          description: Declared value per declared unit.
-        unit:
-          type: String
-          description: Unit of the indicator (e.g. 'kg CO2-eq').
+        declared:
+          type: Boolean
+          description: |
+            Whether this indicator/stage combination is declared (true) or
+            explicitly marked as 'MND - module not declared' (false).
+            Mirrors `impacts[].declared` in urn:sib:product-lca-1. An
+            explicit false is not the same as omitting the entry: it
+            documents a deliberate non-declaration rather than an
+            oversight.
         validated:
           type: Boolean
           optional: true
           description: |
-            Whether the value was validated by a notified body under
-            AVS system 3+.
+            Whether the referenced value was validated by a notified body
+            under AVS system 3+.
 
   epdId:
     type: String
@@ -339,7 +352,18 @@ fields:
     description: |
       ILCD UUID of the underlying EPD dataset. References the `epdId`
       field in `urn:sib:product-lca-1` to link the regulatory declaration
-      to the full environmental dataset.
+      to the full environmental dataset. Required in practice whenever
+      `environmentalCharacteristics` is present, as the declared values
+      are resolved through it.
+
+  epdVersion:
+    type: String
+    optional: true
+    description: |
+      Version of the referenced EPD dataset (e.g. 00.01.000), matching
+      `epdVersion` in `urn:sib:product-lca-1`. Together with `epdId` this
+      pins the exact EPD revision the declaration was based on, so the
+      declared values stay reconstructible after the EPD is revised.
 
   productRequirementsConformity:
     type: Object
