@@ -26,3 +26,4 @@ fields:
             in a 'de' translation. Note that number should also include their units,
             if needed.
           translated: true
+          softFail: true
