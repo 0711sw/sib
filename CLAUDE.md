@@ -15,9 +15,12 @@ Standard Information Blocks (SIB) is a data-definition repository containing YAM
 Validates all `.yml` files against `https://t01.durablox.net/descriptor/check/v1`. Requires `curl` and `jq`.
 
 ### Deployment
-Automatic via GitHub Actions:
-- PRs trigger validation checks
-- Merges to `main` deploy to both `t01.durablox.net` (test) and `d01.durablox.net` (production)
+Automatic via GitHub Actions. `develop` is the default and integration branch, `main` is the production branch.
+- PRs against `develop` trigger validation checks
+- Pushes to `develop` deploy to the sandbox `t01.durablox.net`
+- Pushes to `main` deploy to production: `x01.durablox.com` (integration), `p01`, `p02`, `p03.durablox.com`
+
+Feature branches are merged into `develop` via PR. To release to production, merge `develop` into `main`.
 
 ## Architecture
 
