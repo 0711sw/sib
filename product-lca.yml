@@ -1,5 +1,5 @@
 name: urn:sib:product-lca-1
-version: 1
+version: 2
 state: Experimental
 description: |
   Life Cycle Assessment (LCA) data block according to EN 15804:2012+A2:2019/AC:2021,
@@ -38,6 +38,46 @@ fields:
       (e.g., "The International EPD System", "IBU", "BRE"). Required to
       identify the governing programme and its specific rules (PCR) under
       which the EPD was created and verified.
+
+  pcrReference:
+    type: String
+    optional: true
+    description: |
+      Product Category Rules the EPD was created under, including version
+      (e.g., "PCR 2019:14 v1.11"). Required by ISO 14025 and a
+      precondition for comparing two EPDs: values derived under different
+      PCR are not comparable, even for the same product category.
+
+  pcrComplementaryRules:
+    type: String
+    optional: true
+    description: |
+      Complementary product category rules (c-PCR) applied in addition to
+      the PCR, where the programme operator defines them for a specific
+      product group.
+
+  datasetType:
+    type: String
+    optional: true
+    description: |
+      Type of the EPD dataset, corresponding to the subType of the
+      ILCD+EPD data format. Determines whether the dataset may be used
+      for a specific product: an average or representative dataset
+      describes a group of products, not the individual one.
+    choices:
+      - SPECIFIC        # one specific product of one manufacturer
+      - AVERAGE         # average across products or manufacturers
+      - REPRESENTATIVE  # representative product of a group
+      - TEMPLATE        # template dataset to be completed
+
+  geographicalScope:
+    type: String
+    optional: true
+    description: |
+      Geographical area the EPD is representative for, as an ISO 3166
+      code or a region label (e.g., "DE", "EU-27", "GLO"). An EPD is only
+      valid within its declared geographical scope, as the underlying
+      energy mix and supply chains are region specific.
 
   title:
     type: String
@@ -122,20 +162,34 @@ fields:
   referenceServiceLife:
     type: Number
     optional: true
+    minValue: "0"
     description: Expected service life of the product in years. (EN 15804 §6.3.8)
 
   thirdPartyVerification:
     type: String
     optional: true
-    description: how ist this epd verified?
+    description: |
+      How this EPD was verified. Note that the values are lowercase for
+      backwards compatibility; other enumerations in this repository use
+      uppercase.
     choices:
       - none
       - internal
       - external
 
+  verifier:
+    type: String
+    optional: true
+    description: |
+      Name of the independent verifier or verification body that carried
+      out the verification. ISO 14025 requires the verifier to be stated;
+      thirdPartyVerification alone only says that verification happened,
+      not by whom.
+
   multiplier:
     type: Number
     optional: true
+    minValue: "0"
     description: |
       Contains a multiplier factor for scaling the environmental impacts.
       This is used for EPDs which are shared across multiple products or product variants. 
@@ -420,3 +474,24 @@ fields:
           type: Number
           optional: true
           description: Soil quality potential [dimensionless].
+
+  biogenicCarbonContent:
+    type: Object
+    optional: true
+    description: |
+      Biogenic carbon content, declared per declared or functional unit
+      (EN 15804+A2). This is a mandatory declaration alongside the impact
+      indicators and must not be confused with GWP_BIOGENIC in impacts:
+      GWP_BIOGENIC is an impact in kg CO2-eq, whereas this is the amount
+      of biogenic carbon physically contained in the product, in kg C.
+    fields:
+      product:
+        type: Number
+        optional: true
+        minValue: "0"
+        description: Biogenic carbon content in the product [kg C].
+      packaging:
+        type: Number
+        optional: true
+        minValue: "0"
+        description: Biogenic carbon content in the accompanying packaging [kg C].
